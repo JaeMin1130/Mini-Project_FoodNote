@@ -1,0 +1,11 @@
+.whole {
+  display: flex;
+  justify-content: space-around;
+  height: 100vh; /* 100% of the viewport height */
+}
+.leftSide {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
