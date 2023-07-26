@@ -8,6 +8,7 @@ import * as React from "react";
 export default function Note() {
   return (
     <Grid>
+      <input className="signup-profileImg-input" type="file" accept="image/*" id="profileImg" />
       <Card sx={{ minWidth: "100%" }}>
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
