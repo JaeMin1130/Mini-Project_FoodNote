@@ -8,12 +8,21 @@ import Main from "./Main";
 import Note from "./Note";
 import Search from "./Search";
 import { Container, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import { yellow } from "@mui/material/colors";
 
 const theme = createTheme({
-  typography: {
-    palette: {
-      mode: "dark",
+  palette: {
+    background: {
+      default: "#f0f0f0",
     },
+    primary: {
+      main: "#000000",
+      // light: will be calculated from palette.primary.main,
+      // dark: will be calculated from palette.primary.main,
+      // contrastText: will be calculated to contrast with palette.primary.main
+    },
+  },
+  typography: {
     fontFamily: [
       "-apple-system",
       "BlinkMacSystemFont",
@@ -25,7 +34,7 @@ const theme = createTheme({
       '"Apple Color Emoji"',
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"',
-    ].join(","),
+    ],
   },
 });
 function App() {
