@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,8 +32,9 @@ public class NoteController {
     	return noteService.insertNote(note);
     }
 
-    @PostMapping("/search")		  //6.음식 조회
-    public List<Food> searchFood(String keyword) {
+    @GetMapping("/search/{keyword}")		  //6.음식 조회
+    public List<Food> searchFood(@PathVariable String keyword) {
+    	System.out.println(keyword);
         return noteService.searchFood(keyword);
     }
     

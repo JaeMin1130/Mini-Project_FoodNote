@@ -9,7 +9,7 @@ import edu.pnu.domain.Food;
 
 
 public interface FoodRepository extends JpaRepository<Food, Integer> {
-    @Query(value = "SELECT * FROM food WHERE name LIKE %:searchName%", nativeQuery = true)
+    @Query(value = "SELECT * FROM food f WHERE f.name LIKE %?%", nativeQuery = true)
     List<Food> findByName(String searchName);
 
 }

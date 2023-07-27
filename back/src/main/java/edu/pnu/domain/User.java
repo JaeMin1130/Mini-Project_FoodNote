@@ -1,14 +1,6 @@
 package edu.pnu.domain;
 
-import java.sql.Timestamp;
-import java.util.Collection;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
-
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,8 +23,8 @@ public class User {
 	private String password;
 	private String role;
 	
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		
-		return AuthorityUtils.createAuthorityList(role);
-	}
+//	public Collection<? extends GrantedAuthority> getAuthorities() {
+//		
+//		return AuthorityUtils.createAuthorityList(role);
+//	}
 }

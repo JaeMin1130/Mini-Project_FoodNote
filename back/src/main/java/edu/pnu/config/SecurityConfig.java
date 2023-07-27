@@ -1,32 +1,38 @@
-//package edu.pnu.config;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
-//import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-//import org.springframework.security.web.SecurityFilterChain;
-//
+package edu.pnu.config;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.web.SecurityFilterChain;
+
 //import edu.pnu.service.UserService;
-//
-//@Configuration
-//@EnableWebSecurity
-//public class SecurityConfig {
-//	
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+	
 //	@Autowired
 //	UserService userService;
-//	
+	
 //	@Bean
 //	public BCryptPasswordEncoder encoder() {
 //		return new BCryptPasswordEncoder();
 //	}
-//	
-//
-//	@Bean
-//	public SecurityFilterChain filterChain(HttpSecurity security) throws Exception {
-//		
+	
+
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity security) throws Exception {
+		
+		security.csrf(csrf->csrf.disable());
+		security.cors(cors->cors.disable());
+		
+		
+		security.authorizeHttpRequests(auth->{
+			auth.anyRequest().permitAll();
+		});
 //		security.authorizeHttpRequests(auth->{
 ////			auth.requestMatchers("/").permitAll();
 ////			auth.requestMatchers("/member/**").authenticated();
@@ -39,7 +45,6 @@
 //		});
 //		
 //		security.userDetailsService(userService);
-//		security.csrf(csrf->csrf.disable());
 //		
 //		security.formLogin(form->{
 //			form.loginPage("/login")
@@ -53,24 +58,24 @@
 //				.logoutSuccessUrl("/login");
 //		});
 //		
-//		return security.build();
-//	}
-//	
-//	@Autowired
-//	public void authenticate(AuthenticationManagerBuilder auth) throws Exception {
-//		auth.inMemoryAuthentication()
-//			.withUser("member")
-//			.password("{noop}abcd")
-//			.roles("MEMBER");
-//		
-//		auth.inMemoryAuthentication()
-//			.withUser("manager")
-//			.password("{noop}abcd")
-//			.roles("MANAGER");
-//		
-//		auth.inMemoryAuthentication()
-//			.withUser("admin")
-//			.password("{noop}abcd")
-//			.roles("ADMIN");
-//	}
-//}
+		return security.build();
+	}
+	
+	@Autowired
+	public void authenticate(AuthenticationManagerBuilder auth) throws Exception {
+		auth.inMemoryAuthentication()
+			.withUser("member")
+			.password("{noop}abcd")
+			.roles("MEMBER");
+		
+		auth.inMemoryAuthentication()
+			.withUser("manager")
+			.password("{noop}abcd")
+			.roles("MANAGER");
+		
+		auth.inMemoryAuthentication()
+			.withUser("admin")
+			.password("{noop}abcd")
+			.roles("ADMIN");
+	}
+}

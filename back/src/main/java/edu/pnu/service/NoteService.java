@@ -35,7 +35,7 @@ public class NoteService {
 		Note n = new Note();
 		n.setUserId(note.getUserId());
 		n.setFoodName(note.getFoodName());
-		n.setAmount(note.getAmount());
+		n.setAmount(note.getAmount());	
 		n.setImageData(note.getImageData());
 		n.setMealType(note.getMealType());
 		
@@ -44,8 +44,9 @@ public class NoteService {
 
 	//6.음식 조회
 	public List<Food> searchFood(String keyword) {
+		System.out.println(keyword);
 		List<Food> foods = foodRepo.findByName(keyword);
-
+		
 		return foods;
 	}
 
