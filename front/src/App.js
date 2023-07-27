@@ -1,14 +1,13 @@
+import { Container, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Copyright from "./Copyright";
-import Welcome from "./Welcome";
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
+import Join from "./Join";
+import LogIn from "./LogIn";
 import Main from "./Main";
 import Note from "./Note";
 import Search from "./Search";
-import { Container, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
-import { yellow } from "@mui/material/colors";
+import Welcome from "./Welcome";
 
 const theme = createTheme({
   palette: {
@@ -45,8 +44,8 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="*" element={<Welcome />} />
-            <Route path="signIn" element={<SignIn />} />
-            <Route path="signUp" element={<SignUp />} />
+            <Route path="logIn" element={<LogIn />} />
+            <Route path="join" element={<Join />} />
             <Route path="main" element={<Main />} />
             <Route path="note" element={<Note />} />
             <Route path="search" element={<Search />} />

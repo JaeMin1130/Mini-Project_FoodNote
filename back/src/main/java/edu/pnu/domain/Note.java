@@ -35,8 +35,9 @@ public class Note {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String userId;
-	private String name;
+	private String foodName;
 	private int amount;
+	private String mealType;
 	@Lob // Use @Lob for large binary data
 	private byte[] imageData;
 	
@@ -44,7 +45,6 @@ public class Note {
 	@Temporal (TemporalType.TIMESTAMP)
 	@CreationTimestamp
 	private Date date;
-	private String meal;
 	
 
 }

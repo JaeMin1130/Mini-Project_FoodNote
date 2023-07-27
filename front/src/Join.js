@@ -3,7 +3,7 @@ import { Avatar, Box, Button, Container, CssBaseline, Grid, Link, TextField, Typ
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function SignUp() {
+export default function Join() {
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -12,7 +12,7 @@ export default function SignUp() {
       email: data.get("email"),
       password: data.get("password"),
     });
-    navigate("/signIn");
+    navigate("/logIn");
   };
 
   return (

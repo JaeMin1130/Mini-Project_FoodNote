@@ -15,7 +15,7 @@ import {
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function SignIn() {
+export default function LogIn() {
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -66,7 +66,7 @@ export default function SignIn() {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="/signUp" variant="body2">
+              <Link href="/join" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

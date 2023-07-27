@@ -34,10 +34,10 @@ public class NoteService {
 	public Note insertNote(Note note) {
 		Note n = new Note();
 		n.setUserId(note.getUserId());
-		n.setName(note.getName());
+		n.setFoodName(note.getFoodName());
 		n.setAmount(note.getAmount());
 		n.setImageData(note.getImageData());
-		n.setMeal(note.getMeal());
+		n.setMealType(note.getMealType());
 		
 		return noteRepo.save(n);
 	}
@@ -60,10 +60,10 @@ public class NoteService {
 		
 		Note n = optionalNote.get();
 		n.setUserId(note.getUserId());
-		n.setName(note.getName());
+		n.setFoodName(note.getFoodName());
 		n.setAmount(note.getAmount());
 		n.setImageData(note.getImageData());
-		n.setMeal(note.getMeal());
+		n.setMealType(note.getMealType());
 		
 		return noteRepo.save(n);
 		
