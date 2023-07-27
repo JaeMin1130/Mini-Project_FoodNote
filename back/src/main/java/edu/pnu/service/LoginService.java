@@ -1,6 +1,9 @@
 package edu.pnu.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -30,8 +33,21 @@ public class LoginService {
 	}
 	
 	//2.로그인
-	public boolean login() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean login(String userId, String password) {
+	   
+        Optional<User> optionalUser = userRepo.findById(userId);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+
+            if (encoder.matches(password, user.getPassword())) {
+                return true;
+            }
+        }
+        return false;
+    }
+	
+	//3.로그아웃
+	public void logout() {
+		SecurityContextHolder.clearContext();
 	}
 }

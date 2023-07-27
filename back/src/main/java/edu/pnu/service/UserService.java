@@ -29,7 +29,10 @@ public class UserService implements UserDetailsService {
 		
 		System.out.println(user);
 		
-		return new User(user.getUsername(), user.getPassword(), user.getAuthorities());
+        return new org.springframework.security.core.userdetails.User(
+                user.getUserId(),
+                user.getPassword(),
+                user.getAuthorities()
+        );
 	}
-
 }

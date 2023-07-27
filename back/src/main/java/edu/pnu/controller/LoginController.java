@@ -22,12 +22,15 @@ public class LoginController {
 	}
 
 	@PostMapping("/login")				//2.로그인
-	public boolean login() {
-		return loginService.login();
+	public boolean login(String userId, String password) {
+		 return loginService.login(userId, password);
 	}
 	
 	@GetMapping("/logout")				//3.로그아웃
-	public void logout() {}
+    public String logout() {
+        loginService.logout();
+        return "redirect:/login"; 
+    }
 
 	@GetMapping("/loginSuccess")		//로그인 성공
 	public void loginSuccess() {}

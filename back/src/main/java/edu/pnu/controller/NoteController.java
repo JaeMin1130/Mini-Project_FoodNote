@@ -21,7 +21,7 @@ public class NoteController {
     @Autowired
     NoteService noteService;    
  
-
+    
     @GetMapping("/main/date")     //4.날짜 조회
     public List<Note> searchDate(Date date){
     	return noteService.searchDate(date);
