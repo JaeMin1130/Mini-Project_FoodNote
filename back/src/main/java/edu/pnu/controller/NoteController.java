@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.pnu.domain.DTO;
 import edu.pnu.domain.Food;
 import edu.pnu.domain.Note;
 import edu.pnu.service.NoteService;
@@ -21,8 +22,8 @@ public class NoteController {
     @Autowired
     NoteService noteService;    
  
-    @GetMapping("/main/today/{userId}")
-    public List<Object[]> getToday(@PathVariable String UserId) {
+    @GetMapping("/main/userId/{userId}")		//4.사용자별 조회
+    public List<DTO> getToday(@PathVariable String userId) {
         return noteService.getToday(userId);
     }
     
