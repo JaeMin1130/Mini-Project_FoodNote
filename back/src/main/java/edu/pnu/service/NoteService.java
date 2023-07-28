@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import edu.pnu.domain.Food;
@@ -23,14 +22,19 @@ public class NoteService {
 	NoteRepository noteRepo;
 	@Autowired
 	FoodRepository foodRepo;
-
-	//4.날짜 조회
+	
+	//4.로그인 후 오늘 기록 조회
+	 public List<Object[]> getToday(String UserId, String foodNo) {  
+		 return noteRepo.findByFoodNoAndDate(userId, foodNo);
+	   }
+	
+	//5.날짜 조회
 	public List<Note> searchDate(Date date) {
 		List<Note> notes = noteRepo.findByDate(date);
 		return notes;
 	}
 
-	//5.식단 추가
+	//6.식단 추가
 	public Note insertNote(Note note) {
 		Note n = new Note();
 		n.setUserId(note.getUserId());
@@ -42,7 +46,7 @@ public class NoteService {
 		return noteRepo.save(n);
 	}
 
-	//6.음식 조회
+	//7.음식 조회
 	public List<Food> searchFood(String keyword) {
 		System.out.println(keyword);
 		List<Food> foods = foodRepo.findByName(keyword);
@@ -50,7 +54,7 @@ public class NoteService {
 		return foods;
 	}
 
-	//7.식단 수정
+	//8.식단 수정
 	public Note updateFood(Note note) {
 		Optional<Note> optionalNote = noteRepo.findById(note.getId());
 		
@@ -70,7 +74,7 @@ public class NoteService {
 		
 	}
 
-	//8.식단 삭제
+	//9.식단 삭제
 	public boolean deleteFood(Long id) {
 		try {
 			noteRepo.deleteById(id);

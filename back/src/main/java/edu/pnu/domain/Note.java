@@ -38,6 +38,7 @@ public class Note {
 	private String foodName;
 	private int amount;
 	private String mealType;
+	private int foodNo;
 	@Lob // Use @Lob for large binary data
 	private byte[] imageData;
 	

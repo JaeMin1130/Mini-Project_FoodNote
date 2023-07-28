@@ -21,30 +21,34 @@ public class NoteController {
     @Autowired
     NoteService noteService;    
  
+    @GetMapping("/main/today/{userId}")
+    public List<Object[]> getToday(@PathVariable String UserId) {
+        return noteService.getToday(userId);
+    }
     
-    @GetMapping("/main/date")     //4.날짜 조회
+    @GetMapping("/main/date")     //5.날짜 조회
     public List<Note> searchDate(Date date){
     	return noteService.searchDate(date);
     }
     
-    @GetMapping("/note/insert")   //5.식단 추가
+    @GetMapping("/note/insert")   //6.식단 추가
     public Note insertNote(Note note) {
     	return noteService.insertNote(note);
     }
 
-    @GetMapping("/search/{keyword}")		  //6.음식 조회
+    @GetMapping("/search/{keyword}")		  //7.음식 조회
     public List<Food> searchFood(@PathVariable String keyword) {
     	System.out.println(keyword);
         return noteService.searchFood(keyword);
     }
     
 
-    @PutMapping("/main/update")   //7.식단 수정
+    @PutMapping("/main/update")   //8.식단 수정
     public Note updateFood(Note note) {
     	return noteService.updateFood(note);
     }
     
-    @DeleteMapping("/main/delete") //8.식단 삭제
+    @DeleteMapping("/main/delete") //9.식단 삭제
     public boolean deleteFood(Long id) {
         return noteService.deleteFood(id);
     }
