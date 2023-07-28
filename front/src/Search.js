@@ -1,5 +1,4 @@
-import SearchIcon from "@mui/icons-material/Search";
-import { Autocomplete, Grid, IconButton, TextField } from "@mui/material";
+import { Autocomplete, Grid, IconButton, Paper, TextField } from "@mui/material";
 import { useState } from "react";
 
 const Search = () => {
@@ -27,18 +26,13 @@ const Search = () => {
   };
 
   return (
-    <Grid item xs={4} sx={{ mt: 2, display: "flex", alignItems: "center" }}>
-      <Autocomplete
-        options={foods}
-        sx={{ width: 300 }}
-        renderInput={(params) => <TextField {...params} label="Search" />}
-        onInputChange={onInputChange}
-        value={keyword}
-      />
-      <IconButton>
-        <SearchIcon sx={{ ml: 2, fontSize: 40 }} />
-      </IconButton>
-    </Grid>
+    <Autocomplete
+      options={foods}
+      sx={{ width: 300 }}
+      renderInput={(params) => <TextField {...params} label="Search" />}
+      onInputChange={onInputChange}
+      value={keyword}
+    />
   );
 };
 

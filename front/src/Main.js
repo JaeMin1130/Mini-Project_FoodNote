@@ -2,11 +2,15 @@ import EditIcon from "@mui/icons-material/Edit";
 import EqualizerIcon from "@mui/icons-material/Equalizer";
 import LogoutIcon from "@mui/icons-material/Logout";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import SearchIcon from "@mui/icons-material/Search";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { Box, Fab, Grid, Popover, IconButton, TextField, Typography } from "@mui/material";
+import { Box, Fab, Popover, IconButton, TextField, Typography } from "@mui/material";
+import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
 import * as React from "react";
 import List from "./List";
 import Search from "./Search";
+import PopupButton from "./PopupButton";
+import Menu from "./Menu";
 import { DateCalendar, LocalizationProvider } from "@mui/x-date-pickers";
 
 export default function Main() {
@@ -16,59 +20,23 @@ export default function Main() {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
   return (
-    <Box>
-      <Grid container spacing={2} sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Grid item xs={6}>
-          <Typography variant="h2">Today's Note</Typography>
-        </Grid>
-        <Search />
+    <Grid container spacing={2}>
+      <Grid xs={12}>
+        <Menu />
       </Grid>
-      <Grid container spacing={2}>
-        <Grid item xs={6}>
-          <List />
-          <List />
-        </Grid>
-        <Grid item xs={6}>
-          <List />
-          <List />
-        </Grid>
-        <Grid item xs={12} sx={{ display: "flex", justifyContent: "flex-end" }}>
-          <Fab color="primary" href="/note">
-            <EditIcon />
-          </Fab>
-          <Fab color="primary" sx={{ ml: 2 }} onClick={handleClick}>
-            <CalendarMonthIcon />
-          </Fab>
-          <Popover
-            id={id}
-            open={open}
-            anchorEl={anchorEl}
-            onClose={handleClose}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "left",
-            }}
-          >
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DateCalendar />
-            </LocalizationProvider>
-          </Popover>
 
-          <Fab color="primary" sx={{ ml: 2, mr: 2 }}>
-            <EqualizerIcon />
-          </Fab>
-          <Fab color="primary" href="/login">
-            <LogoutIcon />
-          </Fab>
-        </Grid>
+      <Grid xs={3}>
+        <Typography variant="h2">Today's Meal</Typography>
       </Grid>
-    </Box>
+      <Grid xs={4.5}>
+        <List />
+        <List />
+      </Grid>
+      <Grid xs={4.5}>
+        <List />
+        <List />
+      </Grid>
+    </Grid>
   );
 }

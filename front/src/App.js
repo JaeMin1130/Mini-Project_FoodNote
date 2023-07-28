@@ -35,24 +35,28 @@ const theme = createTheme({
       '"Segoe UI Symbol"',
     ],
   },
+  components: {
+    MuiIcon: {
+      defaultProps: {
+        fontSize: "40",
+      },
+    },
+  },
 });
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Container className="App">
-        <BrowserRouter>
-          <Routes>
-            <Route path="*" element={<Welcome />} />
-            <Route path="logIn" element={<LogIn />} />
-            <Route path="join" element={<Join />} />
-            <Route path="main" element={<Main />} />
-            <Route path="note" element={<Note />} />
-            <Route path="search" element={<Search />} />
-          </Routes>
-        </BrowserRouter>
-        <Copyright />
-      </Container>
+      <BrowserRouter>
+        <Routes>
+          <Route path="*" element={<Welcome />} />
+          <Route path="logIn" element={<LogIn />} />
+          <Route path="join" element={<Join />} />
+          <Route path="main" element={<Main />} />
+          <Route path="note" element={<Note />} />
+          <Route path="search" element={<Search />} />
+        </Routes>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }
