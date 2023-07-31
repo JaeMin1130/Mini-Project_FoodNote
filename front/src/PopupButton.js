@@ -7,7 +7,11 @@ export default function (props) {
   const handleClose = () => {
     props.setAnchorEl(null);
   };
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
   const open = Boolean(props.anchorEl);
   const id = open ? "simple-popover" : undefined;
 

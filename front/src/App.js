@@ -38,7 +38,7 @@ const theme = createTheme({
   components: {
     MuiIcon: {
       defaultProps: {
-        fontSize: "40",
+        fontSize: 50,
       },
     },
   },
