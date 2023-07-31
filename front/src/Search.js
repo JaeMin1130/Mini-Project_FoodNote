@@ -6,7 +6,7 @@ const Search = () => {
   const [keyword, setKeyword] = useState("");
 
   const fetchData = () => {
-    const apiUrl = "http://localhost:8080/search/" + keyword;
+    const apiUrl = "http://10.125.121.173:8080/main/search/" + keyword;
     console.log(apiUrl);
     fetch(apiUrl)
       .then((resp) => resp.json())

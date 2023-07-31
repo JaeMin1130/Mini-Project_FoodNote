@@ -1,22 +1,65 @@
-import MenuIcon from "@mui/icons-material/Menu";
-import {
-  Box,
-  Divider,
-  Drawer,
-  FormControlLabel,
-  ListItemButton,
-  ListItemText,
-  Paper,
-  Slide,
-  Typography,
-} from "@mui/material";
-import Switch from "@mui/material/Switch";
+import { Box, CssBaseline } from "@mui/material";
+import MuiDrawer from "@mui/material/Drawer";
+import { styled } from "@mui/material/styles";
 import * as React from "react";
 import MenuButton from "./MenuButton";
+import Search from "./Search";
+import Note from "./Note";
 import { DateCalendar, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import Search from "./Search";
+
+const openedMixin = (theme, open2) => ({
+  width: "40vh",
+  backgroundColor: "transparent",
+  transition: theme.transitions.create("width", {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.enteringScreen,
+  }),
+  overflowX: "hidden",
+});
+
+const closedMixin = (theme, open2) =>
+  open2
+    ? {
+        width: `calc(${theme.spacing(7)} + 1px)`,
+        backgroundColor: "transparent",
+        transition: theme.transitions.create("width", {
+          easing: theme.transitions.easing.sharp,
+          duration: theme.transitions.duration.leavingScreen,
+        }),
+        overflowX: "hidden",
+        [theme.breakpoints.up("sm")]: {
+          width: `calc(${theme.spacing(8)} + 1px)`,
+        },
+      }
+    : {
+        width: `calc(${theme.spacing(7)} + 1px)`,
+        backgroundColor: "transparent",
+        transition: theme.transitions.create("width", {
+          easing: theme.transitions.easing.sharp,
+          duration: theme.transitions.duration.leavingScreen,
+        }),
+        overflowX: "hidden",
+        [theme.breakpoints.up("sm")]: {
+          width: `calc(${theme.spacing(8)} + 1px)`,
+        },
+      };
+
+const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" })(({ theme, open, open2 }) => ({
+  width: "40vh",
+  flexShrink: 0,
+  whiteSpace: "nowrap",
+  boxSizing: "border-box",
+  ...(open && {
+    ...openedMixin(theme),
+    "& .MuiDrawer-paper": openedMixin(theme),
+  }),
+
+  ...(!open && {
+    ...closedMixin(theme),
+    "& .MuiDrawer-paper": closedMixin(theme),
+  }),
+}));
 
 export default function Menu() {
   const [clicked, setClicked] = React.useState([false, false, false, false, false]);
@@ -24,6 +67,19 @@ export default function Menu() {
     const newClicked = [...clicked];
     newClicked[index] = !newClicked[index];
     setClicked(newClicked);
+  };
+
+  const [open, setOpen] = React.useState(true);
+  const [open2, setOpen2] = React.useState(false);
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+    setOpen2(false);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+    setOpen2(true);
   };
 
   const calendar = (
@@ -34,38 +90,24 @@ export default function Menu() {
     </Box>
   );
 
+  const eventTags = [<Search />, <Note />, calendar, <Search />, <Search />];
+
   return (
-    <Paper sx={{ bgcolor: "transparent", position: "fixed", height: "100vh", width: "40vh" }} elevation={2}>
-      <Box sx={{ display: "flex", mt: 3, ml: 2 }}>
-        <MenuIcon sx={{ fontSize: 55, mt: 0.5 }} />
-        <Typography variant="h3">Menu</Typography>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          height: "30vh",
-          ml: 1,
-          mt: 9,
-        }}
-      >
-        <React.Fragment>
-          <MenuButton index={0} clickHandler={clickHandler} />
-          <Drawer anchor={"left"} open={clicked[0]} onClose={clickHandler}>
-            <Box role="presentation">
-              <Search />
-            </Box>
-          </Drawer>
-        </React.Fragment>
-        <MenuButton index={1} />
-        <FormControlLabel control={<MenuButton index={2} clickHandler={clickHandler} />} />
-        <MenuButton index={3} />
-        <MenuButton index={4} />
-        <Slide direction="up" in={clicked[2]}>
-          {calendar}
-        </Slide>
-      </Box>
-    </Paper>
+    <Box>
+      <Drawer variant="permanent" open={open}>
+        <CssBaseline />
+        {[0, 1, 2, 3, 4].map((idx) => (
+          <MenuButton
+            index={idx}
+            open={open}
+            open2={open2}
+            clicked={clicked[idx]}
+            clickHandler={clickHandler}
+            handleDrawer={!open ? handleDrawerOpen : handleDrawerClose}
+          />
+        ))}
+      </Drawer>
+      <Drawer variant="persistent" open={open2}></Drawer>
+    </Box>
   );
 }

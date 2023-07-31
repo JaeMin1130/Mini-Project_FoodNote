@@ -8,7 +8,6 @@ export default function Main() {
   return (
     <Grid container spacing={1}>
       <Grid xs={3}>
-        {/* <MiniDrawer /> */}
         <Menu />
       </Grid>
       <Grid xs={9}>

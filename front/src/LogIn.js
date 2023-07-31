@@ -16,6 +16,7 @@ import * as React from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function LogIn() {
+  const [userId, setUserId] = React.useState("");
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
