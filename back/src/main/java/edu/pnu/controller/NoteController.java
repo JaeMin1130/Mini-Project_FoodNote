@@ -40,7 +40,7 @@ public class NoteController {
 	}
 	
 	// 6.음식 조회
-	@GetMapping("/main/search/food/{keyword}") 
+	@GetMapping("/main/search/{keyword}") 
 	public List<Food> searchFood(@PathVariable String keyword) {
 		System.out.println(keyword);
 		return noteService.searchFood(keyword);
@@ -59,7 +59,7 @@ public class NoteController {
 	}
 
 	// 9. 최근 검색어 조회
-	@GetMapping("/main/search/log/{userId}")
+	@PostMapping("/main/search/{userId}")
 	public List<SearchLog> searchKeyword(@PathVariable String userId) {
 		return noteService.searchKeyword(userId);
 	}
