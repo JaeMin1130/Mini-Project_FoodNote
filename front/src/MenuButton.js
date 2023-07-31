@@ -1,4 +1,14 @@
-import { Box, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import {
+  Box,
+  Drawer,
+  Fab,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import EditIcon from "@mui/icons-material/Edit";
 import EqualizerIcon from "@mui/icons-material/Equalizer";
@@ -13,32 +23,22 @@ import Note from "./Note";
 
 export default function MenuButton(props) {
   const clickHandler = props.clickHandler;
-  const handleDrawer = props.handleDrawer;
 
   const idx = props.index;
   const navigate = useNavigate();
-  // let clicked = [];
-  // React.useEffect(() => {
-  //   clicked = props.clicked[idx];
-  //   console.log(clicked);
-  // }, [props.clicked]);
 
   const clickSearch = () => {
     clickHandler(idx);
-    handleDrawer();
   };
   const clickNote = () => {
     clickHandler(idx);
-    handleDrawer();
   };
   const clickCal = () => {
     clickHandler(idx);
-    handleDrawer();
   };
 
   const clickStat = () => {
     clickHandler(idx);
-    handleDrawer();
   };
 
   const clickLogout = () => {
@@ -59,10 +59,10 @@ export default function MenuButton(props) {
 
   return (
     <List>
-      <ListItem disablePadding>
-        <ListItemButton onClick={clickEvents[idx]}>
+      <ListItem>
+        <ListItemButton onClick={clickEvents[idx]} sx={{ px: 0 }}>
           {iconList[idx]}
-          <ListItemText primary={iconName[idx]} sx={{ opacity: props.open ? 1 : 0, ml: 2 }} />
+          {props.open && <ListItemText primary={iconName[idx]} sx={{ ml: 2 }} />}
         </ListItemButton>
       </ListItem>
     </List>

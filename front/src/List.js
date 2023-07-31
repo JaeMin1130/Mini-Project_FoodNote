@@ -2,7 +2,7 @@ import { Card } from "@mui/material";
 
 const List = () => {
   return (
-    <Card variant="outlined" sx={{ width: "600px", height: "300px", mt: 8 }}>
+    <Card variant="outlined" sx={{ width: "500px", height: "300px", mt: 5, mr: 0 }}>
       List
     </Card>
   );

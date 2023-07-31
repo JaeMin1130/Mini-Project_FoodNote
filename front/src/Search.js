@@ -1,4 +1,4 @@
-import { Autocomplete, Grid, IconButton, Paper, TextField } from "@mui/material";
+import { Autocomplete, Box, Divider, Grid, IconButton, Paper, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 
 const Search = () => {
@@ -26,13 +26,22 @@ const Search = () => {
   };
 
   return (
-    <Autocomplete
-      options={foods}
-      sx={{ width: 300 }}
-      renderInput={(params) => <TextField {...params} label="Search" />}
-      onInputChange={onInputChange}
-      value={keyword}
-    />
+    <Box sx={{ display: "flex", flexDirection: "column", alignContent: "center", width: "100%" }}>
+      <Typography variant="h5" sx={{ my: 5, mx: 2 }} fontWeight={"bolder"}>
+        음식 검색
+      </Typography>
+      <Autocomplete
+        options={foods}
+        renderInput={(params) => <TextField {...params} label="Search" />}
+        onInputChange={onInputChange}
+        value={keyword}
+        sx={{ mx: 2 }}
+      />
+      <Divider sx={{ my: 3 }} />
+      <Typography variant="body1" sx={{ mx: 2 }} fontWeight={"bolder"}>
+        최근 검색 항목
+      </Typography>
+    </Box>
   );
 };
 

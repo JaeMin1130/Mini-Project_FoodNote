@@ -1,15 +1,15 @@
-import { Box, CssBaseline } from "@mui/material";
+import { Box, CssBaseline, Paper, Typography } from "@mui/material";
 import MuiDrawer from "@mui/material/Drawer";
 import { styled } from "@mui/material/styles";
 import * as React from "react";
 import MenuButton from "./MenuButton";
+import MenuIcon from "@mui/icons-material/Menu";
 import Search from "./Search";
 import Note from "./Note";
-import { DateCalendar, LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import Calendar from "./Calendar";
 
-const openedMixin = (theme, open2) => ({
-  width: "40vh",
+const openedMixin = (theme) => ({
+  width: "30vh",
   backgroundColor: "transparent",
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
@@ -18,35 +18,19 @@ const openedMixin = (theme, open2) => ({
   overflowX: "hidden",
 });
 
-const closedMixin = (theme, open2) =>
-  open2
-    ? {
-        width: `calc(${theme.spacing(7)} + 1px)`,
-        backgroundColor: "transparent",
-        transition: theme.transitions.create("width", {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.leavingScreen,
-        }),
-        overflowX: "hidden",
-        [theme.breakpoints.up("sm")]: {
-          width: `calc(${theme.spacing(8)} + 1px)`,
-        },
-      }
-    : {
-        width: `calc(${theme.spacing(7)} + 1px)`,
-        backgroundColor: "transparent",
-        transition: theme.transitions.create("width", {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.leavingScreen,
-        }),
-        overflowX: "hidden",
-        [theme.breakpoints.up("sm")]: {
-          width: `calc(${theme.spacing(8)} + 1px)`,
-        },
-      };
+const closedMixin = (theme) => ({
+  backgroundColor: "transparent",
+  transition: theme.transitions.create("width", {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  overflowX: "hidden",
+  [theme.breakpoints.up("sm")]: {
+    width: `calc(${theme.spacing(8)} + 1px)`,
+  },
+});
 
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" })(({ theme, open, open2 }) => ({
-  width: "40vh",
+const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" })(({ theme, open }) => ({
   flexShrink: 0,
   whiteSpace: "nowrap",
   boxSizing: "border-box",
@@ -61,53 +45,95 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" 
   }),
 }));
 
+const openedMixinSecondDrawer = (theme) => ({
+  width: "45vh", // Change the width value to make it wider
+  backgroundColor: "transparent",
+  transition: theme.transitions.create("width", {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.enteringScreen,
+  }),
+  overflowX: "hidden",
+});
+
+const closedMixinSecondDrawer = (theme) => ({
+  backgroundColor: "transparent",
+  transition: theme.transitions.create("width", {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  overflowX: "hidden",
+  [theme.breakpoints.up("sm")]: {
+    width: 0,
+  },
+});
+
+const DrawerSecond = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" })(({ theme, open }) => ({
+  flexShrink: 0,
+  whiteSpace: "nowrap",
+  boxSizing: "border-box",
+  ...(open && {
+    ...openedMixinSecondDrawer(theme),
+    "& .MuiDrawer-paper": openedMixinSecondDrawer(theme),
+  }),
+
+  ...(!open && {
+    ...closedMixinSecondDrawer(theme),
+    "& .MuiDrawer-paper": closedMixinSecondDrawer(theme),
+  }),
+}));
+
 export default function Menu() {
   const [clicked, setClicked] = React.useState([false, false, false, false, false]);
+  const [open, setOpen] = React.useState(true);
+
   const clickHandler = (index) => {
-    const newClicked = [...clicked];
-    newClicked[index] = !newClicked[index];
+    if (clicked[index]) setOpen(true);
+    else setOpen(false);
+
+    const newClicked = [false, false, false, false, false];
+    newClicked[index] = !clicked[index];
     setClicked(newClicked);
   };
 
-  const [open, setOpen] = React.useState(true);
-  const [open2, setOpen2] = React.useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-    setOpen2(false);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-    setOpen2(true);
-  };
-
-  const calendar = (
+  const menuButtons = (
     <Box>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DateCalendar />
-      </LocalizationProvider>
+      <Box sx={{ display: "flex", alignItems: "center", mx: 1, my: 4 }}>
+        <MenuIcon
+          sx={{
+            fontSize: 50,
+          }}
+        />
+        {/* 부자연스러움 */}
+        {open && (
+          <Typography variant="h4" sx={{ ml: 1, opacity: open ? 1 : 0, transition: "opacity 0.3s ease" }}>
+            Menu
+          </Typography>
+        )}
+      </Box>
+      <Box>
+        {[0, 1, 2, 3, 4].map((idx) => (
+          <MenuButton index={idx} open={open} clicked={clicked[idx]} clickHandler={clickHandler} />
+        ))}
+      </Box>
     </Box>
   );
-
-  const eventTags = [<Search />, <Note />, calendar, <Search />, <Search />];
+  const eventTags = [<Search />, <Note />, <Calendar />, <Search />, <Search />];
 
   return (
     <Box>
+      <CssBaseline />
       <Drawer variant="permanent" open={open}>
-        <CssBaseline />
-        {[0, 1, 2, 3, 4].map((idx) => (
-          <MenuButton
-            index={idx}
-            open={open}
-            open2={open2}
-            clicked={clicked[idx]}
-            clickHandler={clickHandler}
-            handleDrawer={!open ? handleDrawerOpen : handleDrawerClose}
-          />
-        ))}
+        {menuButtons}
       </Drawer>
-      <Drawer variant="persistent" open={open2}></Drawer>
+      {eventTags.map((eventTag, idx) => (
+        <DrawerSecond variant="permanent" PaperProps open={clicked[idx]}>
+          <CssBaseline />
+          <Box sx={{ display: "flex" }}>
+            {menuButtons}
+            {clicked[idx] ? eventTag : null}
+          </Box>
+        </DrawerSecond>
+      ))}
     </Box>
   );
 }

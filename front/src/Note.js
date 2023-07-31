@@ -1,3 +1,4 @@
+import { Box, Divider } from "@mui/material";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -7,18 +8,11 @@ import * as React from "react";
 
 export default function Note() {
   return (
-    <Grid>
-      <input className="signup-profileImg-input" type="file" accept="image/*" id="profileImg" />
-      <Card sx={{ minWidth: "100%" }}>
-        <CardContent>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            {" "}
-          </Typography>
-        </CardContent>
-      </Card>
-      <Button fullwidth color="secondary" variant="outlined">
-        기록
-      </Button>
-    </Grid>
+    <Box sx={{ display: "flex", flexDirection: "column", alignContent: "center", width: "100%" }}>
+      <Typography variant="h5" sx={{ my: 5, mx: 2 }} fontWeight={"bolder"}>
+        기록하기
+      </Typography>
+      <Divider sx={{ my: 3 }} />
+    </Box>
   );
 }
