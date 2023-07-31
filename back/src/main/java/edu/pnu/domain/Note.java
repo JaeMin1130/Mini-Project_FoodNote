@@ -3,6 +3,9 @@ package edu.pnu.domain;
 import java.util.Date;
 
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,18 +37,28 @@ public class Note {
 	private String userId;
 	@Column(name = "food_name")
 	private String foodName;
-	private int amount;
+	private double amount;
 	@Column(name = "meal_type")
 	private String mealType;
-	@Column(name = "food_no")
-	private int foodNo;
+//	@Column(name = "food_no")
+//	private int foodNo;
 	@Lob // Use @Lob for large binary data
 	@Column(name = "image_data")
 	private byte[] imageData;
 	@Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	@Temporal (TemporalType.TIMESTAMP)
 	@CreationTimestamp
+	@JsonFormat(pattern = "yy-MM-dd-HH:mm", timezone = "Asia/Seoul")
 	private Date date;
-	
+	private String brand;
+	private double serving_size;
+	private double calories;
+	private double carbohydrate;
+	private double protein;
+	private double fat;
+	private double sugars;
+	private double sodium;
+	private double cholesterol;
+	private double caffeine;
 
 }

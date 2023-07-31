@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
 //import edu.pnu.service.UserService;
@@ -29,10 +30,12 @@ public class SecurityConfig {
 		security.csrf(csrf->csrf.disable());
 		security.cors(cors->cors.disable());
 		
-		
+		security.sessionManagement(sess->sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+		security.formLogin(form->form.disable());
 		security.authorizeHttpRequests(auth->{
 			auth.anyRequest().permitAll();
 		});
+		
 //		security.authorizeHttpRequests(auth->{
 ////			auth.requestMatchers("/").permitAll();
 ////			auth.requestMatchers("/member/**").authenticated();
