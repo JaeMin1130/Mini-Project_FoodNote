@@ -1,6 +1,5 @@
 package edu.pnu.service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,13 +31,12 @@ public class NoteService {
 		return noteRepo.findByUserId(userId);
 	}
 
-//	// 5.날짜 조회
 //	public List<Note> searchDate(String userId, Date date) {
 //		List<Note> notes = noteRepo.findByDate(userId, date);
 //		return notes;
 //	}
 
-	// 6.식단 추가
+	// 5.식단 추가
 	public Note insertNote(Note note) {
 
 		double userAmount = note.getAmount();
@@ -58,7 +56,7 @@ public class NoteService {
 		n.setDate(note.getDate());
 		n.setBrand(note.getBrand());
 
-		// Adjust the values based on the ratio
+		
 		n.setServing_size(servingSize);
 		n.setCalories(note.getCalories() * ratio);
 		n.setCarbohydrate(note.getCarbohydrate() * ratio);
@@ -69,11 +67,11 @@ public class NoteService {
 		n.setCholesterol(note.getCholesterol() * ratio);
 		n.setCaffeine(note.getCaffeine() * ratio);
 
-		// Save Note
+		
 		return noteRepo.save(n);
 	}
 
-	// 7.음식 조회
+	// 6.음식 조회
 	public List<Food> searchFood(String keyword) {
 		System.out.println(keyword);
 		List<Food> foods = foodRepo.findByName(keyword);
@@ -85,7 +83,7 @@ public class NoteService {
 	}
 
 	private void saveSearchLog(String userId, String keyword) {
-		// Check if a search log already exists for the user and keyword
+		
 		SearchLog log = searchRepo.findByUserIdAndKeyword(userId, keyword);
 
 		if (log == null) {
@@ -96,7 +94,7 @@ public class NoteService {
 		} 
 	}
 
-	// 8.식단 수정
+	// 7.식단 수정
 	public Note updateFood(Note note) {
 		Optional<Note> optionalNote = noteRepo.findById(note.getId());
 
@@ -115,7 +113,7 @@ public class NoteService {
 
 	}
 
-	// 9.식단 삭제
+	// 8.식단 삭제
 	public boolean deleteFood(Long id) {
 		try {
 			noteRepo.deleteById(id);
@@ -125,7 +123,7 @@ public class NoteService {
 		}
 	}
 
-	// 10. 최근 검색어 조회
+	// 9. 최근 검색어 조회
 	public List<SearchLog> searchKeyword(String userId) {
 		
 		return searchRepo.findByUserId(userId);
