@@ -5,13 +5,31 @@ import { useNavigate } from "react-router-dom";
 
 export default function Join() {
   const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
+    const formData = {
+      userId: data.get("id"),
       password: data.get("password"),
-    });
+    };
+    console.log(formData);
+    const url = "http://10.125.121.173:8080/users/join";
+
+    fetch(url, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log("data", data));
+
+    // console.log({
+    //   email: data.get("id"),
+    //   password: data.get("password"),
+    // });
     navigate("/logIn");
   };
 
@@ -30,31 +48,10 @@ export default function Join() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          회원 가입
         </Typography>
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="given-name"
-                name="firstName"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                autoFocus
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="family-name"
-              />
-            </Grid>
             <Grid item xs={12}>
               <TextField required fullWidth id="id" label="ID" name="id" autoComplete="id" />
             </Grid>

@@ -94,21 +94,6 @@ export default function Menu() {
     setClicked(newClicked);
   };
 
-  const [logData, setLogData] = React.useState([]);
-  const fetchData = (url) => {
-    fetch(url)
-      .then((resp) => resp.json())
-      .then((data) => setLogData(data))
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  React.useEffect(() => {
-    const url = "http://10.125.121.173:8080/main/searchLog/user123";
-    fetchData(url);
-  }, []);
-
   const menuButtons = (
     <Box>
       <Box sx={{ display: "flex", alignItems: "center", mx: 1, my: 4 }}>
@@ -130,7 +115,7 @@ export default function Menu() {
       </Box>
     </Box>
   );
-  const eventTags = [<Search logData={logData} />, <Note />, <Calendar />, <Search />, <Search />];
+  const eventTags = [<Search />, <Note />, <Calendar />, <Search />, <Search />];
 
   return (
     <Box>

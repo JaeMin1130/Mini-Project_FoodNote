@@ -12,15 +12,16 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Search = (props) => {
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
   const [foodList, setFoodList] = useState([]);
   const [keyword, setKeyword] = useState("");
-  const logData = [];
-  props.logData.map((item) => logData.push(item.keyword));
+  const [logs, setLogs] = useState([]);
+
   const fetchData = (url) => {
+    console.log(url);
     fetch(url)
       .then((resp) => resp.json())
       .then((data) => setData(data))
@@ -29,13 +30,54 @@ const Search = (props) => {
       });
   };
 
+  useEffect(() => {
+    const url = "http://10.125.121.173:8080/main/searchLog/user123";
+    console.log(url);
+    fetch(url)
+      .then((resp) => resp.json())
+      .then((data) => setLogs(data))
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const [searchWords, setSearchWords] = useState();
+  useEffect(() => {
+    {
+      setSearchWords(
+        <List>
+          {logs.map((item) => (
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemText primary={item.keyword} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      );
+    }
+  }, [logs]);
+
+  const saveSearchWord = (event, value) => {
+    if (value != null) {
+      const url2 = "http://10.125.121.173:8080/main/search/log/" + value;
+      fetch(url2).catch((err) => console.log(err));
+
+      setLogs(() => {
+        const logList = [...logs];
+        logList.push(value);
+        return Array.from(logList);
+      });
+    }
+  };
+
   const onInputChange = (e) => {
     setKeyword(e.target.value);
     if (keyword != "") {
       const url1 = "http://10.125.121.173:8080/main/search/" + keyword;
       fetchData(url1);
     }
-    setFoodList((prevFoods) => {
+    setFoodList(() => {
       const uniqueFoodsSet = new Set();
       if (data != undefined) {
         data.forEach((item) => {
@@ -47,15 +89,6 @@ const Search = (props) => {
     });
   };
 
-  const handleFoodSelection = (event, value) => {
-    if (value != null) {
-      const url2 = "http://10.125.121.173:8080/main/search/log/" + value;
-      fetch(url2).catch((err) => console.log(err));
-      logData.push(value);
-    }
-    console.log(logData);
-  };
-
   return (
     <Box sx={{ display: "flex", flexDirection: "column", alignContent: "center", width: "100%" }}>
       <Typography variant="h5" sx={{ my: 5, mx: 2 }} fontWeight={"bolder"}>
@@ -65,22 +98,14 @@ const Search = (props) => {
         options={foodList}
         renderInput={(params) => <TextField {...params} label="Search" />}
         onInputChange={onInputChange}
-        onChange={handleFoodSelection}
+        onChange={saveSearchWord}
         sx={{ mx: 2 }}
       />
       <Divider sx={{ my: 3 }} />
       <Typography variant="body1" sx={{ mx: 2 }} fontWeight={"bolder"}>
         최근 검색 항목
       </Typography>
-      <List>
-        {logData.map((item) => (
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemText primary={item} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+      {searchWords}
     </Box>
   );
 };

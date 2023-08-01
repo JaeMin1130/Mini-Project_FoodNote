@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-BigDataApplication<back>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "edu.pnu.BigDataApplication",
+      "projectName": "back",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
