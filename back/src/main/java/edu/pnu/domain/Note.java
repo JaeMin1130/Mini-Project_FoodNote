@@ -46,8 +46,8 @@ public class Note {
 	@Column(name = "image_data")
 	private byte[] imageData;
 	@Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-//	@Temporal (TemporalType.TIMESTAMP)
-//	@CreationTimestamp
+	@Temporal (TemporalType.TIMESTAMP)
+	@CreationTimestamp
 	@JsonFormat(pattern = "yy-MM-dd-HH:mm", timezone = "Asia/Seoul")
 	private Date date;
 	private String brand;
