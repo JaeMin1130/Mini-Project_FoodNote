@@ -51,9 +51,7 @@ function App() {
           <Route path="*" element={<Welcome />} />
           <Route path="logIn" element={<LogIn />} />
           <Route path="join" element={<Join />} />
-          <Route path="main" element={<Main />} />
-          <Route path="note" element={<Note />} />
-          <Route path="search" element={<Search />} />
+          <Route path="main/*" element={<Main />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

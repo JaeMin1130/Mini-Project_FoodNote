@@ -89,11 +89,25 @@ export default function Menu() {
   const clickHandler = (index) => {
     if (clicked[index]) setOpen(true);
     else setOpen(false);
-
     const newClicked = [false, false, false, false, false];
     newClicked[index] = !clicked[index];
     setClicked(newClicked);
   };
+
+  const [logData, setLogData] = React.useState([]);
+  const fetchData = (url) => {
+    fetch(url)
+      .then((resp) => resp.json())
+      .then((data) => setLogData(data))
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  React.useEffect(() => {
+    const url = "http://10.125.121.173:8080/main/searchLog/user123";
+    fetchData(url);
+  }, []);
 
   const menuButtons = (
     <Box>
@@ -103,7 +117,6 @@ export default function Menu() {
             fontSize: 50,
           }}
         />
-        {/* 부자연스러움 */}
         {open && (
           <Typography variant="h4" sx={{ ml: 1, opacity: open ? 1 : 0, transition: "opacity 0.3s ease" }}>
             Menu
@@ -117,7 +130,7 @@ export default function Menu() {
       </Box>
     </Box>
   );
-  const eventTags = [<Search />, <Note />, <Calendar />, <Search />, <Search />];
+  const eventTags = [<Search logData={logData} />, <Note />, <Calendar />, <Search />, <Search />];
 
   return (
     <Box>

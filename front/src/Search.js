@@ -1,28 +1,59 @@
-import { Autocomplete, Box, Divider, Grid, IconButton, Paper, TextField, Typography } from "@mui/material";
+import {
+  Autocomplete,
+  Box,
+  Divider,
+  Grid,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Paper,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useState } from "react";
 
-const Search = () => {
-  const [foods, setFoods] = useState([]);
+const Search = (props) => {
+  const [data, setData] = useState();
+  const [foodList, setFoodList] = useState([]);
   const [keyword, setKeyword] = useState("");
-
-  const fetchData = () => {
-    const apiUrl = "http://10.125.121.173:8080/main/search/" + keyword;
-    console.log(apiUrl);
-    fetch(apiUrl)
+  const logData = [];
+  props.logData.map((item) => logData.push(item.keyword));
+  const fetchData = (url) => {
+    fetch(url)
       .then((resp) => resp.json())
-      .then((data) => setFoods(data.map((item) => item.name)))
+      .then((data) => setData(data))
       .catch((err) => {
         console.log(err);
       });
-    console.log(foods);
   };
 
   const onInputChange = (e) => {
     setKeyword(e.target.value);
     if (keyword != "") {
-      fetchData();
+      const url1 = "http://10.125.121.173:8080/main/search/" + keyword;
+      fetchData(url1);
     }
-    console.log(keyword);
+    setFoodList((prevFoods) => {
+      const uniqueFoodsSet = new Set();
+      if (data != undefined) {
+        data.forEach((item) => {
+          const foodName = item.brand !== "전국(대표)" ? item.name + " (" + item.brand + ")" : item.name;
+          uniqueFoodsSet.add(foodName);
+        });
+      }
+      return Array.from(uniqueFoodsSet);
+    });
+  };
+
+  const handleFoodSelection = (event, value) => {
+    if (value != null) {
+      const url2 = "http://10.125.121.173:8080/main/search/log/" + value;
+      fetch(url2).catch((err) => console.log(err));
+      logData.push(value);
+    }
+    console.log(logData);
   };
 
   return (
@@ -31,16 +62,25 @@ const Search = () => {
         음식 검색
       </Typography>
       <Autocomplete
-        options={foods}
+        options={foodList}
         renderInput={(params) => <TextField {...params} label="Search" />}
         onInputChange={onInputChange}
-        value={keyword}
+        onChange={handleFoodSelection}
         sx={{ mx: 2 }}
       />
       <Divider sx={{ my: 3 }} />
       <Typography variant="body1" sx={{ mx: 2 }} fontWeight={"bolder"}>
         최근 검색 항목
       </Typography>
+      <List>
+        {logData.map((item) => (
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemText primary={item} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
     </Box>
   );
 };

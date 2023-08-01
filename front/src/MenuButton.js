@@ -1,37 +1,24 @@
-import {
-  Box,
-  Drawer,
-  Fab,
-  IconButton,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-} from "@mui/material";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import EditIcon from "@mui/icons-material/Edit";
 import EqualizerIcon from "@mui/icons-material/Equalizer";
 import LogoutIcon from "@mui/icons-material/Logout";
 import SearchIcon from "@mui/icons-material/Search";
+import { List, ListItem, ListItemButton, ListItemText } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { DateCalendar, LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import Search from "./Search";
-import Note from "./Note";
 
 export default function MenuButton(props) {
   const clickHandler = props.clickHandler;
-
   const idx = props.index;
   const navigate = useNavigate();
 
   const clickSearch = () => {
     clickHandler(idx);
+    navigate("/main/search");
   };
   const clickNote = () => {
     clickHandler(idx);
+    navigate("/main/note");
   };
   const clickCal = () => {
     clickHandler(idx);

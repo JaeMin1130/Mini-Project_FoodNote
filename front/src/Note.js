@@ -12,7 +12,7 @@ export default function Note() {
       <Typography variant="h5" sx={{ my: 5, mx: 2 }} fontWeight={"bolder"}>
         기록하기
       </Typography>
-      <Divider sx={{ my: 3 }} />
+      <Divider />
     </Box>
   );
 }
