@@ -66,7 +66,7 @@ public class NoteController {
 	}
 
 	// 10. 최근 검색어 조회
-	@PostMapping("/main/search/{userId}")
+	@GetMapping("/main/searchLog/{userId}")
 	public List<SearchLog> searchKeyword(@PathVariable String userId) {
 		return noteService.searchKeyword(userId);
 	}
