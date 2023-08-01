@@ -34,7 +34,7 @@ public class NoteController {
 //    }
 	
 	// 5.식단 추가
-	@PostMapping("/note/insert") 
+	@PostMapping("main/note") 
 	public Note insertNote(@RequestBody Note note) {
 		return noteService.insertNote(note);
 	}
@@ -45,20 +45,27 @@ public class NoteController {
 		System.out.println(keyword);
 		return noteService.searchFood(keyword);
 	}
+	
+	// 7.검색 기록 저장
+	@GetMapping("/main/search/log/{keyword}")
+	public List<Food> searchLog(@PathVariable String keyword){
+		System.out.println(keyword);
+		return noteService.searchLog(keyword);
+	}
 
-	// 7.식단 수정
+	// 8.식단 수정
 	@PutMapping("/main/update")
 	public Note updateFood(@RequestBody Note note) {
 		return noteService.updateFood(note);
 	}
 
-	// 8.식단 삭제
+	// 9.식단 삭제
 	@DeleteMapping("/main/delete/{id}")
 	public boolean deleteFood(@PathVariable Long id) {
 		return noteService.deleteFood(id);
 	}
 
-	// 9. 최근 검색어 조회
+	// 10. 최근 검색어 조회
 	@PostMapping("/main/search/{userId}")
 	public List<SearchLog> searchKeyword(@PathVariable String userId) {
 		return noteService.searchKeyword(userId);

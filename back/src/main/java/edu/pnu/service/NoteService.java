@@ -81,9 +81,6 @@ public class NoteService {
 		System.out.println(keyword);
 		List<Food> foods = foodRepo.findByName(keyword);
 		
-		String userId = "user123";
-		saveSearchLog(userId, keyword);
-
 		return foods;
 	}
 
@@ -98,8 +95,19 @@ public class NoteService {
 			searchRepo.save(log);
 		} 
 	}
+	
+	// 7.검색 기록 저장
+	public List<Food> searchLog(String keyword) {
+		System.out.println(keyword);
+		List<Food> foods = foodRepo.findBySearchLog(keyword);
+		
+		String userId = "user123";
+		saveSearchLog(userId, keyword);
 
-	// 7.식단 수정
+		return foods;
+	}
+	
+	// 8.식단 수정
 	public Note updateFood(Note note) {
 		Optional<Note> optionalNote = noteRepo.findById(note.getId());
 
@@ -118,7 +126,7 @@ public class NoteService {
 
 	}
 
-	// 8.식단 삭제
+	// 9.식단 삭제
 	public boolean deleteFood(Long id) {
 		try {
 			noteRepo.deleteById(id);
@@ -128,7 +136,7 @@ public class NoteService {
 		}
 	}
 
-	// 9. 최근 검색어 조회
+	// 10. 최근 검색어 조회
 	public List<SearchLog> searchKeyword(String userId) {
 		
 		return searchRepo.findByUserId(userId);
