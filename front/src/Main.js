@@ -21,16 +21,16 @@ export default function Main() {
 
   return (
     <Grid container spacing={1}>
-      <Grid xs={5}>
+      <Grid xs={4}>
         <Menu />
       </Grid>
-      <Grid xs={7}>
+      <Grid xs={8}>
         <Typography variant="h2" sx={{ mt: 2 }}>
           Today's Meal
         </Typography>
       </Grid>
-      <Grid xs={5}></Grid>
-      <Grid xs={7}>
+      <Grid xs={4}></Grid>
+      <Grid xs={8}>
         <List />
       </Grid>
     </Grid>

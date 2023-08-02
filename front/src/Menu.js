@@ -9,7 +9,7 @@ import Note from "./Note";
 import Calendar from "./Calendar";
 
 const openedMixin = (theme) => ({
-  width: "30vh",
+  width: "15vw",
   backgroundColor: "transparent",
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
@@ -46,7 +46,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" 
 }));
 
 const openedMixinSecondDrawer = (theme) => ({
-  width: "45vh", // Change the width value to make it wider
+  width: "23vw",
   backgroundColor: "transparent",
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
