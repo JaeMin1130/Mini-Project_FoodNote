@@ -21,10 +21,22 @@ export default function LogIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
+    const formData = {
+      userId: data.get("id"),
       password: data.get("password"),
-    });
+    };
+    console.log(formData);
+    const url = "http://10.125.121.173:8080/users/login";
+
+    fetch(url, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log("data", data));
     navigate("/main");
   };
 

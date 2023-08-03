@@ -1,15 +1,15 @@
-import { Box, CssBaseline, Paper, Typography } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import { Box, CssBaseline, Typography } from "@mui/material";
 import MuiDrawer from "@mui/material/Drawer";
 import { styled } from "@mui/material/styles";
-import * as React from "react";
-import MenuButton from "./MenuButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import Search from "./Search";
-import Note from "./Note";
+import { useEffect, useState } from "react";
 import Calendar from "./Calendar";
+import MenuButton from "./MenuButton";
+import Note from "./Note";
+import Search from "./Search";
 
 const openedMixin = (theme) => ({
-  width: "15vw",
+  width: "18vw",
   backgroundColor: "transparent",
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
@@ -46,7 +46,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" 
 }));
 
 const openedMixinSecondDrawer = (theme) => ({
-  width: "23vw",
+  width: "30vw",
   backgroundColor: "transparent",
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
@@ -83,9 +83,12 @@ const DrawerSecond = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "
 }));
 
 export default function Menu() {
-  const [clicked, setClicked] = React.useState([false, false, false, false, false]);
-  const [open, setOpen] = React.useState(true);
-
+  const [clicked, setClicked] = useState([false, false, false, false, false]);
+  const [open, setOpen] = useState(true);
+  const [hidden, setHidden] = useState(false);
+  useEffect(() => {
+    setHidden(!open);
+  }, []);
   const clickHandler = (index) => {
     if (clicked[index]) setOpen(true);
     else setOpen(false);
@@ -121,10 +124,10 @@ export default function Menu() {
     <Box>
       <CssBaseline />
       <Drawer variant="permanent" open={open}>
-        {menuButtons}
+        {open && menuButtons}
       </Drawer>
       {eventTags.map((eventTag, idx) => (
-        <DrawerSecond variant="permanent" PaperProps open={clicked[idx]}>
+        <DrawerSecond variant="permanent" PaperProps open={clicked[idx]} sx={{ maxWidth: "30vw" }}>
           <CssBaseline />
           <Box sx={{ display: "flex" }}>
             {menuButtons}

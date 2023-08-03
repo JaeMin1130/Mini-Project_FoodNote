@@ -1,8 +1,8 @@
 import { Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
+import { useEffect, useState } from "react";
 import List from "./List";
 import Menu from "./Menu";
-import { useEffect, useState } from "react";
 
 export default function Main() {
   const [userId, setUserId] = useState("user1");
@@ -20,7 +20,7 @@ export default function Main() {
   }, []);
 
   return (
-    <Grid container spacing={1}>
+    <Grid container spacing={5}>
       <Grid xs={4}>
         <Menu />
       </Grid>

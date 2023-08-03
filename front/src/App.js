@@ -1,6 +1,5 @@
 import { Container, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "./App.css";
 import Copyright from "./Copyright";
 import Join from "./Join";
 import LogIn from "./LogIn";
