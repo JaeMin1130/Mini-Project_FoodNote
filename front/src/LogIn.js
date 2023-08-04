@@ -12,32 +12,39 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import axios from "axios";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function LogIn() {
-  const [userId, setUserId] = React.useState("");
   const navigate = useNavigate();
-  const handleSubmit = (event) => {
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const formData = {
       userId: data.get("id"),
       password: data.get("password"),
     };
-    console.log(formData);
-    const url = "http://10.125.121.173:8080/users/login";
+    const url = "http://localhost:8080/users/login";
 
-    fetch(url, {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => response.json())
-      .then((data) => console.log("data", data));
-    navigate("/main");
+    try {
+      const res = await axios.post(url, formData);
+      console.log("Response Headers:", res.headers); // Log the headers
+      if (res.status === 200) {
+        // Extract authorization token from headers
+        const accessToken = res.headers["authorization"];
+        console.log("Access Token:", accessToken);
+
+        // Set authorization header for Axios
+        axios.defaults.headers.common["authorization"] = `Bearer ${accessToken}`;
+
+        navigate("/main");
+      }
+    } catch (error) {
+      console.error("Error during API call:", error);
+      // Handle error or show error message to the user
+    }
   };
 
   return (

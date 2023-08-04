@@ -1,45 +1,22 @@
-import { Box, Button, Divider } from "@mui/material";
+import React, { useCallback, useState } from "react";
+import { Box, Button, Divider, Fab, IconButton } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ClearIcon from "@mui/icons-material/Clear";
+import AddIcon from "@mui/icons-material/Add";
+import ImageLoader from "./ImageLoader";
+import Search from "./Search";
 export default function Note() {
-  const onDrop = useCallback((acceptedFiles) => {
-    // Do something with the files
-  }, []);
-  const { getRootProps, getInputProps, isDragActive } = useDropzone(console.log("picture"));
-
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", alignContent: "center", width: "100%" }}>
-      <Typography variant="h5" sx={{ my: 5, mx: 2 }} fontWeight={"bolder"}>
+    <Box sx={{ width: "26vw", height: "90vh" }}>
+      <Typography variant="h4" sx={{ my: 5, mx: 2 }} fontWeight={"bolder"}>
         기록하기
       </Typography>
-      <Divider />
-      <Box sx={{ mt: 3 }}>
-        <div {...getRootProps()}>
-          <input {...getInputProps()} />
-          <Box
-            sx={{
-              ml: 10,
-              width: "50%",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              border: "2px dashed grey",
-              padding: "20px",
-              borderRadius: "8px",
-              cursor: "pointer",
-            }}
-          >
-            <Typography variant="body1" gutterBottom flexWrap={1}>
-              {isDragActive ? "Drop the picture here" : "Drag and drop"}
-            </Typography>
-            <Button variant="outlined" color="primary">
-              Select Picture
-            </Button>
-          </Box>
-        </div>
-      </Box>
+      <Divider sx={{ width: "27vw", mb: 3 }} />
+      <ImageLoader />
+      {/* <Search /> */}
     </Box>
   );
 }

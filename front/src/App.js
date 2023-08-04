@@ -34,13 +34,6 @@ const theme = createTheme({
       '"Segoe UI Symbol"',
     ],
   },
-  components: {
-    MuiIcon: {
-      defaultProps: {
-        fontSize: 50,
-      },
-    },
-  },
 });
 function App() {
   return (

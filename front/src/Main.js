@@ -5,11 +5,11 @@ import List from "./List";
 import Menu from "./Menu";
 
 export default function Main() {
-  const [userId, setUserId] = useState("user1");
+  const [userId, setUserId] = useState("Iru");
   const [noteData, setNoteData] = useState([]);
 
   useEffect(() => {
-    const url = `http://10.125.121.173:8080/main/${userId}`;
+    const url = `http://localhost:8080/main/${userId}`;
     console.log(url);
     fetch(url)
       .then((resp) => resp.json())
