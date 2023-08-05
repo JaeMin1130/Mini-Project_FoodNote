@@ -85,10 +85,7 @@ const DrawerSecond = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "
 export default function Menu() {
   const [clicked, setClicked] = useState([false, false, false, false, false]);
   const [open, setOpen] = useState(true);
-  const [hidden, setHidden] = useState(false);
-  useEffect(() => {
-    setHidden(!open);
-  }, []);
+
   const clickHandler = (index) => {
     if (clicked[index]) setOpen(true);
     else setOpen(false);

@@ -10,41 +10,18 @@ import {
   Grid,
   Link,
   TextField,
-  Typography,
 } from "@mui/material";
-import axios from "axios";
 import * as React from "react";
-import { useNavigate } from "react-router-dom";
+import { signin } from "./api/ApiService";
 
 export default function LogIn() {
-  const navigate = useNavigate();
-
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const formData = {
-      userId: data.get("id"),
-      password: data.get("password"),
-    };
-    const url = "http://localhost:8080/users/login";
-
-    try {
-      const res = await axios.post(url, formData);
-      console.log("Response Headers:", res.headers); // Log the headers
-      if (res.status === 200) {
-        // Extract authorization token from headers
-        const accessToken = res.headers["authorization"];
-        console.log("Access Token:", accessToken);
-
-        // Set authorization header for Axios
-        axios.defaults.headers.common["authorization"] = `Bearer ${accessToken}`;
-
-        navigate("/main");
-      }
-    } catch (error) {
-      console.error("Error during API call:", error);
-      // Handle error or show error message to the user
-    }
+    const data = new FormData(event.target);
+    const username = data.get("username");
+    const password = data.get("password");
+    // ApiService의 signin 메서드를 사용 해 로그인.
+    signin({ username: username, password: password });
   };
 
   return (

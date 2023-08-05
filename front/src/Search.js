@@ -11,6 +11,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { call } from "./api/ApiService";
 import { useEffect, useState } from "react";
 import NutritionTable from "./NutritionTable";
 
@@ -23,23 +24,15 @@ const Search = (props) => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const url = "http://10.125.121.173:8080/main/searchLog/user123";
-    console.log(url);
-    fetch(url)
-      .then((resp) => resp.json())
-      .then((data) => setLogs(data.reverse()))
-      .catch((err) => console.log(err));
+    const json = call(`/main/searchLog/user123`, "GET", null);
+    setLogs(json.data.reverse());
   }, []);
 
   // food 테이블에서 음식 조회(6번)
   const findFood = (keyword) => {
     if (keyword != "") {
-      const url = `http://10.125.121.173:8080/main/search/${keyword}`;
-      console.log(url);
-      fetch(url)
-        .then((resp) => resp.json())
-        .then((data) => setFoodData(data))
-        .catch((err) => console.log(err));
+      const json = call(`/main/search/${keyword}`, "GET", null);
+      setFoodData(json.data);
     }
   };
 
@@ -51,11 +44,7 @@ const Search = (props) => {
 
   // 검색 기록 삭제(11번)
   const deleteSearchWord = (keyword) => {
-    const url = `http://10.125.121.173:8080/main/searchLog/delete/${keyword.split(" ")[0]}`;
-    console.log(url);
-    fetch(url, {
-      method: "DELETE",
-    });
+    call(`/main/searchLog/delete/${keyword.split(" ")[0]}`, "DELETE", null);
     setLogs((prevLogs) => {
       const updatedLogs = prevLogs.filter((item) => item.keyword !== keyword);
       return updatedLogs;
@@ -73,8 +62,7 @@ const Search = (props) => {
     const value = e.target.textContent;
 
     if (value != "") {
-      const url = "http://10.125.121.173:8080/main/search/log/" + value;
-      fetch(url).catch((err) => console.log(err));
+      call(`/main/search/log/${value}`, "DELETE", null);
 
       const foodNo = value.split(" ")[0].replace(".", "").replace("No", "");
       findFood(foodNo);
