@@ -6,11 +6,10 @@ import List from "./List";
 import Menu from "./Menu";
 
 export default function Main() {
-  const [userId, setUserId] = useState("Iru");
+  const [userId, setUserId] = useState("user123");
   const [noteData, setNoteData] = useState({});
   useEffect(() => {
-    const json = call(`/main/${userId}`, "GET", null);
-    setNoteData(json);
+    call(`/main/${userId}`, "GET", null);
   });
 
   return (

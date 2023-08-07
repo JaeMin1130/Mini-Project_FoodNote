@@ -14,7 +14,7 @@ export default function Join() {
       password: data.get("password"),
     };
     console.log(formData);
-    const url = "http://10.125.121.173:8080/users/join";
+    const url = "http://localhost:8080/users/join";
 
     fetch(url, {
       method: "post",
@@ -22,9 +22,7 @@ export default function Join() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
-    })
-      .then((response) => response.json())
-      .then((data) => console.log("data", data));
+    });
 
     // console.log({
     //   email: data.get("id"),

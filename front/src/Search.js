@@ -24,15 +24,17 @@ const Search = (props) => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const json = call(`/main/searchLog/user123`, "GET", null);
-    setLogs(json.data.reverse());
+    call(`/main/searchLog/user123`, "GET", null)
+      .then((data) => setLogs(data.reverse()))
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
   }, []);
 
   // food 테이블에서 음식 조회(6번)
   const findFood = (keyword) => {
     if (keyword != "") {
-      const json = call(`/main/search/${keyword}`, "GET", null);
-      setFoodData(json.data);
+      call(`/main/search/${keyword}`, "GET", null).then((data) => setFoodData(data.reverse()));
     }
   };
 
@@ -170,7 +172,6 @@ const Search = (props) => {
           ))}
         </Box>
       </Box>
-      <Divider sx={{ mt: 1 }} />
     </Box>
   );
 };

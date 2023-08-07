@@ -4,11 +4,10 @@ export function call(api, method, request) {
   let headers = new Headers({
     "Content-Type": "application/json",
   });
-
   // 로컬 스토리지에서 ACCESS TOKEN 가져오기
   const accessToken = localStorage.getItem("ACCESS_TOKEN");
   if (accessToken && accessToken != null) {
-    headers.append("Authorization", "Bearer " + accessToken);
+    headers.append("authorization", accessToken);
   }
 
   let options = {
@@ -22,13 +21,10 @@ export function call(api, method, request) {
   }
   return fetch(options.url, options)
     .then((response) => {
-      if (response == 200) {
+      if (response.status == 200) {
         return response.json();
-      } else if (response == 403) {
+      } else if (response.status == 403) {
         window.location.href = "/login";
-      } else {
-        Promise.reject(response);
-        throw Error(response);
       }
     })
     .catch((error) => {
@@ -37,18 +33,7 @@ export function call(api, method, request) {
     });
 }
 
-export function signin(userDTO) {
-  return call("/auth/signin", "POST", userDTO).then((response) => {
-    if (response.token) {
-      // 로컬 스토리지에 토큰 저장
-      localStorage.setItem("ACCESS_TOKEN", response.token);
-      // token이 존재하는 경우 Todo 화면으로 리디렉트
-      window.location.href = "/main";
-    }
-  });
-}
-
 export function signout() {
-  localStorage.setItem("ACCESS_TOKEN", null);
+  localStorage.removeItem("ACCESS_TOKEN");
   window.location.href = "/login";
 }
