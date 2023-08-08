@@ -26,15 +26,16 @@ export default function LogIn() {
       userId: data.get("id"),
       password: data.get("password"),
     };
-    const url = "http://localhost:8080/users/login";
+    const url = "http://10.125.121.173:8080/users/login";
 
     try {
       const res = await axios.post(url, formData);
-      console.log("Response Headers:", res.headers); // Log the headers
       if (res.status === 200) {
         // Extract authorization token from headers
         const accessToken = res.headers["authorization"];
+        console.log("token", accessToken);
         localStorage.setItem("ACCESS_TOKEN", accessToken);
+        console.log("token", localStorage.getItem("ACCESS_TOKEN"));
         navigate("/main");
       }
     } catch (error) {

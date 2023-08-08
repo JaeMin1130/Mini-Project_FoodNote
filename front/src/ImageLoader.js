@@ -56,7 +56,10 @@ export default function ImageLoader() {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop: handleDrop });
 
   return (
-    <Box sx={{ width: "26vw", ml: 2 }}>
+    <Box sx={{ display: "flex", alignContent: "center", justifyContent: "space-evenly", mt: 3 }}>
+      <IconButton onClick={handlePreviousPhoto}>
+        <ArrowBackIosNewIcon />
+      </IconButton>
       <Box
         {...getRootProps()}
         sx={{
@@ -117,8 +120,8 @@ export default function ImageLoader() {
         <IconButton
           sx={{
             position: "absolute",
-            right: -5,
-            bottom: -5,
+            right: 1,
+            bottom: 1,
           }}
         >
           <Fab
@@ -134,6 +137,9 @@ export default function ImageLoader() {
           </Fab>
         </IconButton>
       </Box>
+      <IconButton onClick={handleNextPhoto}>
+        <ArrowForwardIosIcon />
+      </IconButton>
     </Box>
   );
 }

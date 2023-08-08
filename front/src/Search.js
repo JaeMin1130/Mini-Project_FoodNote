@@ -3,6 +3,7 @@ import {
   Autocomplete,
   Box,
   Divider,
+  Grid,
   IconButton,
   List,
   ListItem,
@@ -14,7 +15,7 @@ import {
 import { call } from "./api/ApiService";
 import { useEffect, useState } from "react";
 import NutritionTable from "./NutritionTable";
-
+import FoodList from "./FoodList";
 const Search = (props) => {
   const [foodData, setFoodData] = useState([]);
   const [foodList, setFoodList] = useState([]);
@@ -25,7 +26,10 @@ const Search = (props) => {
 
   useEffect(() => {
     call(`/main/searchLog/user123`, "GET", null)
-      .then((data) => setLogs(data.reverse()))
+      .then((data) => {
+        console.log("data", data);
+        setLogs(data.reverse());
+      })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
@@ -36,21 +40,6 @@ const Search = (props) => {
     if (keyword != "") {
       call(`/main/search/${keyword}`, "GET", null).then((data) => setFoodData(data.reverse()));
     }
-  };
-
-  // 최근 검색어에서 음식 클릭시 상세 정보 띄우기
-  const showFoodInfo = (e) => {
-    const foodNo = e.target.textContent.split(".")[0].replace("No", "");
-    findFood(foodNo);
-  };
-
-  // 검색 기록 삭제(11번)
-  const deleteSearchWord = (keyword) => {
-    call(`/main/searchLog/delete/${keyword.split(" ")[0]}`, "DELETE", null);
-    setLogs((prevLogs) => {
-      const updatedLogs = prevLogs.filter((item) => item.keyword !== keyword);
-      return updatedLogs;
-    });
   };
 
   // 검색어 저장(7번), 음식 상세정보 띄우기, 최근 검색어에 바로 추가
@@ -64,7 +53,7 @@ const Search = (props) => {
     const value = e.target.textContent;
 
     if (value != "") {
-      call(`/main/search/log/${value}`, "DELETE", null);
+      call(`/main/searchLog/save/${value}`, "GET", null);
 
       const foodNo = value.split(" ")[0].replace(".", "").replace("No", "");
       findFood(foodNo);
@@ -96,7 +85,9 @@ const Search = (props) => {
 
   useEffect(() => {
     const debounce = setTimeout(() => {
-      if (keyword) findFood(keyword);
+      if (keyword) {
+        findFood(keyword);
+      }
     }, 200);
     return () => {
       clearTimeout(debounce);
@@ -159,16 +150,7 @@ const Search = (props) => {
         </Typography>
         <Box sx={{ maxHeight: open ? "21vh" : "35vh", overflowY: "auto" }}>
           {logs.map((item) => (
-            <List sx={{ display: "flex", p: 0 }}>
-              <ListItem disablePadding>
-                <IconButton onClick={(keyword) => deleteSearchWord(item.keyword)}>
-                  <ClearIcon />
-                </IconButton>
-                <ListItemButton onClick={showFoodInfo}>
-                  <ListItemText primary={item.keyword}></ListItemText>
-                </ListItemButton>
-              </ListItem>
-            </List>
+            <FoodList findFood={findFood} setLogs={setLogs} item={item} />
           ))}
         </Box>
       </Box>

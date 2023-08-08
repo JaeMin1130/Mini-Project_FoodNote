@@ -1,88 +1,14 @@
 import MenuIcon from "@mui/icons-material/Menu";
 import { Box, CssBaseline, Typography } from "@mui/material";
-import MuiDrawer from "@mui/material/Drawer";
-import { styled } from "@mui/material/styles";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Calendar from "./Calendar";
 import MenuButton from "./MenuButton";
 import Note from "./Note";
 import Search from "./Search";
+import Drawer from "./drawer/Drawer";
+import Drawer2 from "./drawer/Drawer2";
 
-const openedMixin = (theme) => ({
-  width: "18vw",
-  backgroundColor: "transparent",
-  transition: theme.transitions.create("width", {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.enteringScreen,
-  }),
-  overflowX: "hidden",
-});
-
-const closedMixin = (theme) => ({
-  backgroundColor: "transparent",
-  transition: theme.transitions.create("width", {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  overflowX: "hidden",
-  [theme.breakpoints.up("sm")]: {
-    width: `calc(${theme.spacing(8)} + 1px)`,
-  },
-});
-
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" })(({ theme, open }) => ({
-  flexShrink: 0,
-  whiteSpace: "nowrap",
-  boxSizing: "border-box",
-  ...(open && {
-    ...openedMixin(theme),
-    "& .MuiDrawer-paper": openedMixin(theme),
-  }),
-
-  ...(!open && {
-    ...closedMixin(theme),
-    "& .MuiDrawer-paper": closedMixin(theme),
-  }),
-}));
-
-const openedMixinSecondDrawer = (theme) => ({
-  width: "30vw",
-  backgroundColor: "transparent",
-  transition: theme.transitions.create("width", {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.enteringScreen,
-  }),
-  overflowX: "hidden",
-});
-
-const closedMixinSecondDrawer = (theme) => ({
-  backgroundColor: "transparent",
-  transition: theme.transitions.create("width", {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  overflowX: "hidden",
-  [theme.breakpoints.up("sm")]: {
-    width: 0,
-  },
-});
-
-const DrawerSecond = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" })(({ theme, open }) => ({
-  flexShrink: 0,
-  whiteSpace: "nowrap",
-  boxSizing: "border-box",
-  ...(open && {
-    ...openedMixinSecondDrawer(theme),
-    "& .MuiDrawer-paper": openedMixinSecondDrawer(theme),
-  }),
-
-  ...(!open && {
-    ...closedMixinSecondDrawer(theme),
-    "& .MuiDrawer-paper": closedMixinSecondDrawer(theme),
-  }),
-}));
-
-export default function Menu() {
+export default function Menu(props) {
   const [clicked, setClicked] = useState([false, false, false, false, false]);
   const [open, setOpen] = useState(true);
 
@@ -115,7 +41,13 @@ export default function Menu() {
       </Box>
     </Box>
   );
-  const eventTags = [<Search />, <Note />, <Calendar />, <Search />, <Search />];
+  const eventTags = [
+    <Search simple={false} />,
+    <Note searchOpen={props.searchOpen} setSearchOpen={props.setSearchOpen} />,
+    <Calendar />,
+    <Search />,
+    <Search />,
+  ];
 
   return (
     <Box>
@@ -124,13 +56,13 @@ export default function Menu() {
         {open && menuButtons}
       </Drawer>
       {eventTags.map((eventTag, idx) => (
-        <DrawerSecond variant="permanent" PaperProps open={clicked[idx]} sx={{ maxWidth: "30vw" }}>
+        <Drawer2 variant="permanent" PaperProps open={clicked[idx]}>
           <CssBaseline />
           <Box sx={{ display: "flex" }}>
             {menuButtons}
             {clicked[idx] ? eventTag : null}
           </Box>
-        </DrawerSecond>
+        </Drawer2>
       ))}
     </Box>
   );

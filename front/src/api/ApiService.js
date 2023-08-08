@@ -1,14 +1,16 @@
 import { API_BASE_URL } from "./api-config";
 
 export function call(api, method, request) {
-  let headers = new Headers({
-    "Content-Type": "application/json",
-  });
   // 로컬 스토리지에서 ACCESS TOKEN 가져오기
   const accessToken = localStorage.getItem("ACCESS_TOKEN");
-  if (accessToken && accessToken != null) {
-    headers.append("authorization", accessToken);
-  }
+  // console.log("토큰", accessToken);
+  // if (accessToken && accessToken != null) {
+  //   headers.append("Authorization", accessToken);
+  // }
+  let headers = new Headers({
+    "Content-Type": "application/json",
+    Authorization: accessToken,
+  });
 
   let options = {
     headers: headers,
@@ -21,10 +23,13 @@ export function call(api, method, request) {
   }
   return fetch(options.url, options)
     .then((response) => {
+      console.log(options.url);
       if (response.status == 200) {
         return response.json();
       } else if (response.status == 403) {
         window.location.href = "/login";
+      } else {
+        console.log("other errors");
       }
     })
     .catch((error) => {
