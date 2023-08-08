@@ -1,11 +1,14 @@
 package edu.pnu.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import edu.pnu.domain.Food;
 import edu.pnu.domain.Note;
@@ -14,6 +17,7 @@ import edu.pnu.persistance.FoodRepository;
 import edu.pnu.persistance.NoteRepository;
 import edu.pnu.persistance.SearchLogRepository;
 import jakarta.persistence.EntityNotFoundException;
+
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
@@ -30,19 +34,60 @@ public class NoteService {
 
 	// 4.사용자별 조회
 	public List<Note> getToday(String userId) {
-		return noteRepo.findByUserId(userId);
+		List<Note> notes = noteRepo.findByUserId(userId);
+
+		for (Note note : notes) {
+			byte[] decodedImage = decodeImage(note.getImageData());
+			note.setImageData(decodedImage);
+			break;
+		}
+		return notes;
 	}
 
+	// // 4.사용자별 조회
+	// public List<Note> getToday(String userId) {
+	//
+	// return noteRepo.findByUserId(userId);
+	// }
+
+	// // 5.식단 추가
+	// public Note insertNote(Note note) {
+	//
+	// Note n = new Note();
+	// n.setUserId(note.getUserId());
+	// n.setFoodName(note.getFoodName());
+	// n.setAmount(note.getAmount());
+	// n.setServing_size(note.getServing_size());
+	// n.setMealType(note.getMealType());
+	// n.setImageData(note.getImageData());
+	// n.setDate(note.getDate());
+	// n.setBrand(note.getBrand());
+	// n.setCalories(note.getCalories());
+	// n.setCarbohydrate(note.getCarbohydrate());
+	// n.setProtein(note.getProtein());
+	// n.setFat(note.getFat());
+	// n.setSugars(note.getSugars());
+	// n.setSodium(note.getSodium());
+	// n.setCholesterol(note.getCholesterol());
+	// n.setCaffeine(note.getCaffeine());
+	//
+	// return noteRepo.save(n);
+	// }
+
 	// 5.식단 추가
-	public Note insertNote(Note note) {
+	public Note insertNote(Note note, MultipartFile imageFile) {
+
+		byte[] imageBytes = saveImage(imageFile);
+
+		byte[] encodedImage = encodeImage(imageBytes);
 
 		Note n = new Note();
+		n.setImageData(encodedImage);
 		n.setUserId(note.getUserId());
 		n.setFoodName(note.getFoodName());
 		n.setAmount(note.getAmount());
 		n.setServing_size(note.getServing_size());
 		n.setMealType(note.getMealType());
-		n.setImageData(note.getImageData());
 		n.setDate(note.getDate());
 		n.setBrand(note.getBrand());
 		n.setCalories(note.getCalories());
@@ -58,34 +103,15 @@ public class NoteService {
 	}
 
 	// 6.음식 조회
-	public List <Food> searchFood(String keyword) {
+	public List<Food> searchFood(String keyword) {
 		try {
 			int num = Integer.parseInt(keyword);
 			List<Food> list = new ArrayList<>();
 			list.add(foodRepo.findById(num).get());
 			return list;
-		}catch(Exception e) {
+		} catch (Exception e) {
 			return foodRepo.findByName(keyword);
 		}
-	}
-	
-	private void saveSearchLog(String userId, String keyword) {
-
-		SearchLog log = searchRepo.findByUserIdAndKeyword(userId, keyword);
-
-		if (log != null) {
-			searchRepo.deleteById(String.valueOf(log.getId()));
-		}
-
-		List<SearchLog> list = searchRepo.findAllbyUserId(userId);
-		if (list.size() == 15) {
-			SearchLog firstLog = list.get(0);
-			searchRepo.deleteById(String.valueOf(firstLog.getId()));
-		}
-		log = new SearchLog();
-		log.setUserId(userId);
-		log.setKeyword(keyword);
-		searchRepo.save(log);
 	}
 
 	// 7.검색 기록 저장
@@ -143,5 +169,42 @@ public class NoteService {
 		} catch (Exception e) {
 			return false;
 		}
+	}
+
+	public byte[] encodeImage(byte[] imageBytes) {
+		return Base64.getEncoder().encode(imageBytes);
+	}
+
+	public static byte[] decodeImage(byte[] imageData) {
+		return Base64.getDecoder().decode(imageData);
+	}
+
+	public byte[] saveImage(MultipartFile imageFile) {
+		try {
+			return imageFile.getBytes();
+		} catch (IOException e) {
+			// 적절하게 예외 처리 (예: 로깅, 기본 값 반환 등)
+			System.out.println("예외");
+			return null;
+		}
+	}
+
+	private void saveSearchLog(String userId, String keyword) {
+
+		SearchLog log = searchRepo.findByUserIdAndKeyword(userId, keyword);
+
+		if (log != null) {
+			searchRepo.deleteById(String.valueOf(log.getId()));
+		}
+
+		List<SearchLog> list = searchRepo.findAllbyUserId(userId);
+		if (list.size() == 15) {
+			SearchLog firstLog = list.get(0);
+			searchRepo.deleteById(String.valueOf(firstLog.getId()));
+		}
+		log = new SearchLog();
+		log.setUserId(userId);
+		log.setKeyword(keyword);
+		searchRepo.save(log);
 	}
 }

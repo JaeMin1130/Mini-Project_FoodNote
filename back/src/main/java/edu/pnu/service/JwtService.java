@@ -27,9 +27,10 @@ public class JwtService {
 
 	// 서명된 JWT 토큰 생성
 	public String getToken(String userId) {
-		return Jwts.builder().setSubject(userId)
+		String token = Jwts.builder().setSubject(userId)
 				.setExpiration(Date.from(expiration)).setIssuer("admin")
 				.setIssuedAt(new Date()).signWith(SECRET_KEY).compact();
+		return token;
 	}
 
 	public String validateAndGetUserId(String token) {
@@ -41,7 +42,7 @@ public class JwtService {
 			token = token.replace(PREFIX, "");
 			System.out.println(token);
 			Claims claims = Jwts.parserBuilder()
-					.setSigningKey(SECRET_KEY)
+					.setSigningKey(SECRET_KEY.getEncoded())
 					.build()
 					.parseClaimsJws(token)
 					.getBody();

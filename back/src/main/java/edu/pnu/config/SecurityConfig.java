@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.filter.CorsFilter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import edu.pnu.service.UserDetailsServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -47,9 +47,10 @@ public class SecurityConfig {
                     auth
                             .requestMatchers("/users/login", "/users/join")
                             .permitAll()
-                            .anyRequest().authenticated();
+                            .anyRequest().permitAll();
                 })
-                .addFilterBefore(jwtFilter, CorsFilter.class);
+                .addFilterBefore(jwtFilter,
+                        UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
