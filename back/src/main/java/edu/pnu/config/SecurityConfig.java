@@ -13,9 +13,9 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import edu.pnu.service.UserDetailsServiceImpl;
-import lombok.extern.slf4j.Slf4j;
+//import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
+//@Slf4j
 @Configuration
 @EnableWebSecurity // 시큐리티 활성화 -> 기본 스프링 필터체인에 등록
 public class SecurityConfig {
@@ -47,7 +47,8 @@ public class SecurityConfig {
                     auth
                             .requestMatchers("/users/login", "/users/join")
                             .permitAll()
-                            .anyRequest().permitAll();
+                            .anyRequest().authenticated();
+                            
                 })
                 .addFilterBefore(jwtFilter,
                         UsernamePasswordAuthenticationFilter.class);
