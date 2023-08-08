@@ -3,18 +3,16 @@ package edu.pnu.service;
 import java.security.Key;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Base64;
 import java.util.Date;
 
-import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import jakarta.servlet.http.HttpServletRequest;
+
 
 @Service
 public class JwtService {
@@ -25,6 +23,11 @@ public class JwtService {
 	Instant now = Instant.now();
 	Instant expiration = now.plus(Duration.ofSeconds(EXPIRATIONTIME));
 
+	public JwtService() {
+		// 서명 및 확인에 동일한 키를 사용하는지 확인하기 위해 비밀 키의 base64 인코딩 값을 출력합니다.
+		System.out.println("Secret Key: " + Base64.getEncoder().encodeToString(SECRET_KEY.getEncoded()));
+	}
+
 	// 서명된 JWT 토큰 생성
 	public String getToken(String userId) {
 		String token = Jwts.builder().setSubject(userId)
@@ -32,7 +35,8 @@ public class JwtService {
 				.setIssuedAt(new Date()).signWith(SECRET_KEY).compact();
 		return token;
 	}
-
+	
+    
 	public String validateAndGetUserId(String token) {
 		try {
 			// parseClaimsJws메서드가 Base 64로 디코딩 및 파싱.
@@ -42,13 +46,14 @@ public class JwtService {
 			token = token.replace(PREFIX, "");
 			System.out.println(token);
 			Claims claims = Jwts.parserBuilder()
-					.setSigningKey(SECRET_KEY.getEncoded())
+					.setSigningKey(SECRET_KEY)
 					.build()
 					.parseClaimsJws(token)
 					.getBody();
 
 			return claims.getSubject();
 		} catch (Exception e) {
+			System.out.println("예외");
 			e.printStackTrace();
 			return null;
 		}

@@ -17,7 +17,6 @@ import edu.pnu.persistance.FoodRepository;
 import edu.pnu.persistance.NoteRepository;
 import edu.pnu.persistance.SearchLogRepository;
 import jakarta.persistence.EntityNotFoundException;
-
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
@@ -75,14 +74,16 @@ public class NoteService {
 	// }
 
 	// 5.식단 추가
-	public Note insertNote(Note note, MultipartFile imageFile) {
-
-		byte[] imageBytes = saveImage(imageFile);
-
-		byte[] encodedImage = encodeImage(imageBytes);
+	public Note insertNote(Note note, MultipartFile imageFile) throws IOException {
 
 		Note n = new Note();
-		n.setImageData(encodedImage);
+
+		if (imageFile != null && !imageFile.isEmpty()) {
+			byte[] imageBytes = imageFile.getBytes(); // 이미지 바이트 배열 가져오기
+			byte[] encodedImage = encodeImage(imageBytes);
+			n.setImageData(encodedImage);
+		}
+
 		n.setUserId(note.getUserId());
 		n.setFoodName(note.getFoodName());
 		n.setAmount(note.getAmount());
@@ -177,16 +178,6 @@ public class NoteService {
 
 	public static byte[] decodeImage(byte[] imageData) {
 		return Base64.getDecoder().decode(imageData);
-	}
-
-	public byte[] saveImage(MultipartFile imageFile) {
-		try {
-			return imageFile.getBytes();
-		} catch (IOException e) {
-			// 적절하게 예외 처리 (예: 로깅, 기본 값 반환 등)
-			System.out.println("예외");
-			return null;
-		}
 	}
 
 	private void saveSearchLog(String userId, String keyword) {

@@ -1,5 +1,6 @@
 package edu.pnu.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class NoteController {
 	// 5.식단 추가
 	@PostMapping("main/note")
 	public Note insertNote(@RequestPart("noteData") Note note,
-			@RequestPart("imageFile") MultipartFile imageFile) {
+			@RequestPart("imageFile") MultipartFile imageFile) throws IOException {
 
 		// byte[] imageBytes = noteService.saveImage(imageFile);
 		// note.setImageData(imageBytes);
@@ -54,11 +55,12 @@ public class NoteController {
 	// 6.음식 조회
 	@GetMapping("/main/search/{keyword}")
 	public List<Food> searchFood(@PathVariable String keyword) {
+		System.out.println("searchfood: " + keyword);
 		return noteService.searchFood(keyword);
 	}
 
 	// 7.검색 기록 저장
-	@GetMapping("/main/search/log/{keyword}")
+	@GetMapping("/main/searchLog/save/{keyword}")
 	public List<Food> searchLog(@PathVariable String keyword) {
 		System.out.println(keyword);
 		return noteService.searchLog(keyword);

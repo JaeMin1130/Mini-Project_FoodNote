@@ -50,6 +50,7 @@ public class LoginController {
 
 			// 토큰 생성
 			String jwts = jwtService.getToken(member.getUserId());
+			System.out.println("jwts:" + jwts);
 			// 생성된 토큰으로 응답을 생성
 			return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION, "Bearer " + jwts).build();
 		} else {

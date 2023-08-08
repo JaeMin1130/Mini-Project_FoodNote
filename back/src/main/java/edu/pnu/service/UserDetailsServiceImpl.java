@@ -24,7 +24,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		if (!opt.isPresent()) {
 			throw new UsernameNotFoundException("User not found.");
 		}
+		
 		Member m = opt.get();
+		System.out.println("Member: " + m);
 		return new User(m.getUserId(), m.getPassword(), m.getAuthorities());
 	}
 }
