@@ -46,9 +46,6 @@ public class NoteController {
 	@PostMapping("main/note")
 	public Note insertNote(@RequestPart("noteData") Note note,
 			@RequestPart("imageFile") MultipartFile imageFile) throws IOException {
-
-		// byte[] imageBytes = noteService.saveImage(imageFile);
-		// note.setImageData(imageBytes);
 		return noteService.insertNote(note, imageFile);
 	}
 
