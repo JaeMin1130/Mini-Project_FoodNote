@@ -16,7 +16,7 @@ import io.jsonwebtoken.security.Keys;
 @Service
 public class JwtService {
 
-	static final long EXPIRATIONTIME = 3600; // 유효시간 설정
+	static final long EXPIRATIONTIME = 36000; // 유효시간 설정
 	static final String PREFIX = "Bearer ";
 	static final Key SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256); // 비밀 키 생성
 	Instant now = Instant.now();
@@ -41,9 +41,9 @@ public class JwtService {
 			// 위조되지 않았다면 페이로드(Claims) 리턴, 위조라면 예외를 날림
 			// 그 중 우리는 userId가 필요하므로 getBody를 부른다.
 			token = token.replace(PREFIX, "");
-			System.out.println(token);
+			System.out.println("Received Token: " + token);
 			Claims claims = Jwts.parserBuilder().setSigningKey(SECRET_KEY).build().parseClaimsJws(token).getBody();
-
+			System.out.println("Parsed Claims: " + claims);
 			return claims.getSubject();
 		} catch (Exception e) {
 			System.out.println("예외");

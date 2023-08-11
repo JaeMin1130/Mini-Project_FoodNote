@@ -40,6 +40,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 //			}
 			// 요청정보에서 jwt토큰 읽어오기
 			String jwtToken = req.getHeader(HttpHeaders.AUTHORIZATION);
+			System.out.println("jwtToken 확인 :" + jwtToken);
 			if (jwtToken == null) {
 				System.out.println("token is null");
 				chain.doFilter(req, resp);

@@ -31,7 +31,7 @@ public class NoteService {
 	@Autowired
 	SearchLogRepository searchRepo;
 
-	// 4.사용자별 조회
+	// 3.사용자별 조회
 	public List<Note> getToday(String userId) {
 		List<Note> notes = noteRepo.findByUserId(userId);
 
@@ -43,7 +43,7 @@ public class NoteService {
 		return notes;
 	}
 
-	// 5.식단 추가
+	// 4.식단 추가
 	public Note insertNote(Note note, MultipartFile imageFile) throws IOException {
 
 		Note n = new Note();
@@ -73,7 +73,7 @@ public class NoteService {
 		return noteRepo.save(n);
 	}
 
-	// 6.음식 조회
+	// 5.음식 조회
 	public List<Food> searchFood(String keyword) {
 		try {
 			int num = Integer.parseInt(keyword);
@@ -85,7 +85,7 @@ public class NoteService {
 		}
 	}
 
-	// 7.검색 기록 저장
+	// 6.검색 기록 저장
 	public List<Food> searchLog(String keyword) {
 		System.out.println(keyword);
 		List<Food> foods = foodRepo.findBySearchLog(keyword);
@@ -96,7 +96,7 @@ public class NoteService {
 		return foods;
 	}
 
-	// 8.식단 수정
+	// 7.식단 수정
 	public Note updateFood(Note note) {
 		Optional<Note> optionalNote = noteRepo.findById(note.getId());
 
@@ -115,7 +115,7 @@ public class NoteService {
 
 	}
 
-	// 9.식단 삭제
+	// 8.식단 삭제
 	public boolean deleteFood(Long id) {
 		try {
 			noteRepo.deleteById(id);
@@ -125,13 +125,13 @@ public class NoteService {
 		}
 	}
 
-	// 10. 최근 검색어 조회
+	// 9. 최근 검색어 조회
 	public List<SearchLog> searchKeyword(String userId) {
 
 		return searchRepo.findByUserId(userId);
 	}
 
-	// 11. 최근 검색어 삭제
+	// 10. 최근 검색어 삭제
 	@Transactional
 	public boolean deleteKeyword(String keyword) {
 		try {

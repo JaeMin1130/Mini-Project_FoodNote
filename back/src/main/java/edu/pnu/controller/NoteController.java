@@ -25,52 +25,52 @@ public class NoteController {
 	@Autowired
 	NoteService noteService;
 
-	// 4.사용자별 조회
+	// 3.사용자별 조회
 	@GetMapping("/main/{userId}")
 	public List<Note> getToday(@PathVariable String userId) {
 		return noteService.getToday(userId);
 	}
 
-	// 5.식단 추가
+	// 4.식단 추가
 	@PostMapping("main/note")
 	public Note insertNote(@RequestPart("noteData") Note note, @RequestPart("imageFile") MultipartFile imageFile)
 			throws IOException {
 		return noteService.insertNote(note, imageFile);
 	}
 
-	// 6.음식 조회
+	// 5.음식 조회
 	@GetMapping("/main/search/{keyword}")
 	public List<Food> searchFood(@PathVariable String keyword) {
 		System.out.println("searchfood: " + keyword);
 		return noteService.searchFood(keyword);
 	}
 
-	// 7.검색 기록 저장
+	// 6.검색 기록 저장
 	@GetMapping("/main/searchLog/save/{keyword}")
 	public List<Food> searchLog(@PathVariable String keyword) {
 		System.out.println(keyword);
 		return noteService.searchLog(keyword);
 	}
 
-	// 8.식단 수정
+	// 7.식단 수정
 	@PutMapping("/main/update")
 	public Note updateFood(@RequestBody Note note) {
 		return noteService.updateFood(note);
 	}
 
-	// 9.식단 삭제
+	// 8.식단 삭제
 	@DeleteMapping("/main/delete/{id}")
 	public boolean deleteFood(@PathVariable Long id) {
 		return noteService.deleteFood(id);
 	}
 
-	// 10. 최근 검색어 조회
+	// 9. 최근 검색어 조회
 	@GetMapping("/main/searchLog/{userId}")
 	public List<SearchLog> searchKeyword(@PathVariable String userId) {
 		return noteService.searchKeyword(userId);
 	}
 
-	// 11. 최근 검색어 삭제
+	// 10. 최근 검색어 삭제
 	@DeleteMapping("/main/searchLog/delete/{keyword}")
 	public boolean deleteKeyword(@PathVariable String keyword) {
 		return noteService.deleteKeyword(keyword);
