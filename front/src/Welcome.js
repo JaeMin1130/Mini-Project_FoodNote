@@ -1,22 +1,32 @@
-import { Container } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import Link from "@mui/material/Link";
 import React from "react";
+import LogIn from "./LogIn";
+import "./Welcome.css";
+import { Grid } from "@mui/material";
 
 const Welcome = () => {
   return (
-    <Container>
-      <h1>Welcome to Our Website!</h1>
-      <p>
-        Thank you for visiting our website. We are excited to have you here! Lorem ipsum dolor sit amet, consectetur
-        adipiscing elit. Sed tincidunt purus in velit feugiat, sit amet feugiat massa tristique.
-      </p>
-      <Link href="login" role="button">
-        로그인
-      </Link>
-      &nbsp;&nbsp;&nbsp;&nbsp;
-      <Link href="join" role="button">
-        회원가입
-      </Link>
+    <Container className="container">
+      <div id="a1" className="c1">
+        <div id="a2">
+          <img src="/food1.gif" alt="Food GIF" width="540" height="300" />
+        </div>
+        <div className="c2">
+          <div id="a3" className="image-container">
+            <img src="/NutriScan.png" alt="NutriScan Logo" className="logo-image" />
+            <LogIn />
+          </div>
+          <div className="grid1">
+            <Grid marginRight="25px" fontSize={16}>
+              Don't have an account?
+              <Link href="/join" variant="body2" marginLeft="5px" marginRight="16px" fontSize={16}>
+                {"  Sign Up"}
+              </Link>
+            </Grid>
+          </div>
+        </div>
+      </div>
     </Container>
   );
 };

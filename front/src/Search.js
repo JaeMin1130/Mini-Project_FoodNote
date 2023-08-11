@@ -1,21 +1,8 @@
-import ClearIcon from "@mui/icons-material/Clear";
-import {
-  Autocomplete,
-  Box,
-  Divider,
-  Grid,
-  IconButton,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { call } from "./api/ApiService";
+import { Autocomplete, Box, Divider, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import NutritionTable from "./NutritionTable";
 import FoodList from "./FoodList";
+import NutritionTable from "./NutritionTable";
+import { call } from "./api/ApiService";
 const Search = (props) => {
   const [foodData, setFoodData] = useState([]);
   const [foodList, setFoodList] = useState([]);
@@ -27,7 +14,6 @@ const Search = (props) => {
   useEffect(() => {
     call(`/main/searchLog/user123`, "GET", null)
       .then((data) => {
-        console.log("data", data);
         setLogs(data.reverse());
       })
       .catch((error) => {
@@ -54,7 +40,7 @@ const Search = (props) => {
 
     if (value != "") {
       call(`/main/searchLog/save/${value}`, "GET", null);
-
+      props.setNoteLogs([...props.noteLogs, { keyword: value }]);
       const foodNo = value.split(" ")[0].replace(".", "").replace("No", "");
       findFood(foodNo);
 
@@ -67,11 +53,9 @@ const Search = (props) => {
         ) {
           logList = logs.filter((item) => item.keyword !== value);
         }
-
         if (logList.length >= 15) {
           logList.pop();
         }
-
         logList.unshift({ keyword: value });
         return Array.from(logList);
       });
@@ -120,23 +104,18 @@ const Search = (props) => {
   }, [foodInfo]);
 
   return props.simple ? (
-    <Box sx={{ display: "flex", justifyContent: "space-around", alignItems: "center" }}>
-      <Typography variant="h6" fontWeight={"bolder"}>
-        음식 찾기
-      </Typography>
-      <Autocomplete
-        options={foodList}
-        renderInput={(params) => <TextField {...params} label="Search" />}
-        onInputChange={onInputChange}
-        onChange={saveSearchWord}
-        onKeyDown={handleKeyDown}
-        size="small"
-        sx={{ width: "240px" }}
-      />
-    </Box>
+    <Autocomplete
+      options={foodList}
+      renderInput={(params) => <TextField {...params} label="음식 찾기" />}
+      onInputChange={onInputChange}
+      onChange={saveSearchWord}
+      onKeyDown={handleKeyDown}
+      size="small"
+      sx={{ width: "240px" }}
+    />
   ) : (
-    <Box>
-      <Box>
+    <Box sx={{ width: "100%" }}>
+      <Box sx={{ mt: 5, mx: 2 }}>
         <Typography variant="h4" fontWeight={"bolder"}>
           음식 검색
         </Typography>
@@ -146,26 +125,25 @@ const Search = (props) => {
           onInputChange={onInputChange}
           onChange={saveSearchWord}
           onKeyDown={handleKeyDown}
-          sx={{ p: 0 }}
+          sx={{ my: 3, width: "80%" }}
         />
       </Box>
-      <Divider sx={{ my: 4 }} />
+      <Divider sx={{ my: 3 }} />
       {open && (
-        <Box sx={{ my: 3, height: "45%" }}>
-          <Typography variant="h5" sx={{ my: 3 }} fontWeight={"bolder"}>
+        <Box sx={{ mb: 6, height: "45%" }}>
+          <Typography variant="h5" sx={{ ml: 2, my: 3 }} fontWeight={"bolder"}>
             영양 정보
           </Typography>
           <NutritionTable foodInfo={foodInfo["0"]} />
         </Box>
       )}
-      {open && <Divider sx={{ mb: 4 }} />}
       <Box sx={{ height: "30%" }}>
         <Typography variant="h5" sx={{ mb: 2, ml: 2 }} fontWeight={"bolder"}>
           최근 검색 항목
         </Typography>
         <Box sx={{ maxHeight: open ? "21vh" : "35vh", overflowY: "auto" }}>
           {logs.map((item) => (
-            <FoodList findFood={findFood} setLogs={setLogs} item={item} />
+            <FoodList setFoodData={setFoodData} setLogs={setLogs} item={item} />
           ))}
         </Box>
       </Box>

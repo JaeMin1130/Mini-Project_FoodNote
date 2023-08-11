@@ -8,16 +8,23 @@ export default function FoodList(props) {
   // 최근 검색어에서 음식 클릭시 상세 정보 띄우기
   const showFoodInfo = (e) => {
     const foodNo = e.target.textContent.split(".")[0].replace("No", "");
-    props.findFood(foodNo);
+    call(`/main/search/${foodNo}`, "GET", null).then((data) => props.setFoodData(data));
   };
 
   // 검색 기록 삭제(11번)
   const deleteSearchWord = (keyword) => {
-    call(`/main/searchLog/delete/${keyword.split(" ")[0]}`, "DELETE", null);
-    props.setLogs((prevLogs) => {
-      const updatedLogs = prevLogs.filter((item) => item.keyword !== keyword);
-      return updatedLogs;
-    });
+    if (props.inNote) {
+      props.setNoteLogs((prevLogs) => {
+        const updatedLogs = prevLogs.filter((item) => item.keyword !== keyword);
+        return updatedLogs;
+      });
+    } else {
+      call(`/main/searchLog/delete/${keyword.split(" ")[0]}`, "DELETE", null);
+      props.setLogs((prevLogs) => {
+        const updatedLogs = prevLogs.filter((item) => item.keyword !== keyword);
+        return updatedLogs;
+      });
+    }
   };
 
   return (

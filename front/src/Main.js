@@ -1,11 +1,6 @@
-import { Box, Drawer, Paper, Typography } from "@mui/material";
-import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
 import { useEffect, useState } from "react";
-import { call } from "./api/ApiService";
 import Menu from "./Menu";
-import Search from "./Search";
-import Drawer3 from "./drawer/Drawer3";
-import Drawer2 from "./drawer/Drawer2";
+import { call } from "./api/ApiService";
 
 export default function Main() {
   const [userId, setUserId] = useState("user123");

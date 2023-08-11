@@ -13,7 +13,6 @@ export default function Join() {
       userId: data.get("id"),
       password: data.get("password"),
     };
-    console.log(formData);
     const url = "http://localhost:8080/users/join";
 
     fetch(url, {
