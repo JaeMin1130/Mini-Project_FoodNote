@@ -28,8 +28,7 @@ public class LoginService {
 
 		String encodedPassword = encoder.encode(member.getPassword());
 
-		memRepo.save(Member.builder().userId(member.getUserId()).password(encodedPassword)
-				.role("Member").build());
+		memRepo.save(Member.builder().userId(member.getUserId()).password(encodedPassword).role("Member").build());
 
 		return true;
 	}
@@ -47,38 +46,3 @@ public class LoginService {
 		return false;
 	}
 }
-//
-// @Autowired
-// private MemberRepository memRepo;
-// @Autowired
-// private PasswordEncoder encoder;
-//
-// // 1.회원가입
-// public Boolean save(Member member) {
-//
-// if (memRepo.existsById(member.getUserId())) {
-// return false;
-// }
-//
-// String encodedPassword = encoder.encode(member.getPassword());
-//
-// memRepo.save(Member.builder().userId(member.getUserId()).password(encodedPassword)
-// .role("Member").build());
-//
-// return true;
-// }
-//
-// // 2.로그인
-// public boolean login(Member member) {
-//
-// Optional<Member> option = memRepo.findById(member.getUserId());
-// if (option.isPresent()) {
-// Member member1 = option.get();
-//
-// if (encoder.matches(member.getPassword(), member1.getPassword())) {
-// return true;
-// }
-// }
-// return false;
-// }
-// }

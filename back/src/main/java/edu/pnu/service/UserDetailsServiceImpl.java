@@ -24,32 +24,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		if (!opt.isPresent()) {
 			throw new UsernameNotFoundException("User not found.");
 		}
-		
+
 		Member m = opt.get();
 		System.out.println("Member: " + m);
 		return new User(m.getUserId(), m.getPassword(), m.getAuthorities());
 	}
 }
-
-// @Override
-// public UserDetails loadUserByUsername(String userId) throws
-// UsernameNotFoundException {
-// Optional<Member> member = memRepo.findById(userId);
-// UserBuilder builder = null;
-//
-// if(member.isPresent()) {
-// Member currentMember = member.get();
-// builder =
-// User.withUsername(userId);
-// builder.password(currentMember.getPassword());
-// builder.roles(currentMember.getRole());
-// } else {
-// throw new UsernameNotFoundException("UserId not found.");
-// }
-// return builder.build();
-
-// Member member = memRepo.findById(userId).orElseThrow(()->
-// new UsernameNotFoundException("Not Found!"));
-// return new User(member.getUserId(), member.getPassword(),
-// member.getAuthorities());
-// }

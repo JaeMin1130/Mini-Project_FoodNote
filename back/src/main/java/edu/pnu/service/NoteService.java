@@ -43,36 +43,6 @@ public class NoteService {
 		return notes;
 	}
 
-	// // 4.사용자별 조회
-	// public List<Note> getToday(String userId) {
-	//
-	// return noteRepo.findByUserId(userId);
-	// }
-
-	// // 5.식단 추가
-	// public Note insertNote(Note note) {
-	//
-	// Note n = new Note();
-	// n.setUserId(note.getUserId());
-	// n.setFoodName(note.getFoodName());
-	// n.setAmount(note.getAmount());
-	// n.setServing_size(note.getServing_size());
-	// n.setMealType(note.getMealType());
-	// n.setImageData(note.getImageData());
-	// n.setDate(note.getDate());
-	// n.setBrand(note.getBrand());
-	// n.setCalories(note.getCalories());
-	// n.setCarbohydrate(note.getCarbohydrate());
-	// n.setProtein(note.getProtein());
-	// n.setFat(note.getFat());
-	// n.setSugars(note.getSugars());
-	// n.setSodium(note.getSodium());
-	// n.setCholesterol(note.getCholesterol());
-	// n.setCaffeine(note.getCaffeine());
-	//
-	// return noteRepo.save(n);
-	// }
-
 	// 5.식단 추가
 	public Note insertNote(Note note, MultipartFile imageFile) throws IOException {
 
@@ -172,14 +142,19 @@ public class NoteService {
 		}
 	}
 
+//	---------------------------------------------------------------------------------
+
+	// 이미지 인코딩
 	public byte[] encodeImage(byte[] imageBytes) {
 		return Base64.getEncoder().encode(imageBytes);
 	}
 
+	// 이미지 디코딩
 	public static byte[] decodeImage(byte[] imageData) {
 		return Base64.getDecoder().decode(imageData);
 	}
 
+	// 7. 검색기록 저장
 	private void saveSearchLog(String userId, String keyword) {
 
 		SearchLog log = searchRepo.findByUserIdAndKeyword(userId, keyword);

@@ -13,7 +13,6 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 
-
 @Service
 public class JwtService {
 
@@ -30,13 +29,11 @@ public class JwtService {
 
 	// 서명된 JWT 토큰 생성
 	public String getToken(String userId) {
-		String token = Jwts.builder().setSubject(userId)
-				.setExpiration(Date.from(expiration)).setIssuer("admin")
+		String token = Jwts.builder().setSubject(userId).setExpiration(Date.from(expiration)).setIssuer("admin")
 				.setIssuedAt(new Date()).signWith(SECRET_KEY).compact();
 		return token;
 	}
-	
-    
+
 	public String validateAndGetUserId(String token) {
 		try {
 			// parseClaimsJws메서드가 Base 64로 디코딩 및 파싱.
@@ -45,11 +42,7 @@ public class JwtService {
 			// 그 중 우리는 userId가 필요하므로 getBody를 부른다.
 			token = token.replace(PREFIX, "");
 			System.out.println(token);
-			Claims claims = Jwts.parserBuilder()
-					.setSigningKey(SECRET_KEY)
-					.build()
-					.parseClaimsJws(token)
-					.getBody();
+			Claims claims = Jwts.parserBuilder().setSigningKey(SECRET_KEY).build().parseClaimsJws(token).getBody();
 
 			return claims.getSubject();
 		} catch (Exception e) {

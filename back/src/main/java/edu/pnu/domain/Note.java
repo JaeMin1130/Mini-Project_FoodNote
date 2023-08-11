@@ -3,10 +3,7 @@ package edu.pnu.domain;
 import java.util.Date;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,8 +27,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Note {
-	
-	@Id	
+
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(name = "user_id")
@@ -41,11 +38,11 @@ public class Note {
 	private double amount;
 	@Column(name = "meal_type")
 	private String mealType;
-	@Lob 
+	@Lob
 	@Column(name = "image_data", columnDefinition = "MEDIUMBLOB")
-	private byte[]  imageData;
+	private byte[] imageData;
 	@Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-	@Temporal (TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.TIMESTAMP)
 	@CreationTimestamp
 	@JsonFormat(pattern = "yy-MM-dd-HH:mm", timezone = "Asia/Seoul")
 	private Date date;

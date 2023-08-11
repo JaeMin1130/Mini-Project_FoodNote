@@ -31,21 +31,10 @@ public class NoteController {
 		return noteService.getToday(userId);
 	}
 
-	// @GetMapping("/main/{userId}/date")
-	// public List<Note> searchDate(@PathVariable String userId, Date date){
-	// return noteService.searchDate(userId, date);
-	// }
-
-	// 5.식단 추가
-	// @PostMapping("main/note")
-	// public Note insertNote(@RequestBody Note note) {
-	// return noteService.insertNote(note);
-	// }
-
 	// 5.식단 추가
 	@PostMapping("main/note")
-	public Note insertNote(@RequestPart("noteData") Note note,
-			@RequestPart("imageFile") MultipartFile imageFile) throws IOException {
+	public Note insertNote(@RequestPart("noteData") Note note, @RequestPart("imageFile") MultipartFile imageFile)
+			throws IOException {
 		return noteService.insertNote(note, imageFile);
 	}
 
@@ -86,5 +75,4 @@ public class NoteController {
 	public boolean deleteKeyword(@PathVariable String keyword) {
 		return noteService.deleteKeyword(keyword);
 	}
-
 }

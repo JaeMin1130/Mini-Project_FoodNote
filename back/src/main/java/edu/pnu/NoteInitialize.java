@@ -14,18 +14,14 @@ public class NoteInitialize implements ApplicationRunner {
 
 	@Autowired
 	MemberRepository memRepo;
-	
+
 	@Autowired
 	BCryptPasswordEncoder encoder;
-	
+
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		
-		memRepo.save(Member.builder()
-				.userId("admin")
-				.password(encoder.encode("123"))
-				.role("Admin")
-		
+
+		memRepo.save(Member.builder().userId("admin").password(encoder.encode("123")).role("Admin")
 				.build());
 	}
 
