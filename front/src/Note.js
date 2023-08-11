@@ -15,25 +15,31 @@ import Search from "./Search";
 import Drawer2 from "./drawer/Drawer2";
 
 export default function Note(props) {
+  const onClickHandler = (event) => {
+    if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
+      return;
+    }
+    props.setSearchOpen(!props.SearchOpen);
+  };
   return (
-    <Box sx={{ width: "26vw", height: "90vh" }}>
+    <Box sx={{ width: "100%" }}>
       <ImageLoader />
-      <Divider sx={{ width: "27vw", my: 3 }} />
+      <Divider sx={{ my: 3 }} />
       <NoteButton />
-      <Divider sx={{ width: "27vw", my: 3 }} />
+      <Divider sx={{ my: 3 }} />
       <Box>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography variant="h6" fontWeight={"bolder"}>
             식단
           </Typography>
-          <Button onClick={() => props.setSearchOpen(!props.SearchOpen)}>음식 찾기</Button>
+          <Button onClick={(event) => onClickHandler(event)}>음식 찾기</Button>
         </Box>
         <FoodList item={""} />
         <FoodList item={""} />
         <FoodList item={""} />
         <FoodList item={""} />
       </Box>
-      <Divider sx={{ width: "27vw", my: 3 }} />
+      <Divider sx={{ my: 3 }} />
       <Calculator />
       {/* <NutritionTable /> */}
     </Box>

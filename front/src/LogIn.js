@@ -15,6 +15,7 @@ import {
 import axios from "axios";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "./api/api-config";
 
 export default function LogIn() {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ export default function LogIn() {
       userId: data.get("id"),
       password: data.get("password"),
     };
-    const url = "http://10.125.121.173:8080/users/login";
+    const url = API_BASE_URL + "/users/login";
 
     try {
       const res = await axios.post(url, formData);

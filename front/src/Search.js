@@ -120,9 +120,9 @@ const Search = (props) => {
   }, [foodInfo]);
 
   return (
-    <Box sx={{ width: "27vw", height: "90vh" }}>
-      <Box sx={{ display: "flex", flexDirection: "column", height: "20%" }}>
-        <Typography variant="h4" sx={{ my: 5, mx: 2 }} fontWeight={"bolder"}>
+    <Box>
+      <Box>
+        <Typography variant="h4" fontWeight={"bolder"}>
           음식 검색
         </Typography>
         <Autocomplete
@@ -131,20 +131,20 @@ const Search = (props) => {
           onInputChange={onInputChange}
           onChange={saveSearchWord}
           onKeyDown={handleKeyDown}
-          sx={{ maxWidth: "25vw", ml: 2 }}
+          sx={{ p: 0 }}
         />
       </Box>
       <Divider sx={{ my: 4 }} />
       {open && (
-        <Box sx={{ my: 3, height: "45%", width: "100%" }}>
-          <Typography variant="h5" sx={{ ml: 2, my: 3 }} fontWeight={"bolder"}>
+        <Box sx={{ my: 3, height: "45%" }}>
+          <Typography variant="h5" sx={{ my: 3 }} fontWeight={"bolder"}>
             영양 정보
           </Typography>
           <NutritionTable foodInfo={foodInfo["0"]} />
         </Box>
       )}
       {open && <Divider sx={{ mb: 4 }} />}
-      <Box sx={{ height: "30%", maxWidth: "98%" }}>
+      <Box sx={{ height: "30%" }}>
         <Typography variant="h5" sx={{ mb: 2, ml: 2 }} fontWeight={"bolder"}>
           최근 검색 항목
         </Typography>

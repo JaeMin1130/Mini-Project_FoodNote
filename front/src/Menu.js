@@ -42,7 +42,7 @@ export default function Menu(props) {
     </Box>
   );
   const eventTags = [
-    <Search simple={false} />,
+    <Search />,
     <Note searchOpen={props.searchOpen} setSearchOpen={props.setSearchOpen} />,
     <Calendar />,
     <Search />,
@@ -56,8 +56,7 @@ export default function Menu(props) {
         {open && menuButtons}
       </Drawer>
       {eventTags.map((eventTag, idx) => (
-        <Drawer2 variant="permanent" PaperProps open={clicked[idx]}>
-          <CssBaseline />
+        <Drawer2 variant="permanent" open={clicked[idx]}>
           <Box sx={{ display: "flex" }}>
             {menuButtons}
             {clicked[idx] ? eventTag : null}

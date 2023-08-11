@@ -1,9 +1,8 @@
 import MuiDrawer from "@mui/material/Drawer";
 import { styled } from "@mui/material/styles";
 
-const openedMixinSecondDrawer = (theme) => ({
-  width: "30vw",
-  maxWidth: "60vw",
+const openedMixinDrawer = (theme) => ({
+  width: "27vw",
   backgroundColor: "transparent",
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
@@ -12,7 +11,7 @@ const openedMixinSecondDrawer = (theme) => ({
   overflowX: "hidden",
 });
 
-const closedMixinSecondDrawer = (theme) => ({
+const closedMixinDrawer = (theme) => ({
   backgroundColor: "transparent",
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
@@ -29,13 +28,13 @@ const Drawer2 = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open"
   whiteSpace: "nowrap",
   boxSizing: "border-box",
   ...(open && {
-    ...openedMixinSecondDrawer(theme),
-    "& .MuiDrawer-paper": openedMixinSecondDrawer(theme),
+    ...openedMixinDrawer(theme),
+    "& .MuiDrawer-paper": openedMixinDrawer(theme),
   }),
 
   ...(!open && {
-    ...closedMixinSecondDrawer(theme),
-    "& .MuiDrawer-paper": closedMixinSecondDrawer(theme),
+    ...closedMixinDrawer(theme),
+    "& .MuiDrawer-paper": closedMixinDrawer(theme),
   }),
 }));
 
