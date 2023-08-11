@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import edu.pnu.domain.Member;
 import edu.pnu.persistance.MemberRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -18,6 +19,8 @@ public class LoginService {
 	MemberRepository memRepo;
 	@Autowired
 	private PasswordEncoder encoder;
+	@Autowired
+	private HttpServletRequest request;
 
 	// 1.회원가입
 	public Boolean save(Member member) {
@@ -44,5 +47,18 @@ public class LoginService {
 			}
 		}
 		return false;
+	}
+
+	// 3. 로그아웃
+	public boolean logout() {
+
+		try {
+			System.out.println("로그아웃 성공");
+			request.getSession().invalidate();
+			return true;
+		} catch (Exception e) {
+			System.out.println("로그아웃 실패");
+			return false;
+		}
 	}
 }
