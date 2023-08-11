@@ -15,10 +15,16 @@ export default function Main() {
     call(`/main/${userId}`, "GET", null);
   });
 
+  const closeDrawer = (event) => {
+    if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
+      setSearchOpen(!searchOpen);
+    }
+  };
+
   return (
     <Box sx={{ display: "flex" }}>
       <Menu searchOpen={searchOpen} setSearchOpen={setSearchOpen} />
-      <Drawer open={searchOpen} anchor="bottom">
+      <Drawer open={searchOpen} onClose={(e) => closeDrawer(e)} anchor="bottom" width={10}>
         <Search />
       </Drawer>
     </Box>
