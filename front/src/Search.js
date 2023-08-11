@@ -119,7 +119,22 @@ const Search = (props) => {
     }
   }, [foodInfo]);
 
-  return (
+  return props.simple ? (
+    <Box sx={{ display: "flex", justifyContent: "space-around", alignItems: "center" }}>
+      <Typography variant="h6" fontWeight={"bolder"}>
+        음식 찾기
+      </Typography>
+      <Autocomplete
+        options={foodList}
+        renderInput={(params) => <TextField {...params} label="Search" />}
+        onInputChange={onInputChange}
+        onChange={saveSearchWord}
+        onKeyDown={handleKeyDown}
+        size="small"
+        sx={{ width: "240px" }}
+      />
+    </Box>
+  ) : (
     <Box>
       <Box>
         <Typography variant="h4" fontWeight={"bolder"}>
