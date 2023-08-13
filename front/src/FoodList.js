@@ -15,13 +15,13 @@ export default function FoodList(props) {
   const deleteSearchWord = (keyword) => {
     if (props.inNote) {
       props.setNoteLogs((prevLogs) => {
-        const updatedLogs = prevLogs.filter((item) => item.keyword !== keyword);
+        const updatedLogs = prevLogs.filter((item) => item.foodName !== keyword);
         return updatedLogs;
       });
     } else {
       call(`/main/searchLog/delete/${keyword.split(" ")[0]}`, "DELETE", null);
       props.setLogs((prevLogs) => {
-        const updatedLogs = prevLogs.filter((item) => item.keyword !== keyword);
+        const updatedLogs = prevLogs.filter((item) => item.foodName !== keyword);
         return updatedLogs;
       });
     }
@@ -30,11 +30,13 @@ export default function FoodList(props) {
   return (
     <List sx={{ display: "flex", p: 0 }}>
       <ListItem disablePadding>
-        <IconButton onClick={() => deleteSearchWord(item.keyword)}>
+        <IconButton onClick={() => deleteSearchWord(item.foodName)}>
           <ClearIcon />
         </IconButton>
         <ListItemButton onClick={(e) => showFoodInfo(e)}>
-          <ListItemText primary={item.keyword}></ListItemText>
+          <ListItemText
+            primary={item.amount ? item.foodName + " " + item.amount + item.unit : item.foodName}
+          ></ListItemText>
         </ListItemButton>
       </ListItem>
     </List>

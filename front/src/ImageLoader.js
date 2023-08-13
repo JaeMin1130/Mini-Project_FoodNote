@@ -8,10 +8,10 @@ import imageCompression from "browser-image-compression";
 import React, { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
-export default function ImageLoader() {
-  const [imageUpload, setImageUpload] = useState([]);
+export default function ImageLoader(props) {
   const [uploadPreview, setUploadPreview] = useState([]);
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
+  const imageUpload = props.imageUpload;
 
   const handleImageCompress = async (file) => {
     const options = {
@@ -39,7 +39,7 @@ export default function ImageLoader() {
 
   const handleDeletePhoto = (index, event) => {
     event.stopPropagation(); // Prevent click event from propagating to parent elements
-    setImageUpload((prevFiles) => prevFiles.filter((_, i) => i !== index));
+    props.setImageUpload((prevFiles) => prevFiles.filter((_, i) => i !== index));
   };
 
   const handleDrop = useCallback(
@@ -47,7 +47,7 @@ export default function ImageLoader() {
       if (acceptedFiles && acceptedFiles.length > 0) {
         const compressedFiles = await Promise.all(acceptedFiles.map((file) => handleImageCompress(file)));
         const validCompressedFiles = compressedFiles.filter((file) => file !== null);
-        setImageUpload([...imageUpload, ...validCompressedFiles]);
+        props.setImageUpload([...imageUpload, ...validCompressedFiles]);
         setUploadPreview(validCompressedFiles.map((file) => URL.createObjectURL(file)));
       }
     },

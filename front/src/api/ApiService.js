@@ -5,7 +5,7 @@ export function call(api, method, request) {
   const accessToken = localStorage.getItem("ACCESS_TOKEN");
 
   let headers = new Headers({
-    "Content-Type": "application/json",
+    "Content-Type": "multipart/form-data; boundary=<calculated when request is sent>",
   });
 
   if (accessToken && accessToken != null) {
@@ -27,7 +27,7 @@ export function call(api, method, request) {
       return response.json();
     })
     .catch((error) => {
-      window.location.href = "/login";
+      // window.location.href = "/login";
       console.log(error);
     });
 }

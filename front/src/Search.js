@@ -4,15 +4,18 @@ import FoodList from "./FoodList";
 import NutritionTable from "./NutritionTable";
 import { call } from "./api/ApiService";
 const Search = (props) => {
+  const [selectedWord, setSelectedWord] = useState([]);
   const [foodData, setFoodData] = useState([]);
   const [foodList, setFoodList] = useState([]);
   const [keyword, setKeyword] = useState("");
   const [logs, setLogs] = useState([]);
-  const [foodInfo, setFoodInfo] = useState([]);
   const [open, setOpen] = useState(false);
+  const [noteValue, setNoteValue] = useState([]);
+  const [amount, setAmount] = useState(0);
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
-    call(`/main/searchLog/user123`, "GET", null)
+    call(`/main/searchLog/${userId}`, "GET", null)
       .then((data) => {
         setLogs(data.reverse());
       })
@@ -24,7 +27,12 @@ const Search = (props) => {
   // food 테이블에서 음식 조회(6번)
   const findFood = (keyword) => {
     if (keyword != "") {
-      call(`/main/search/${keyword}`, "GET", null).then((data) => setFoodData(data.reverse()));
+      call(`/main/search/${keyword}`, "GET", null).then((data) => {
+        setFoodData(data.reverse());
+        if (props.inNote) {
+          props.setFoodData(data);
+        }
+      });
     }
   };
 
@@ -37,10 +45,10 @@ const Search = (props) => {
 
   const saveSearchWord = (e) => {
     const value = e.target.textContent;
-
+    setKeyword("");
     if (value != "") {
       call(`/main/searchLog/save/${value}`, "GET", null);
-      props.setNoteLogs([...props.noteLogs, { keyword: value }]);
+
       const foodNo = value.split(" ")[0].replace(".", "").replace("No", "");
       findFood(foodNo);
 
@@ -48,17 +56,20 @@ const Search = (props) => {
         let logList = [];
         if (
           logs.map((item) => {
-            if (item.keyword == value) return true;
+            if (item.foodName == value) return true;
           })
         ) {
-          logList = logs.filter((item) => item.keyword !== value);
+          logList = logs.filter((item) => item.foodName !== value);
         }
         if (logList.length >= 15) {
           logList.pop();
         }
-        logList.unshift({ keyword: value });
+        logList.unshift({ foodName: value });
         return Array.from(logList);
       });
+      if (props.inNote) {
+        props.setNoteLogs([...props.noteLogs, { foodName: value }]);
+      }
     }
   };
 
@@ -92,18 +103,12 @@ const Search = (props) => {
         return Array.from(uniqueFoodsSet);
       });
       if (foodData.length == 1) {
-        setFoodInfo(foodData);
+        setOpen(true);
       }
     }
   }, [foodData]);
 
-  useEffect(() => {
-    if (foodInfo.length != 0) {
-      setOpen(true);
-    }
-  }, [foodInfo]);
-
-  return props.simple ? (
+  return props.inNote ? (
     <Autocomplete
       options={foodList}
       renderInput={(params) => <TextField {...params} label="음식 찾기" />}
@@ -126,6 +131,7 @@ const Search = (props) => {
           onChange={saveSearchWord}
           onKeyDown={handleKeyDown}
           sx={{ my: 3, width: "80%" }}
+          autoFocus
         />
       </Box>
       <Divider sx={{ my: 3 }} />
@@ -134,7 +140,13 @@ const Search = (props) => {
           <Typography variant="h5" sx={{ ml: 2, my: 3 }} fontWeight={"bolder"}>
             영양 정보
           </Typography>
-          <NutritionTable foodInfo={foodInfo["0"]} />
+          <NutritionTable
+            foodData={foodData["0"]}
+            noteValue={noteValue}
+            setNoteValue={setNoteValue}
+            amount={amount}
+            setAmount={setAmount}
+          />
         </Box>
       )}
       <Box sx={{ height: "30%" }}>

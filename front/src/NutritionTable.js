@@ -4,14 +4,22 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import AddIcon from "@mui/icons-material/Add";
 
-import { Box, InputAdornment, TextField, Typography } from "@mui/material";
+import { Box, IconButton, InputAdornment, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 export default function NutritionTable(props) {
-  const info = props.foodInfo;
-  const [amount, setAmount] = useState(props.foodInfo.serving_size);
-  const [noteValue, setNoteValue] = useState([]);
+  const foodData = props.foodData;
+  const noteValue = props.noteValue;
+  const noteLogs = props.noteLogs;
+  const amount = props.amount;
+
+  useEffect(() => {
+    if (foodData) {
+      props.setAmount(foodData.serving_size);
+    }
+  }, [foodData]);
 
   const keyList = {
     calories: "칼로리(㎉)",
@@ -27,96 +35,89 @@ export default function NutritionTable(props) {
   const unit = ["kcal", "g", "g", "g", "g", "mg", "mg", "mg"];
 
   const handleInputChange = (event) => {
-    setAmount(event.target.value);
+    const debounce = setTimeout(() => {
+      props.setAmount(event.target.value);
+    }, 500);
+    return () => {
+      clearTimeout(debounce);
+    };
+  };
+
+  const onClickHandler = () => {
+    if (noteLogs) {
+      const target = noteLogs.filter((item) => item.foodName.includes(foodData.no));
+
+      target["0"].amount = amount;
+      Object.keys(noteValue).forEach((key) => {
+        target["0"][key] = noteValue[key];
+      });
+      target["0"].serving_size = foodData.serving_size;
+      target["0"].unit = foodData.unit;
+      target["0"].brand = foodData.brand;
+      target["0"].userId = localStorage.getItem("userId");
+
+      const idx = noteLogs.findIndex((item) => item.foodName === target[0].foodName);
+      props.setNoteLogs((prevLogs) => {
+        const updatedLogs = [...prevLogs];
+        updatedLogs[idx] = target[0];
+        return updatedLogs;
+      });
+    }
   };
 
   useEffect(() => {
-    if (info) {
-      console.log("info", info);
-      // setAmount(info.serving_size);
-
-      // console.log("info.serving_size", info.serving_size);
-      console.log("amount", amount / info.serving_size);
-
-      setNoteValue(() => {
+    if (foodData) {
+      props.setNoteValue(() => {
         let note = {};
-        Object.keys(info).forEach((key) => {
+        Object.keys(foodData).forEach((key) => {
           if (Object.keys(keyList).includes(key)) {
-            console.log("key", key);
-            const value = Math.round(info[key] * (amount / info.serving_size), 2);
+            const value = Math.round(foodData[key] * (amount / foodData.serving_size), 2);
             note[key] = value;
-            console.log("value", value);
           }
         });
         return note;
       });
     }
-  }, [amount]);
-
-  useEffect(() => {
-    console.log("noteValue", noteValue);
-  }, [noteValue]);
-
-  // useEffect(() => {
-  //   console.log("amount", amount);
-  //   if (info) {
-  //     const debounce = setTimeout(() => {
-  //       setInfo((prevInfo) => {
-  //         const updatedInfo = { ...prevInfo };
-  //         Object.keys(prevInfo).forEach((key) => {
-  //           if (Object.keys(keyList).includes(key)) {
-  //             updatedInfo[key] = Math.round(prevInfo[key] * (amount / prevInfo.serving_size), 2);
-  //           }
-  //         });
-  //         return updatedInfo;
-  //       });
-  //     }, 500);
-  //     return () => {
-  //       clearTimeout(debounce);
-  //     };
-  //   }
-  // }, [amount]);
+  }, [foodData, amount]);
 
   return (
-    noteValue &&
-    info && (
+    props.noteValue && (
       <Box>
         <Box sx={{ display: "flex", alignItems: "center", mb: 2, ml: 2 }}>
           <Typography variant="h6" fontWeight={"bolder"}>
             영양소 계산하기
           </Typography>
-          <Box sx={{ display: "flex", justifyContent: "space-around", alignItems: "center" }}>
+          <Box sx={{ display: "flex", justifyContent: "end", alignItems: "center" }}>
             <TextField
               label="먹은 양 입력"
               InputProps={{
-                endAdornment: <InputAdornment position="start">{info.unit}</InputAdornment>,
+                endAdornment: <InputAdornment position="start">{foodData.unit}</InputAdornment>,
               }}
               size="small"
-              sx={{ width: "80%" }}
+              sx={{ width: "60%" }}
               onChange={handleInputChange}
+              autoFocus
             />
-            {/* <Button variant="outlined" onClick={(e) => onClickHandler(e)}>
-              계산
-            </Button> */}
+            {props.inNote && (
+              <IconButton>
+                <AddIcon onClick={onClickHandler} />
+              </IconButton>
+            )}
           </Box>
         </Box>
         <TableContainer sx={{ bgcolor: "transparent" }}>
           <Table size="small" aria-label="a dense table">
             <TableHead>
               <TableRow>
-                <TableCell>{info.name} </TableCell>
-                <TableCell>1회 제공량당 함량({info.serving_size + " " + info.unit})</TableCell>
+                <TableCell>{foodData.name} </TableCell>
+                <TableCell>1회 제공량당 함량({foodData.serving_size + " " + foodData.unit})</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {Object.keys(keyList).map((key, idx) => (
-                <TableRow key={noteValue[key]}>
-                  <TableCell component="th" scope="info">
-                    {keyList[key]}
-                  </TableCell>
-                  <TableCell component="th" scope="info">
-                    {noteValue[key] + " " + unit[idx]}
-                  </TableCell>
+                <TableRow key={idx}>
+                  <TableCell component="th">{keyList[key]}</TableCell>
+                  <TableCell component="th">{props.noteValue[key] + " " + unit[idx]}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

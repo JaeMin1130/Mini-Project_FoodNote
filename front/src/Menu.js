@@ -41,13 +41,7 @@ export default function Menu(props) {
       </Box>
     </Box>
   );
-  const eventTags = [
-    <Search />,
-    <Note searchOpen={props.searchOpen} setSearchOpen={props.setSearchOpen} />,
-    <Calendar />,
-    <Search />,
-    <Search />,
-  ];
+  const eventTags = [<Search />, <Note />, <Calendar />, <Search />, <Search />];
 
   return (
     <Box>

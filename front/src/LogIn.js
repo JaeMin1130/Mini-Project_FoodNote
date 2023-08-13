@@ -35,9 +35,8 @@ export default function LogIn() {
       if (res.status === 200) {
         // Extract authorization token from headers
         const accessToken = res.headers["authorization"];
-        console.log("token", accessToken);
         localStorage.setItem("ACCESS_TOKEN", accessToken);
-        console.log("token", localStorage.getItem("ACCESS_TOKEN"));
+        localStorage.setItem("userId", data.get("id"));
         navigate("/main");
       }
     } catch (error) {

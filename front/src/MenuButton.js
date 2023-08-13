@@ -31,7 +31,6 @@ export default function MenuButton(props) {
   const clickLogout = () => {
     clickHandler(idx);
     signout();
-    console.log(localStorage.getItem("ACCESS_TOKEN"));
   };
 
   const iconList = [
