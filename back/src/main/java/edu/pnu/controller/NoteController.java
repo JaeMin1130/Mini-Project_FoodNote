@@ -32,10 +32,11 @@ public class NoteController {
 	}
 
 	// 4.식단 추가
-	@PostMapping("main/note")
-	public Note insertNote(@RequestPart("noteData") Note note, @RequestPart("imageFile") MultipartFile imageFile)
+	@PostMapping(path = "main/note", consumes = { "multipart/form-data" })
+	public Note insertNote(@RequestPart("note") Note note,
+			@RequestPart("file") MultipartFile file)
 			throws IOException {
-		return noteService.insertNote(note, imageFile);
+		return noteService.insertNote(note, file);
 	}
 
 	// 5.음식 조회

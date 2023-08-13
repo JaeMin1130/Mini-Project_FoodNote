@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -44,12 +45,12 @@ public class NoteService {
 	}
 
 	// 4.식단 추가
-	public Note insertNote(Note note, MultipartFile imageFile) throws IOException {
+	public Note insertNote(Note note, MultipartFile file) throws IOException {
 
 		Note n = new Note();
 
-		if (imageFile != null && !imageFile.isEmpty()) {
-			byte[] imageBytes = imageFile.getBytes(); // 이미지 바이트 배열 가져오기
+		if (file != null && !file.isEmpty()) {
+			byte[] imageBytes = file.getBytes(); // 이미지 바이트 배열 가져오기
 			byte[] encodedImage = encodeImage(imageBytes);
 			n.setImageData(encodedImage);
 		}
@@ -69,6 +70,7 @@ public class NoteService {
 		n.setSodium(note.getSodium());
 		n.setCholesterol(note.getCholesterol());
 		n.setCaffeine(note.getCaffeine());
+		n.setUnit(note.getUnit());
 
 		return noteRepo.save(n);
 	}
@@ -89,8 +91,7 @@ public class NoteService {
 	public List<Food> searchLog(String keyword) {
 		System.out.println(keyword);
 		List<Food> foods = foodRepo.findBySearchLog(keyword);
-
-		String userId = "user123";
+		String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 		saveSearchLog(userId, keyword);
 
 		return foods;
@@ -142,7 +143,7 @@ public class NoteService {
 		}
 	}
 
-//	---------------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------------
 
 	// 이미지 인코딩
 	public byte[] encodeImage(byte[] imageBytes) {
@@ -170,7 +171,7 @@ public class NoteService {
 		}
 		log = new SearchLog();
 		log.setUserId(userId);
-		log.setKeyword(keyword);
+		log.setFoodName(keyword);
 		searchRepo.save(log);
 	}
 }

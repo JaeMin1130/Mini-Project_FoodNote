@@ -11,11 +11,11 @@ public interface SearchLogRepository extends JpaRepository<SearchLog, String> {
 
 	List<SearchLog> findByUserId(String userId);
 
-	@Query(value = "SELECT * FROM SEARCH_LOG log WHERE log.user_Id = :userId AND log.keyword = :keyword", nativeQuery = true)
+	@Query(value = "SELECT * FROM SEARCH_LOG log WHERE log.user_Id = :userId AND log.food_name = :keyword", nativeQuery = true)
 	SearchLog findByUserIdAndKeyword(@Param("userId") String userId, @Param("keyword") String keyword);
 
 	@Modifying
-	@Query(value = "DELETE FROM SEARCH_LOG log WHERE log.keyword Like %:keyword%", nativeQuery = true)
+	@Query(value = "DELETE FROM SEARCH_LOG log WHERE log.food_name Like %:keyword%", nativeQuery = true)
 	void deleteByKeyword(@Param("keyword") String keyword);
 
 	@Query(value = "SELECT * FROM search_log WHERE user_Id = :userId", nativeQuery = true)

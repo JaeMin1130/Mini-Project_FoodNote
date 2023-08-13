@@ -48,7 +48,7 @@ public class Note {
 	private Date date;
 	private String brand;
 	private double serving_size;
-	private double unit;
+	private String unit;
 	private double calories;
 	private double carbohydrate;
 	private double protein;
