@@ -19,6 +19,10 @@ export default function Note(props) {
   const [imageUpload, setImageUpload] = useState([]);
   const [mealType, setMealType] = useState("");
 
+  useEffect(() => {
+    console.log("image", imageUpload);
+  }, [imageUpload]);
+
   const submitHandler = async () => {
     try {
       for (const noteData of noteLogs) {
@@ -34,6 +38,12 @@ export default function Note(props) {
             Authorization: localStorage.getItem("ACCESS_TOKEN"),
             "Content-Type": "multipart/form-data",
           },
+        });
+
+        props.setCategorizedNoteData((prevNote) => {
+          console.log("prevNote", prevNote[props.today].mealType);
+          // const updatedNote = prevNote[props.today].mealType.push(noteData);
+          // return updatedNote;
         });
       }
       setNoteLogs([]);

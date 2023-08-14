@@ -8,7 +8,8 @@ export default function List(props) {
 
   useEffect(() => {
     console.log("data", data);
-  }, []);
+  }, [data]);
+
   if (!data || data.length === 0) {
     return null;
   }
@@ -36,9 +37,11 @@ export default function List(props) {
           <Divider sx={{ mb: 2 }} />
           <ChipsArray data={data} />
           <Divider sx={{ my: 2 }} />
-          {data.map((list, idx) => (
-            <FoodList key={idx} item={list} inList={true} />
-          ))}
+          <Box sx={{ maxHeight: "10vh", overflowY: "auto" }}>
+            {data.map((list, idx) => (
+              <FoodList key={idx} item={list} inList={true} />
+            ))}
+          </Box>
         </Box>
       </Box>
     </Paper>

@@ -1,6 +1,7 @@
-import { IconButton, List, ListItem, ListItemButton, ListItemText } from "@mui/material";
+import { IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
 import { call } from "./api/ApiService";
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import { useEffect } from "react";
 
 export default function FoodList(props) {
@@ -29,9 +30,10 @@ export default function FoodList(props) {
 
   return props.inList ? (
     <ListItemButton sx={{ p: 0 }}>
-      <ListItemText
-        primary={item.amount ? item.foodName + " " + item.amount + item.unit : item.foodName}
-      ></ListItemText>
+      <ListItemIcon>
+        <FiberManualRecordIcon sx={{ fontSize: "15px" }} />
+      </ListItemIcon>
+      <ListItemText primary={item.foodName + " " + item.amount + item.unit}></ListItemText>
     </ListItemButton>
   ) : (
     <List sx={{ display: "flex", p: 0 }}>

@@ -138,7 +138,7 @@ const Search = (props) => {
       </Box>
       <Divider sx={{ my: 3 }} />
       {open && (
-        <Box sx={{ mb: 6, height: "45%" }}>
+        <Box sx={{ mb: 6 }}>
           <Typography variant="h5" sx={{ ml: 2, my: 3 }} fontWeight={"bolder"}>
             영양 정보
           </Typography>
@@ -151,7 +151,7 @@ const Search = (props) => {
           />
         </Box>
       )}
-      <Box sx={{ height: "30%" }}>
+      <Box>
         <Typography variant="h5" sx={{ mb: 2, ml: 2 }} fontWeight={"bolder"}>
           최근 검색 항목
         </Typography>
