@@ -6,6 +6,11 @@ import List from "./List";
 
 export default function Main() {
   const [noteData, setNoteData] = useState([]);
+  const [categorizedNoteData, setCategorizedNoteData] = useState({
+    breakfast: [],
+    lunch: [],
+    dinner: [],
+  });
   const userId = localStorage.getItem("userId");
 
   useEffect(() => {
@@ -14,45 +19,39 @@ export default function Main() {
     });
   }, []);
 
-  const categorizedNoteData = {
-    breakfast: [],
-    lunch: [],
-    dinner: [],
-  };
-
   useEffect(() => {
+    const categorizedData = {
+      breakfast: [],
+      lunch: [],
+      dinner: [],
+    };
+
     noteData.forEach((item) => {
       if (item.mealType === "아침") {
-        categorizedNoteData.breakfast.push(item);
+        categorizedData.breakfast.push(item);
       } else if (item.mealType === "점심") {
-        categorizedNoteData.lunch.push(item);
+        categorizedData.lunch.push(item);
       } else if (item.mealType === "저녁") {
-        categorizedNoteData.dinner.push(item);
+        categorizedData.dinner.push(item);
       }
     });
-    console.log("categorized", categorizedNoteData);
+
+    setCategorizedNoteData(categorizedData);
   }, [noteData]);
 
   return (
     <Grid container spacing={1}>
-      <Grid xs={4}>
+      <Grid item xs={4}>
         <Menu />
       </Grid>
-      <Grid xs={8} sx={{ mt: 5 }}>
+      <Grid item xs={8} sx={{ mt: 5 }}>
         <Typography variant="h2">Today's Meal</Typography>
       </Grid>
-      <Grid xs={4}></Grid>
-      {/* {noteData.length > 0 && (
-        <Grid xs={5}>
-          {Object.keys(categorizedNoteData).map((key) => (
-            <List key={key} item={categorizedNoteData[key]} />
-          ))}
-        </Grid>
-      )} */}
-      <Grid xs={5}>
+      <Grid item xs={4}></Grid>
+      <Grid item xs={5}>
         <List item={categorizedNoteData.breakfast} />
-        {/* <List item={categorizedNoteData.lunch} /> */}
-        {/* <List item={categorizedNoteData.dinner} /> */}
+        <List item={categorizedNoteData.lunch} />
+        <List item={categorizedNoteData.dinner} />
       </Grid>
     </Grid>
   );

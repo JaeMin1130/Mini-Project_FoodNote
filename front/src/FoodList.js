@@ -1,10 +1,10 @@
 import { IconButton, List, ListItem, ListItemButton, ListItemText } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
 import { call } from "./api/ApiService";
+import { useEffect } from "react";
 
 export default function FoodList(props) {
   const item = props.item;
-
   // 최근 검색어에서 음식 클릭시 상세 정보 띄우기
   const showFoodInfo = (e) => {
     const foodNo = e.target.textContent.split(".")[0].replace("No", "");
@@ -27,7 +27,13 @@ export default function FoodList(props) {
     }
   };
 
-  return (
+  return props.inList ? (
+    <ListItemButton sx={{ p: 0 }}>
+      <ListItemText
+        primary={item.amount ? item.foodName + " " + item.amount + item.unit : item.foodName}
+      ></ListItemText>
+    </ListItemButton>
+  ) : (
     <List sx={{ display: "flex", p: 0 }}>
       <ListItem disablePadding>
         <IconButton onClick={() => deleteSearchWord(item.foodName)}>

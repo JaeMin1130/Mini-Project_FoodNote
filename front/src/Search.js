@@ -68,11 +68,13 @@ const Search = (props) => {
         return Array.from(logList);
       });
       if (props.inNote) {
-        props.setNoteLogs([...props.noteLogs, { foodName: value }]);
+        props.setNoteLogs([...props.noteLogs, { foodName: value, amount: 0 }]);
       }
     }
   };
-
+  useEffect(() => {
+    console.log("logs", logs);
+  }, logs);
   // 검색어 자동 완성(10번)
   const onInputChange = (e) => {
     setKeyword(e.target.value);
@@ -155,7 +157,7 @@ const Search = (props) => {
         </Typography>
         <Box sx={{ maxHeight: open ? "21vh" : "35vh", overflowY: "auto" }}>
           {logs.map((item) => (
-            <FoodList setFoodData={setFoodData} setLogs={setLogs} item={item} />
+            <FoodList setFoodData={setFoodData} setLogs={setLogs} item={item} inSearch={true} />
           ))}
         </Box>
       </Box>
