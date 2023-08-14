@@ -35,11 +35,9 @@ public class NoteService {
 	// 3.사용자별 조회
 	public List<Note> getToday(String userId) {
 		List<Note> notes = noteRepo.findByUserId(userId);
-
 		for (Note note : notes) {
 			byte[] decodedImage = decodeImage(note.getImageData());
 			note.setImageData(decodedImage);
-			break;
 		}
 		return notes;
 	}
