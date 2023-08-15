@@ -36,8 +36,12 @@ public class NoteService {
 	public List<Note> getToday(String userId) {
 		List<Note> notes = noteRepo.findByUserId(userId);
 		for (Note note : notes) {
-			byte[] decodedImage = decodeImage(note.getImageData());
-			note.setImageData(decodedImage);
+			if (note.getImageData() != null) {
+				byte[] decodedImage = decodeImage(note.getImageData());
+				note.setImageData(decodedImage);
+			} else {
+				note.setImageData(null);
+			}
 		}
 		return notes;
 	}

@@ -44,7 +44,7 @@ public class Note {
 	@Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreationTimestamp
-	@JsonFormat(pattern = "yy-MM-dd-HH:mm", timezone = "Asia/Seoul")
+	@JsonFormat(pattern = "yy-MM-dd", timezone = "Asia/Seoul")
 	private Date date;
 	private String brand;
 	private double serving_size;
