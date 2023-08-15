@@ -16,40 +16,40 @@ export default function Main() {
   const [date, setDate] = useState(today);
 
   useEffect(() => {
-    console.log("start");
     call(`/main/${userId}`, "GET", null).then((data) => {
       setNoteData(data);
     });
   }, []);
+
   useEffect(() => {
-    console.log("datedate", date);
-  }, [date]);
-  useEffect(() => {
+    console.log("noteData", noteData);
+
     const categorizedData = {};
 
-    noteData.forEach((item) => {
-      const date = item.date.substring(0, 8);
-      if (categorizedData[date]) {
-        categorizedData[date].push(item);
-      } else {
-        categorizedData[date] = [item];
-      }
-    });
+    if (noteData) {
+      noteData.forEach((item) => {
+        const date = item.date.substring(0, 8);
+        if (categorizedData[date]) {
+          categorizedData[date].push(item);
+        } else {
+          categorizedData[date] = [item];
+        }
+      });
+    }
 
-    console.log("categorizedData", categorizedData);
     Object.keys(categorizedData).forEach((date) => {
       const categorizedMeals = {
-        breakfast: [],
-        lunch: [],
-        dinner: [],
+        아침: [],
+        점심: [],
+        저녁: [],
       };
       categorizedData[date].forEach((meal) => {
         if (meal.mealType === "아침") {
-          categorizedMeals.breakfast.push(meal);
+          categorizedMeals.아침.push(meal);
         } else if (meal.mealType === "점심") {
-          categorizedMeals.lunch.push(meal);
+          categorizedMeals.점심.push(meal);
         } else if (meal.mealType === "저녁") {
-          categorizedMeals.dinner.push(meal);
+          categorizedMeals.저녁.push(meal);
         }
       });
 
@@ -60,28 +60,26 @@ export default function Main() {
     setCategorizedNoteData(categorizedData);
   }, [noteData]);
 
-  // useEffect(() => {
-  //   console.log("categorizedNoteData", categorizedNoteData);
-  // }, [categorizedNoteData]);
   return (
     <Grid container spacing={1}>
       <Grid item xs={4}>
         <Menu
-          today={today}
+          date={date}
           setDate={setDate}
+          noteData={noteData}
+          setNoteData={setNoteData}
           categorizedNoteData={categorizedNoteData}
-          setCategorizedNoteData={setCategorizedNoteData}
         />
       </Grid>
       <Grid item xs={8} sx={{ mt: 5 }}>
         <Typography variant="h2">{date}</Typography>
       </Grid>
       <Grid item xs={4}></Grid>
-      {Object.keys(categorizedNoteData).length >= 1 ? (
+      {Object.keys(categorizedNoteData).includes(date) ? (
         <Grid item xs={5}>
-          <List item={categorizedNoteData[date].breakfast} />
-          <List item={categorizedNoteData[date].lunch} />
-          <List item={categorizedNoteData[date].dinner} />{" "}
+          <List item={categorizedNoteData[date].아침} noteData={noteData} setNoteData={setNoteData} />
+          <List item={categorizedNoteData[date].점심} noteData={noteData} setNoteData={setNoteData} />
+          <List item={categorizedNoteData[date].저녁} noteData={noteData} setNoteData={setNoteData} />
         </Grid>
       ) : (
         ""
