@@ -43,7 +43,7 @@ export default function Menu(props) {
   );
   const eventTags = [
     <Search />,
-    <Note setCategorizedNoteData={props.setCategorizedNoteData} today={props.today} />,
+    <Note noteData={props.noteData} setNoteData={props.setNoteData} date={props.date} />,
     <Calendar setDate={props.setDate} categorizedNoteData={props.categorizedNoteData} />,
     <Search />,
     <Search />,

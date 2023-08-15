@@ -1,24 +1,12 @@
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import {
-  Avatar,
-  Box,
-  Button,
-  Checkbox,
-  Container,
-  CssBaseline,
-  FormControlLabel,
-  Grid,
-  Link,
-  TextField,
-  Typography,
-  colors,
-} from "@mui/material";
+import { Box, Button, Container, CssBaseline, TextField } from "@mui/material";
 import axios from "axios";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "./api/api-config";
+import AlertError from "./alert/AlertError";
 
 export default function LogIn() {
+  const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -33,15 +21,14 @@ export default function LogIn() {
     try {
       const res = await axios.post(url, formData);
       if (res.status === 200) {
-        // Extract authorization token from headers
         const accessToken = res.headers["authorization"];
         localStorage.setItem("ACCESS_TOKEN", accessToken);
         localStorage.setItem("userId", data.get("id"));
         navigate("/main");
       }
     } catch (error) {
+      setOpen(true);
       console.error("Error during API call:", error);
-      // Handle error or show error message to the user
     }
   };
 
@@ -67,6 +54,12 @@ export default function LogIn() {
             required
             fullWidth
           />
+          <AlertError
+            open={open}
+            setOpen={setOpen}
+            text={"아이디 또는 비밀번호를 잘못 입력했습니다. 입력하신 내용을 다시 확인해주세요."}
+          />
+
           <Button
             type="submit"
             fullWidth

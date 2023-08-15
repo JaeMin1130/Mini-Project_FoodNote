@@ -28,7 +28,9 @@ const Search = (props) => {
   const findFood = (keyword) => {
     if (keyword != "") {
       call(`/main/search/${keyword}`, "GET", null).then((data) => {
-        setFoodData(data.reverse());
+        if (data) {
+          setFoodData(data.reverse());
+        }
         if (props.inNote) {
           props.setFoodData(data);
         }
@@ -72,9 +74,6 @@ const Search = (props) => {
       }
     }
   };
-  useEffect(() => {
-    console.log("logs", logs);
-  }, logs);
   // 검색어 자동 완성(10번)
   const onInputChange = (e) => {
     setKeyword(e.target.value);

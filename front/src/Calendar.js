@@ -1,12 +1,10 @@
-import dayjs from "dayjs";
-import advancedFormat from "dayjs/plugin/advancedFormat";
-import { Alert, Box, Collapse, CssBaseline, Divider, IconButton, Typography, useThemeProps } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 import { DateCalendar, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import CloseIcon from "@mui/icons-material/Close";
+import dayjs from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat";
 import { useState } from "react";
-import { styled } from "@mui/material/styles";
-
+import AlertError from "./alert/AlertError";
 dayjs.extend(advancedFormat); // Load the advancedFormat plugin for custom formatting
 
 export default function Calendar(props) {
@@ -24,8 +22,6 @@ export default function Calendar(props) {
     } else {
       setOpen(true);
     }
-
-    console.log("Selected Date:", formattedDate);
   };
 
   return (
@@ -33,26 +29,7 @@ export default function Calendar(props) {
       <Typography variant="h5" sx={{ my: 5, mx: 2 }} fontWeight={"bolder"}>
         달력
       </Typography>
-      <Collapse in={open}>
-        <Alert
-          action={
-            <IconButton
-              aria-label="close"
-              color="error"
-              size="small"
-              onClick={() => {
-                setOpen(false);
-              }}
-            >
-              <CloseIcon fontSize="inherit" />
-            </IconButton>
-          }
-          severity="error"
-          sx={{ mb: 2 }}
-        >
-          해당 날짜에 기록한 식단이 없습니다.
-        </Alert>
-      </Collapse>
+      <AlertError open={open} setOpen={setOpen} text={"해당 날짜에 기록한 식단이 없습니다."} />
       <Divider sx={{ my: 3 }} />
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DateCalendar onChange={handleDateChange} />

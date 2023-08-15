@@ -28,12 +28,22 @@ export default function FoodList(props) {
     }
   };
 
+  const deleteNote = () => {
+    const id = item.id;
+    call(`/main/delete/${id}`, "DELETE", null);
+    const updatedNote = props.noteData.filter((note) => note.id !== id);
+    props.setNoteData(updatedNote);
+  };
+
   return props.inList ? (
     <ListItemButton sx={{ p: 0 }}>
       <ListItemIcon>
         <FiberManualRecordIcon sx={{ fontSize: "15px" }} />
       </ListItemIcon>
       <ListItemText primary={item.foodName + " " + item.amount + item.unit}></ListItemText>
+      <IconButton onClick={deleteNote}>
+        <ClearIcon />
+      </IconButton>
     </ListItemButton>
   ) : (
     <List sx={{ display: "flex", p: 0 }}>

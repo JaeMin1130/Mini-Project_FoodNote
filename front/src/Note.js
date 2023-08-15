@@ -1,15 +1,13 @@
 import { Box, Button, Divider } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import React, { useEffect, useState } from "react";
-import Calculator from "./Calculator";
+import axios from "axios";
+import React, { useState } from "react";
 import FoodList from "./FoodList";
 import ImageLoader from "./ImageLoader";
 import NoteButton from "./NoteButton";
-import Search from "./Search";
 import NutritionTable from "./NutritionTable";
-import { call } from "./api/ApiService";
+import Search from "./Search";
 import { API_BASE_URL } from "./api/api-config";
-import axios from "axios";
 
 export default function Note(props) {
   const [noteLogs, setNoteLogs] = useState([]);
@@ -18,10 +16,6 @@ export default function Note(props) {
   const [amount, setAmount] = useState(0);
   const [imageUpload, setImageUpload] = useState([]);
   const [mealType, setMealType] = useState("");
-
-  useEffect(() => {
-    console.log("image", imageUpload);
-  }, [imageUpload]);
 
   const submitHandler = async () => {
     try {
@@ -39,12 +33,9 @@ export default function Note(props) {
             "Content-Type": "multipart/form-data",
           },
         });
-
-        props.setCategorizedNoteData((prevNote) => {
-          console.log("prevNote", prevNote[props.today].mealType);
-          // const updatedNote = prevNote[props.today].mealType.push(noteData);
-          // return updatedNote;
-        });
+        const newNote = { ...noteData, date: props.date };
+        const updatedNoteData = [...props.noteData, newNote];
+        props.setNoteData(updatedNoteData);
       }
       setNoteLogs([]);
       setFoodData([]);
@@ -80,7 +71,7 @@ export default function Note(props) {
         )}
       </Box>
       <Divider sx={{ my: 2 }} />
-      {foodData.length == 1 && (
+      {foodData && foodData.length == 1 && (
         <NutritionTable
           foodData={foodData["0"]}
           noteValue={noteValue}

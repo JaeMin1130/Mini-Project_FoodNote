@@ -11,8 +11,7 @@ const ListItem = styled("li")(({ theme }) => ({
 
 export default function ChipsArray(props) {
   const nutrition = props.data;
-
-  const [chipData, setChipData] = useState([
+  const chipData = [
     { key: "칼", label: nutrition.reduce((total, item) => total + item.calories, 0) + "kcal" },
     { key: "탄", label: nutrition.reduce((total, item) => total + item.carbohydrate, 0) + "g" },
     { key: "단", label: nutrition.reduce((total, item) => total + item.protein, 0) + "g" },
@@ -21,7 +20,7 @@ export default function ChipsArray(props) {
     { key: "나", label: nutrition.reduce((total, item) => total + item.sodium, 0) + "mg" },
     { key: "콜", label: nutrition.reduce((total, item) => total + item.cholesterol, 0) + "mg" },
     { key: "카", label: nutrition.reduce((total, item) => total + item.caffeine, 0) + "mg" },
-  ]);
+  ];
 
   return (
     <Box

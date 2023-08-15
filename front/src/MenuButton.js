@@ -14,11 +14,9 @@ export default function MenuButton(props) {
 
   const clickSearch = () => {
     clickHandler(idx);
-    navigate("/main/search");
   };
   const clickNote = () => {
     clickHandler(idx);
-    navigate("/main/note");
   };
   const clickCal = () => {
     clickHandler(idx);
