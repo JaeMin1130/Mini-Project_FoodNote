@@ -16,11 +16,15 @@ export default function Join() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget[0]);
+    const data = new FormData(event.currentTarget); // Use event.currentTarget directly
+
     const formData = {
       userId: data.get("id"),
       password: data.get("password"),
     };
+
+    console.log("id:", formData.userId);
+    console.log("Password:", formData.password);
 
     const url = "http://localhost:8080/users/join";
 
@@ -31,7 +35,7 @@ export default function Join() {
       },
       body: JSON.stringify(formData),
     }).then((response) => {
-      if (response.status == 200) {
+      if (response.status === 200) {
         navigate("/logIn");
       } else {
         setOpen(true);
@@ -92,6 +96,8 @@ export default function Join() {
               flexDirection: "column",
               justifyContent: "space-evenly",
             }}
+            component="form"
+            onSubmit={handleSubmit}
           >
             <TextField required fullWidth id="id" label="ID" name="id" autoComplete="id" />
             <TextField
@@ -115,7 +121,6 @@ export default function Join() {
                   color: "#white",
                   fontWeight: "bold",
                 }}
-                onClick={handleSubmit}
               >
                 Sign Up
               </Button>

@@ -32,11 +32,17 @@ export default function LogIn() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    const data = new FormData(event.target);
+
+    console.log("Form Data:", data.entries());
+
     const formData = {
       userId: data.get("id"),
       password: data.get("password"),
     };
+
+    console.log("id:", formData.userId);
+    console.log("Password:", formData.password);
     const url = API_BASE_URL + "/users/login";
 
     try {
@@ -66,9 +72,10 @@ export default function LogIn() {
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField margin="normal" required fullWidth id="id" label="ID" name="id" autoFocus />
           <FormControl fullWidth variant="outlined" sx={{ mt: 1 }}>
-            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+            <InputLabel htmlFor="password">Password</InputLabel>
             <OutlinedInput
-              id="outlined-adornment-password"
+              id="password"
+              name="password"
               type={showPassword ? "text" : "password"}
               endAdornment={
                 <InputAdornment position="end">
@@ -101,7 +108,7 @@ export default function LogIn() {
             로그인
           </Button>
           <Button
-            type="submit"
+            href="/join"
             fullWidth
             variant="contained"
             sx={{
