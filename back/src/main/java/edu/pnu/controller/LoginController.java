@@ -29,8 +29,13 @@ public class LoginController {
 
 	// 1. 회원가입
 	@PostMapping("/join")
-	public Boolean join(@RequestBody Member member) {
-		return loginService.save(member);
+	public ResponseEntity<?> join(@RequestBody Member member) {
+		boolean success = loginService.join(member);
+		if (success) {
+			return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION).build();
+		} else {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+		}
 	}
 
 	// 2. 로그인

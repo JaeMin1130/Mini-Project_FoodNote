@@ -41,9 +41,7 @@ public class Note {
 	@Lob
 	@Column(name = "image_data", columnDefinition = "MEDIUMBLOB")
 	private byte[] imageData;
-	@Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-	@Temporal(TemporalType.TIMESTAMP)
-	@CreationTimestamp
+	@Column(columnDefinition = "DATE")
 	@JsonFormat(pattern = "yy-MM-dd", timezone = "Asia/Seoul")
 	private Date date;
 	private String brand;

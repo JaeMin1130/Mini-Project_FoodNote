@@ -20,9 +20,9 @@ public class LoginService {
 	private PasswordEncoder encoder;
 
 	// 1.회원가입
-	public Boolean save(Member member) {
-
-		if (memRepo.existsById(member.getUserId())) {
+	public Boolean join(Member member) {
+		Member mem = memRepo.findByUserId(member.getUserId()).get();
+		if (mem != null) {
 			return false;
 		}
 
