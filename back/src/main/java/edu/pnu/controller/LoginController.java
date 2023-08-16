@@ -30,7 +30,9 @@ public class LoginController {
 	// 1. 회원가입
 	@PostMapping("/join")
 	public ResponseEntity<?> join(@RequestBody Member member) {
+		System.out.println("member " + member.toString());
 		boolean success = loginService.join(member);
+		System.out.println("success : " + success);
 		if (success) {
 			return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION).build();
 		} else {

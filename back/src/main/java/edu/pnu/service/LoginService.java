@@ -21,8 +21,9 @@ public class LoginService {
 
 	// 1.회원가입
 	public Boolean join(Member member) {
-		Member mem = memRepo.findByUserId(member.getUserId()).get();
-		if (mem != null) {
+		Optional<Member> option = memRepo.findById(member.getUserId());
+
+		if (option.isPresent()) {
 			return false;
 		}
 
