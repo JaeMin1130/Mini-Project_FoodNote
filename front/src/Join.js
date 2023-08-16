@@ -36,7 +36,7 @@ export default function Join() {
       body: JSON.stringify(formData),
     }).then((response) => {
       if (response.status === 200) {
-        navigate("/logIn");
+        navigate("/MiniProject_MealNote/");
       } else {
         setOpen(true);
       }
@@ -55,14 +55,13 @@ export default function Join() {
               <img src="/MealNote.png" alt="MealNote 로고" width={180} height={65} />
             </Typography>
             <Box>
-              <Link href="signIn" variant="body2">
-                <Button
-                  color="inherit"
-                  sx={{ color: "rgb(59, 58, 58)", fontSize: "1.4rem", fontWeight: "bold", marginRight: 4 }}
-                >
-                  Home
-                </Button>
-              </Link>
+              <Button
+                color="inherit"
+                sx={{ color: "rgb(59, 58, 58)", fontSize: "1.4rem", fontWeight: "bold", marginRight: 4 }}
+                onClick={() => navigate("/MiniProject_MealNote/")}
+              >
+                Home
+              </Button>
             </Box>
           </Toolbar>
         </AppBar>

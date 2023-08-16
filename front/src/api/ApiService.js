@@ -31,8 +31,3 @@ export function call(api, method, request) {
       console.log(error);
     });
 }
-
-export function signout() {
-  localStorage.removeItem("ACCESS_TOKEN");
-  window.location.href = "/login";
-}

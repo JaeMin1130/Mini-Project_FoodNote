@@ -51,7 +51,7 @@ export default function LogIn() {
         const accessToken = res.headers["authorization"];
         localStorage.setItem("ACCESS_TOKEN", accessToken);
         localStorage.setItem("userId", data.get("id"));
-        navigate("/main");
+        navigate("/MiniProject_MealNote/main");
       }
     } catch (error) {
       setOpen(true);
@@ -108,7 +108,7 @@ export default function LogIn() {
             로그인
           </Button>
           <Button
-            href="/join"
+            onClick={() => navigate("/MiniProject_MealNote/join")}
             fullWidth
             variant="contained"
             sx={{

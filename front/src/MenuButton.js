@@ -5,7 +5,6 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import SearchIcon from "@mui/icons-material/Search";
 import { List, ListItem, ListItemButton, ListItemText } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { signout } from "./api/ApiService";
 
 export default function MenuButton(props) {
   const clickHandler = props.clickHandler;
@@ -28,7 +27,9 @@ export default function MenuButton(props) {
 
   const clickLogout = () => {
     clickHandler(idx);
-    signout();
+    localStorage.removeItem("ACCESS_TOKEN");
+    localStorage.removeItem("userId");
+    navigate("/MiniProject_MealNote/");
   };
 
   const iconList = [

@@ -19,8 +19,9 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/*" element={<Welcome />} />
-        <Route path="/join" element={<Join />} />
-        <Route path="/main/*" element={<Main />} />
+        <Route path="/MiniProject_MealNote/*" element={<Welcome />} />
+        <Route path="/MiniProject_MealNote/join" element={<Join />} />
+        <Route path="/MiniProject_MealNote/main/*" element={<Main />} />
       </Routes>
     </BrowserRouter>
     // </ThemeProvider>
