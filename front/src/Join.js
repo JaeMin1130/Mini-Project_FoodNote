@@ -1,12 +1,12 @@
-import { Box, Button, Container, CssBaseline, Grid, Link, TextField, Typography } from "@mui/material";
+import { Box, Button, Container, CssBaseline, Link, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 import AppBar from "@mui/material/AppBar";
 
 import Toolbar from "@mui/material/Toolbar";
 
-import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
+import IconButton from "@mui/material/IconButton";
 import { useState } from "react";
 import AlertError from "./alert/AlertError";
 
@@ -47,8 +47,8 @@ export default function Join() {
             <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" sx={{ flexGrow: 1, color: "grey" }}>
-              <img src="/NutriScan.png" alt="NutriScan 로고" width={180} height={70} />
+            <Typography variant="h6" sx={{ mt: 2, flexGrow: 1, color: "grey" }}>
+              <img src="/MealNote.png" alt="MealNote 로고" width={180} height={65} />
             </Typography>
             <Box>
               <Link href="signIn" variant="body2">

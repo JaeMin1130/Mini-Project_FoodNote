@@ -97,6 +97,7 @@ export default function NutritionTable(props) {
               sx={{ width: "60%" }}
               onChange={handleInputChange}
               autoFocus
+              defaultValue={foodData.serving_size}
             />
             {props.inNote && (
               <IconButton>

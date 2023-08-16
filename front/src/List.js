@@ -33,7 +33,7 @@ export default function List(props) {
               alignItems: "center",
               justifyContent: "center",
               bgcolor: "#eee",
-              width: "40%",
+              width: "43%",
             }}
           >
             <Typography variant="h4" fontWeight={"bolder"}>

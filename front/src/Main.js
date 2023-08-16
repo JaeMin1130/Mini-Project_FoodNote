@@ -1,8 +1,8 @@
+import { Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import List from "./List";
 import Menu from "./Menu";
 import { call } from "./api/ApiService";
-import { Grid, Paper, Typography } from "@mui/material";
-import List from "./List";
 
 export default function Main() {
   const [noteData, setNoteData] = useState([]);
@@ -64,6 +64,7 @@ export default function Main() {
     <Grid container spacing={1}>
       <Grid item xs={4}>
         <Menu
+          today={today}
           date={date}
           setDate={setDate}
           noteData={noteData}
@@ -82,7 +83,9 @@ export default function Main() {
           <List item={categorizedNoteData[date].저녁} noteData={noteData} setNoteData={setNoteData} />
         </Grid>
       ) : (
-        ""
+        <Grid item xs={5}>
+          <img src="/unrecorded.gif" alt="unrecorded" height="100%" width="100%" />
+        </Grid>
       )}
     </Grid>
   );

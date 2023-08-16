@@ -1,9 +1,6 @@
-import { styled } from "@mui/material/styles";
-import Chip from "@mui/material/Chip";
-import Paper from "@mui/material/Paper";
-import TagFacesIcon from "@mui/icons-material/TagFaces";
 import { Box } from "@mui/material";
-import { useEffect, useState } from "react";
+import Chip from "@mui/material/Chip";
+import { styled } from "@mui/material/styles";
 
 const ListItem = styled("li")(({ theme }) => ({
   margin: theme.spacing(0.5),

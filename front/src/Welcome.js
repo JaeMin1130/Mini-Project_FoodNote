@@ -1,4 +1,4 @@
-import { Box, Container, Link, Typography } from "@mui/material";
+import { Box, Button, Container, Link, Typography } from "@mui/material";
 import React from "react";
 import LogIn from "./LogIn";
 
@@ -37,14 +37,8 @@ const Welcome = () => {
             zIndex: 1,
           }}
         >
-          <img src="/NutriScan.png" alt="NutriScan 로고" width="80%" />
+          <img src="/MealNote.png" alt="MealNote 로고" width="80%" height="20%" />
           <LogIn />
-          <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
-            <Typography variant="body1">"Don't have an account?"</Typography>
-            <Link href="/join" variant="body2" fontSize={16}>
-              {"Sign Up "}
-            </Link>
-          </Box>
         </Box>
       </Box>
     </Container>

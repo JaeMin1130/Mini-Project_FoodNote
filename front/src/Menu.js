@@ -7,7 +7,7 @@ import Note from "./Note";
 import Search from "./Search";
 import Drawer from "./drawer/Drawer";
 import Drawer2 from "./drawer/Drawer2";
-
+import Statistic from "./Statistic";
 export default function Menu(props) {
   const [clicked, setClicked] = useState([false, false, false, false, false]);
   const [open, setOpen] = useState(true);
@@ -19,7 +19,6 @@ export default function Menu(props) {
     newClicked[index] = !clicked[index];
     setClicked(newClicked);
   };
-
   const menuButtons = (
     <Box>
       <Box sx={{ display: "flex", alignItems: "center", mx: 1, my: 4 }}>
@@ -43,10 +42,10 @@ export default function Menu(props) {
   );
   const eventTags = [
     <Search />,
-    <Note noteData={props.noteData} setNoteData={props.setNoteData} date={props.date} />,
-    <Calendar setDate={props.setDate} categorizedNoteData={props.categorizedNoteData} />,
-    <Search />,
-    <Search />,
+    <Note setNoteData={props.setNoteData} today={props.today} date={props.date} setDate={props.setDate} />,
+    <Calendar date={props.date} setDate={props.setDate} categorizedNoteData={props.categorizedNoteData} />,
+    <Statistic />,
+    <></>,
   ];
 
   return (

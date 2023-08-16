@@ -2,7 +2,7 @@ import { Box, FormControlLabel, Radio, RadioGroup, Typography } from "@mui/mater
 
 export default function NoteButton(props) {
   const handleRadioChange = (event) => {
-    props.setMealType(event.target.value); // Update the selected meal type when a radio button is clicked
+    props.setMealType(event.target.value);
   };
 
   return (

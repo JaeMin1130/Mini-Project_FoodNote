@@ -1,13 +1,34 @@
-import { Box, Button, Container, CssBaseline, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  CssBaseline,
+  FormControl,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+  TextField,
+} from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "./api/api-config";
 import AlertError from "./alert/AlertError";
 import { useState } from "react";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 export default function LogIn() {
   const [open, setOpen] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
   const navigate = useNavigate();
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -44,15 +65,27 @@ export default function LogIn() {
       >
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField margin="normal" required fullWidth id="id" label="ID" name="id" autoFocus />
-          <TextField
-            margin="normal"
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            required
-            fullWidth
-          />
+          <FormControl fullWidth variant="outlined" sx={{ mt: 1 }}>
+            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+            <OutlinedInput
+              id="outlined-adornment-password"
+              type={showPassword ? "text" : "password"}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              label="Password"
+              fullWidth
+            />
+          </FormControl>
           <AlertError
             open={open}
             setOpen={setOpen}
@@ -63,9 +96,22 @@ export default function LogIn() {
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2, borderRadius: "10px", backgroundColor: "#47b8fd", color: "#white", fontWeight: "bold" }}
+            sx={{ mt: 3, mb: 2, borderRadius: "10px", bgcolor: "#47b8fd", color: "#white", fontWeight: "bold" }}
           >
             로그인
+          </Button>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{
+              borderRadius: "10px",
+              color: "#white",
+              bgcolor: "#47b8fd",
+              fontWeight: "bold",
+            }}
+          >
+            회원가입
           </Button>
         </Box>
       </Box>
