@@ -1,32 +1,52 @@
-import { Box, Container } from "@mui/material";
-import Link from "@mui/material/Link";
-import React, { useState } from "react";
+import { Box, Container, Link, Typography } from "@mui/material";
+import React from "react";
 import LogIn from "./LogIn";
-import "./Welcome.css";
-import { Grid } from "@mui/material";
 
 const Welcome = () => {
   return (
-    <Container className="container">
-      <div id="a1" className="c1">
-        <div id="a2">
-          <img src="/food1.gif" alt="Food GIF" width="540" height="300" />
-        </div>
-        <div className="c2">
-          <div id="a3" className="image-container">
-            <img src="/NutriScan.png" alt="NutriScan Logo" className="logo-image" />
-            <LogIn />
-          </div>
-          <div className="grid1">
-            <Grid marginRight="25px" fontSize={16}>
-              Don't have an account?
-              <Link href="/join" variant="body2" marginLeft="5px" marginRight="16px" fontSize={16}>
-                {"  Sign Up"}
-              </Link>
-            </Grid>
-          </div>
-        </div>
-      </div>
+    <Container>
+      <Box sx={{ height: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
+        {/* 첫 번째 열 */}
+        <Box
+          sx={{
+            width: "45%",
+            height: "60%",
+          }}
+        >
+          <img
+            src="/i.gif"
+            alt="food"
+            style={{
+              width: "100%",
+              height: "100%",
+            }}
+          />
+        </Box>
+
+        {/* 두 번째 열 */}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "space-evenly",
+            border: "1px solid rgb(189, 188, 188)",
+            width: "35%",
+            height: "60%",
+            marginLeft: -11,
+            zIndex: 1,
+          }}
+        >
+          <img src="/NutriScan.png" alt="NutriScan 로고" width="80%" />
+          <LogIn />
+          <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-around" }}>
+            <Typography variant="body1">"Don't have an account?"</Typography>
+            <Link href="/join" variant="body2" fontSize={16}>
+              {"Sign Up "}
+            </Link>
+          </Box>
+        </Box>
+      </Box>
     </Container>
   );
 };

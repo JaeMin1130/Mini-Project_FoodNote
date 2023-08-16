@@ -26,7 +26,7 @@ export default function Calendar(props) {
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", alignContent: "center", width: "100%" }}>
-      <Typography variant="h5" sx={{ my: 5, mx: 2 }} fontWeight={"bolder"}>
+      <Typography variant="h4" sx={{ my: 5, mx: 2 }} fontWeight={"bolder"}>
         달력
       </Typography>
       <AlertError open={open} setOpen={setOpen} text={"해당 날짜에 기록한 식단이 없습니다."} />

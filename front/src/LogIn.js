@@ -1,12 +1,12 @@
 import { Box, Button, Container, CssBaseline, TextField } from "@mui/material";
 import axios from "axios";
-import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "./api/api-config";
 import AlertError from "./alert/AlertError";
+import { useState } from "react";
 
 export default function LogIn() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -37,7 +37,6 @@ export default function LogIn() {
       <CssBaseline />
       <Box
         sx={{
-          marginTop: 3,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
