@@ -3,6 +3,7 @@
 - 개요: 매일의 식단을 기록하여 관리하는 웹 서비스 개발
 - 활용 데이터 : [식품의약품안전처 식품영양성분DB(음식)](https://various.foodsafetykorea.go.kr/nutrient/)
 - 기간: 2023. 07.24 ~ 08.17
+- [Go to see our service](https://jaemin1130.github.io/MiniProject_MealNote/)
 
 ## 2. 팀원 
 |<img width="200" alt="image" src="https://avatars.githubusercontent.com/u/98063854?v=4">|<img width="200" alt="image" src="https://avatars.githubusercontent.com/u/129818813?v=4">|
