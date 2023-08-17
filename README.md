@@ -68,7 +68,7 @@
 | :-------------------------------------------: | :------------: |
 | <img width="450" height="350" src="https://github.com/JaeMin1130/MiniProject_MealNote/assets/98063854/b86b1a21-b047-47f8-8632-fdca89c8312a"/>   |  <img width="450" height="350" src="https://github.com/JaeMin1130/MiniProject_MealNote/assets/98063854/eee3055a-24b4-4472-807b-b48b3ee95b47"/>|
 
-| 날짜 조회 페이지  |
+| 메인 페이지(날짜 조회)  |
 | :-------------------------------------------: | 
 | <img width="450" height="350" src="https://github.com/JaeMin1130/MiniProject_MealNote/assets/98063854/225bf747-ac6f-42e2-93ca-ee477509efe3"/> |
 ## 7. REST API 명세 
