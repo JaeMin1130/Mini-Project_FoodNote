@@ -127,7 +127,7 @@ export default function ImageLoader(props) {
             color="primary"
             size="small"
             sx={{
-              bgcolor: imageUpload.length > 0 ? "transparent" : "",
+              bgcolor: imageUpload.length > 0 ? "transparent" : "#47b8fd",
               width: "30px",
               height: 0,
             }}
