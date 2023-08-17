@@ -62,15 +62,15 @@
 
 | 메인 페이지  |  회원가입 페이지   |
 | :-------------------------------------------: | :------------: |
-|  <img width="450" src="https://github.com/JaeMin1130/MiniProject_MealNote/blob/main/Login.png"/> |  <img width="450" src="https://github.com/JaeMin1130/MiniProject_MealNote/blob/main/Join.png"/>|  
+|  <img width="500" src="https://github.com/JIeunhuh/K3MiniProject/blob/main/mainPage.png"/> |  <img width="500" src="https://github.com/JIeunhuh/K3MiniProject/assets/112235808/e2ea4914-4d51-4f5c-8c41-a2d9cc964600.png"/>|  
 
 | 음식 조회 페이지  |  기록 저장 페이지   |  
 | :-------------------------------------------: | :------------: |
-| <img width="450" src="https://github.com/JIeunhuh/K3MiniProject/blob/main/foodSearch-modal.png"/>   |  <img width="450" src="https://github.com/JIeunhuh/K3MiniProject/blob/main/commPage.png"/>     |
+| <img width="500" src="https://github.com/JaeMin1130/MiniProject_MealNote/blob/main/Search.png"/>   |  <img width="500" src="https://github.com/JIeunhuh/JaeMin1130/MiniProject_MealNote/blob/main/recentSearch.png/>     |
 
 | 날짜 조회 페이지  |
 | :-------------------------------------------: | 
-| <img width="450" src="https://github.com/JIeunhuh/K3MiniProject/assets/112235808/a00d125f-31f7-4d98-a3db-91048ad003e9.png"/>   |  <img width="450" src="https://github.com/JIeunhuh/K3MiniProject/assets/112235808/8039534f-9ea1-47d4-9829-35800b50f135.png"/>     |
+| <img width="500" src="https://github.com/JaeMin1130/MiniProject_MealNote/blob/main/GetNote.png"/>   |
 
 ## 7. REST API 명세 
 | ID | Method | Params | URI | Return | Description |
