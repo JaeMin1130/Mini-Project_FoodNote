@@ -44,8 +44,7 @@
 </div>
 
 ## 4. 서비스 아키텍처
-![image](https://github.com/JaeMin1130/MiniProject_MealNote/assets/98063854/1e87e903-3015-460c-ac04-74e28b010ba7)
-
+![image](https://github.com/JaeMin1130/MiniProject_MealNote/assets/98063854/c3db61f9-04ef-46a9-88b3-9ccb9513d697)
 
 ## 5. 주요 기능 
 - [x] 회원가입/로그인
@@ -60,18 +59,18 @@
 
 ## 6. 화면 구성
 
-| 메인 페이지  |  회원가입 페이지   |
+
+| 로그인 페이지  |  회원가입 페이지   |
 | :-------------------------------------------: | :------------: |
-|  <img width="500"  src="https://github.com/JaeMin1130/MiniProject_MealNote/blob/main/Login.png"/> |  <img width="600"  src="https://github.com/JaeMin1130/MiniProject_MealNote/blob/main/Join.png"/>|  
+|  <img width="450" height="350"  src="https://github.com/JaeMin1130/MiniProject_MealNote/assets/98063854/1dea1fa7-1cf7-47fe-8df5-54e00d60f1ab"/> |  <img width="450" height="350" src="https://github.com/JaeMin1130/MiniProject_MealNote/assets/98063854/62ecc733-1e5e-4603-adcc-284bfeb83485"/>|  
 
-| 음식 조회 페이지  |  기록 저장 페이지   |  
+| 메인 페이지(음식 검색)  |  메인 페이지(기록 저장)   |  
 | :-------------------------------------------: | :------------: |
-| <img width="500" src="https://github.com/JaeMin1130/MiniProject_MealNote/blob/main/Search.png"/>   |  <img width="500" src="https://github.com/JaeMin1130/MiniProject_MealNote/blob/main/recentSearch.png"/>|
+| <img width="450" height="350" src="https://github.com/JaeMin1130/MiniProject_MealNote/assets/98063854/b86b1a21-b047-47f8-8632-fdca89c8312a"/>   |  <img width="450" height="350" src="https://github.com/JaeMin1130/MiniProject_MealNote/assets/98063854/eee3055a-24b4-4472-807b-b48b3ee95b47"/>|
 
-| 날짜 조회 페이지  |  :------------:   |  
-| :-------------------------------------------: | :-------------------------------------------: | 
-| <img width="500" src="https://github.com/JaeMin1130/MiniProject_MealNote/blob/main/GetNote.png"/>   | :-------------------------------------------: | 
-
+| 메인 페이지(날짜 조회)  |
+| :-------------------------------------------: | 
+| <img width="450" height="350" src="https://github.com/JaeMin1130/MiniProject_MealNote/assets/98063854/225bf747-ac6f-42e2-93ca-ee477509efe3"/> |
 ## 7. REST API 명세 
 | ID | Method | Params | URI | Return | Description |
 | --- | --- | --- | --- | --- | --- |
