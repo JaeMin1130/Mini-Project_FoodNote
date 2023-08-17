@@ -5,9 +5,9 @@ import Calendar from "./Calendar";
 import MenuButton from "./MenuButton";
 import Note from "./Note";
 import Search from "./Search";
+import Statistic from "./Statistic";
 import Drawer from "./drawer/Drawer";
 import Drawer2 from "./drawer/Drawer2";
-import Statistic from "./Statistic";
 export default function Menu(props) {
   const [clicked, setClicked] = useState([false, false, false, false, false]);
   const [open, setOpen] = useState(true);

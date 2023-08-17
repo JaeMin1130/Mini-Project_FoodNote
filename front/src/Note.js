@@ -32,9 +32,11 @@ export default function Note(props) {
       } else {
         setOpen(false);
         const formData = new FormData();
+
         const json = JSON.stringify(noteData);
         const blob = new Blob([json], { type: "application/json" });
         formData.append("note", blob);
+
         formData.append("file", imageUpload[0]);
 
         await axios.post(API_BASE_URL + "/main/note", formData, {

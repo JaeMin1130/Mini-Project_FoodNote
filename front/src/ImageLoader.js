@@ -5,7 +5,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import { Box, Fab, IconButton } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import imageCompression from "browser-image-compression";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 export default function ImageLoader(props) {

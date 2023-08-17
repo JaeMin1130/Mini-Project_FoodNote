@@ -1,14 +1,4 @@
-import {
-  Box,
-  Button,
-  Container,
-  CssBaseline,
-  Link,
-  ListItemButton,
-  ListItemText,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Container, CssBaseline, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 import AppBar from "@mui/material/AppBar";
@@ -19,8 +9,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
 import { useState } from "react";
 import AlertError from "./alert/AlertError";
-import { API_BASE_URL } from "./api/api-config";
 import AlertSuccess from "./alert/AlertSuccess";
+import { API_BASE_URL } from "./api/api-config";
 
 export default function Join() {
   const [open, setOpen] = useState(false);

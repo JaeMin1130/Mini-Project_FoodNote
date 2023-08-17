@@ -1,8 +1,7 @@
-import { IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
-import { call } from "./api/ApiService";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
-import { useEffect } from "react";
+import { IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import { call } from "./api/ApiService";
 
 export default function FoodList(props) {
   const item = props.item;

@@ -1,5 +1,5 @@
-import { Box, Divider, Fab, IconButton, InputAdornment, TextField, Typography } from "@mui/material";
 import CalculateIcon from "@mui/icons-material/Calculate";
+import { Box, IconButton, InputAdornment, TextField, Typography } from "@mui/material";
 
 export default function Calculator(props) {
   return (

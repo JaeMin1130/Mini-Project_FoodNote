@@ -1,13 +1,13 @@
+import AddIcon from "@mui/icons-material/Add";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import AddIcon from "@mui/icons-material/Add";
 
 import { Box, IconButton, InputAdornment, TextField, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function NutritionTable(props) {
   const foodData = props.foodData;
