@@ -44,7 +44,8 @@
 </div>
 
 ## 4. 서비스 아키텍처
-![image](https://github.com/JaeMin1130/MiniProject_MealNote/assets/98063854/da5d5645-9cd1-41fe-9a8c-c5e62d40dbf2)
+![image](https://github.com/JaeMin1130/MiniProject_MealNote/assets/98063854/1e87e903-3015-460c-ac04-74e28b010ba7)
+
 
 ## 5. 주요 기능 
 - [x] 회원가입/로그인
