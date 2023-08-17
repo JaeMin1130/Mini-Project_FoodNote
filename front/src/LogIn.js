@@ -44,7 +44,7 @@ export default function LogIn() {
     console.log("id:", formData.userId);
     console.log("Password:", formData.password);
     const url = API_BASE_URL + "/users/login";
-
+    console.log(url);
     try {
       const res = await axios.post(url, formData);
       if (res.status === 200) {

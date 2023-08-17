@@ -1,4 +1,14 @@
-import { Box, Button, Container, CssBaseline, Link, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  CssBaseline,
+  Link,
+  ListItemButton,
+  ListItemText,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 import AppBar from "@mui/material/AppBar";
@@ -9,9 +19,12 @@ import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
 import { useState } from "react";
 import AlertError from "./alert/AlertError";
+import { API_BASE_URL } from "./api/api-config";
+import AlertSuccess from "./alert/AlertSuccess";
 
 export default function Join() {
   const [open, setOpen] = useState(false);
+  const [open1, setOpen1] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -26,7 +39,7 @@ export default function Join() {
     console.log("id:", formData.userId);
     console.log("Password:", formData.password);
 
-    const url = "http://localhost:8080/users/join";
+    const url = API_BASE_URL + "/users/join";
 
     fetch(url, {
       method: "post",
@@ -36,7 +49,7 @@ export default function Join() {
       body: JSON.stringify(formData),
     }).then((response) => {
       if (response.status === 200) {
-        navigate("/MiniProject_MealNote/");
+        setOpen1(true);
       } else {
         setOpen(true);
       }
@@ -110,6 +123,14 @@ export default function Join() {
             />
             <Box>
               <AlertError open={open} setOpen={setOpen} text={"이미 존재하는 아이디입니다."} />
+              {open1 && (
+                <Box>
+                  <AlertSuccess open={open1} setOpen={setOpen1} text={"회원가입이 완료되었습니다."} />
+                  {/* <ListItemButton onClick={() => navigate("/MiniProject_MealNote/")} color="info">
+                    <ListItemText primary="로그인 페이지로 이동하기"></ListItemText>
+                  </ListItemButton> */}
+                </Box>
+              )}
               <Button
                 type="submit"
                 fullWidth

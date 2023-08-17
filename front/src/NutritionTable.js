@@ -81,7 +81,8 @@ export default function NutritionTable(props) {
   }, [foodData, amount]);
 
   return (
-    props.noteValue && (
+    props.noteValue &&
+    foodData && (
       <Box>
         <Box sx={{ display: "flex", alignItems: "center", mb: 2, ml: 2 }}>
           <Typography variant="h6" fontWeight={"bolder"}>
