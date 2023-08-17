@@ -62,7 +62,7 @@
 
 | 메인 페이지  |  회원가입 페이지   |
 | :-------------------------------------------: | :------------: |
-|  <img width="500" height="800" src="https://github.com/JaeMin1130/MiniProject_MealNote/blob/main/Login.png"/> |  <img width="500" height="800" src="https://github.com/JaeMin1130/MiniProject_MealNote/blob/main/Join.png"/>|  
+|  <img width="500" height="600" src="https://github.com/JaeMin1130/MiniProject_MealNote/blob/main/Login.png"/> |  <img width="600" height="800" src="https://github.com/JaeMin1130/MiniProject_MealNote/blob/main/Join.png"/>|  
 
 | 음식 조회 페이지  |  기록 저장 페이지   |  
 | :-------------------------------------------: | :------------: |
