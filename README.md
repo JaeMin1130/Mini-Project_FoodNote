@@ -59,9 +59,10 @@
 - [ ] 월별 통계치 조회 기능
 
 ## 6. 화면 구성
+
 | 메인 페이지  |  회원가입 페이지   |
 | :-------------------------------------------: | :------------: |
-|  <img width="450" src="https://github.com/JIeunhuh/K3MiniProject/blob/main/mainPage.png"/> |  <img width="450" src="https://github.com/JIeunhuh/K3MiniProject/assets/112235808/e2ea4914-4d51-4f5c-8c41-a2d9cc964600.png"/>|  
+|  <img width="450" src="https://github.com/JaeMin1130/MiniProject_MealNote/blob/main/Login.png"/> |  <img width="450" src="https://github.com/JaeMin1130/MiniProject_MealNote/blob/main/Join.png"/>|  
 
 | 음식 조회 페이지  |  기록 저장 페이지   |  
 | :-------------------------------------------: | :------------: |
