@@ -1,4 +1,5 @@
 # 식품영양성분 데이터를 활용한 식단 기록 웹 서비스 개발하기
+
 ## 1. 프로젝트 소개 
 - 개요: 매일의 식단을 기록하여 관리하는 웹 서비스 개발
 - 활용 데이터 : [식품의약품안전처 식품영양성분DB(음식)](https://various.foodsafetykorea.go.kr/nutrient/)
@@ -11,6 +12,7 @@
 |                FrontEnd           |           Backend                       |        
 |             김재민            |          김은진             |             
 | [GitHub](https://github.com/JaeMin1130)  | [GitHub](https://github.com/EUNJIN6131)  |
+
 ## 3. 활용 스택 
 <h3>Environment</h3>
 <div>
@@ -42,17 +44,33 @@
 </div>
 
 ## 4. 서비스 아키텍처
+![image](https://github.com/JaeMin1130/MiniProject_MealNote/assets/98063854/1e87e903-3015-460c-ac04-74e28b010ba7)
+
 
 ## 5. 주요 기능 
 - [x] 회원가입/로그인
-- [x] 사진을 포함한 식단 기록 기능
-- [x] 날짜별 기록 조회 기능
+- [x] 음식 영양 정보 검색 및 계산 기능
 - [x] 검색어 자동 완성 기능
 - [x] 최근 검색어 조회 및 삭제 기능
-- [x] 기록 수정 및 삭제 기능
+- [x] 사진을 포함한 식단 기록 기능
+- [x] 날짜별 기록 조회 기능
+- [x] 기록 삭제 기능
+- [ ] 기록 수정 기능
 - [ ] 월별 통계치 조회 기능
 
 ## 6. 화면 구성
+
+| 메인 페이지  |  회원가입 페이지   |
+| :-------------------------------------------: | :------------: |
+|  <img width="500"  src="https://github.com/JaeMin1130/MiniProject_MealNote/blob/main/Login.png"/> |  <img width="600"  src="https://github.com/JaeMin1130/MiniProject_MealNote/blob/main/Join.png"/>|  
+
+| 음식 조회 페이지  |  기록 저장 페이지   |  
+| :-------------------------------------------: | :------------: |
+| <img width="500" src="https://github.com/JaeMin1130/MiniProject_MealNote/blob/main/Search.png"/>   |  <img width="500" src="https://github.com/JaeMin1130/MiniProject_MealNote/blob/main/recentSearch.png"/>|
+
+| 날짜 조회 페이지  |  :------------:   |  
+| :-------------------------------------------: | :-------------------------------------------: | 
+| <img width="500" src="https://github.com/JaeMin1130/MiniProject_MealNote/blob/main/GetNote.png"/>   | :-------------------------------------------: | 
 
 ## 7. REST API 명세 
 | ID | Method | Params | URI | Return | Description |
