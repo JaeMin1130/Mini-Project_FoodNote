@@ -66,7 +66,7 @@
 
 | 음식 조회 페이지  |  기록 저장 페이지   |  
 | :-------------------------------------------: | :------------: |
-| <img width="500" src="https://github.com/JaeMin1130/MiniProject_MealNote/blob/main/Search.png"/>   |  <img width="500" src="https://github.com/JaeMin1130/MiniProject_MealNote/blob/main/recentSearch.png/>     |
+| <img width="500" src="https://github.com/JaeMin1130/MiniProject_MealNote/blob/main/Search.png"/>   |  <img width="500" src="https://github.com/JaeMin1130/MiniProject_MealNote/blob/main/recentSearch.png"/>     |
 
 | 날짜 조회 페이지  |    |  
 | :-------------------------------------------: | 
