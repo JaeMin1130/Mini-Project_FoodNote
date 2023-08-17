@@ -68,9 +68,9 @@
 | :-------------------------------------------: | :------------: |
 | <img width="500" src="https://github.com/JaeMin1130/MiniProject_MealNote/blob/main/Search.png"/>   |  <img width="500" src="https://github.com/JaeMin1130/MiniProject_MealNote/blob/main/recentSearch.png"/>|
 
-| 날짜 조회 페이지  |                  |  
-| :-------------------------------------------: | 
-| <img width="500" src="https://github.com/JaeMin1130/MiniProject_MealNote/blob/main/GetNote.png"/>   |      |
+| 날짜 조회 페이지  |  :------------:   |  
+| :-------------------------------------------: | :-------------------------------------------: | 
+| <img width="500" src="https://github.com/JaeMin1130/MiniProject_MealNote/blob/main/GetNote.png"/>   | :-------------------------------------------: | 
 
 ## 7. REST API 명세 
 | ID | Method | Params | URI | Return | Description |
