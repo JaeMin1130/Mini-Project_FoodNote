@@ -65,7 +65,7 @@
 
 | 메인 페이지(음식 검색)  |  메인 페이지(기록 저장)   |  
 | :-------------------------------------------: | :------------: |
-| <img width="450" height="350" src="https://github.com/JaeMin1130/MiniProject_MealNote/assets/98063854/b86b1a21-b047-47f8-8632-fdca89c8312a"/>   |  <img width="450" height="350" src="https://github.com/JaeMin1130/MiniProject_MealNote/assets/98063854/eee3055a-24b4-4472-807b-b48b3ee95b47"/>|
+| <img width="450" height="350" src="https://file.notion.so/f/s/06d16577-5736-43d2-a1ba-30db44c5b89b/%ED%99%94%EB%A9%B4_%EC%BA%A1%EC%B2%98_2023-08-22_173849.png?id=08b59f44-4bd7-445d-854e-213465603a47&table=block&spaceId=305e395a-5955-44d6-bb5f-c488ffd0100f&expirationTimestamp=1692784800000&signature=cfM5g3qjzFtz6tRQzPFTpEuV1Q7APcQb6tMhLDe5n7o&downloadName=%ED%99%94%EB%A9%B4+%EC%BA%A1%EC%B2%98+2023-08-22+173849.png"/>   |  <img width="450" height="350" src="https://github.com/JaeMin1130/MiniProject_MealNote/assets/98063854/eee3055a-24b4-4472-807b-b48b3ee95b47"/>|
 
 | 메인 페이지(날짜 조회)  |
 | :-------------------------------------------: | 
