@@ -70,6 +70,11 @@
 | 메인 페이지(날짜 조회)  |
 | :-------------------------------------------: | 
 | <img width="450" height="350" src="https://github.com/JaeMin1130/MiniProject_MealNote/assets/98063854/225bf747-ac6f-42e2-93ca-ee477509efe3"/> |
+
+| 시연 영상  |
+| :-------------------------------------------: | 
+|   <img width="900" height="600" src="https://github.com/JaeMin1130/MiniProject_MealNote/assets/129818813/d84a868b-6b03-4ac7-a85c-5e46c97e5ad5"> |
+
 ## 7. REST API 명세 
 | ID | Method | Params | URI | Return | Description |
 | --- | --- | --- | --- | --- | --- |
