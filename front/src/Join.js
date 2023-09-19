@@ -55,7 +55,7 @@ export default function Join() {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" sx={{ mt: 2, flexGrow: 1, color: "grey" }}>
-              <img src="/MealNote.png" alt="MealNote 로고" width={180} height={65} />
+              <img src="./MealNote.png" alt="MealNote 로고" width={180} height={65} />
             </Typography>
             <Box>
               <Button

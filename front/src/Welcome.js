@@ -14,7 +14,7 @@ const Welcome = () => {
           }}
         >
           <img
-            src="/i.gif"
+            src="./i.gif"
             alt="food"
             style={{
               width: "100%",
@@ -37,7 +37,7 @@ const Welcome = () => {
             zIndex: 1,
           }}
         >
-          <img src="/MealNote.png" alt="MealNote 로고" width="80%" height="20%" />
+          <img src="./MealNote.png" alt="MealNote 로고" width="80%" height="20%" />
           <LogIn />
         </Box>
       </Box>
