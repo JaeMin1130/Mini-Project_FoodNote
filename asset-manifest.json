@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/https[githubPage%EB%8A%94%20https]://[github%20user_name].github.io/[%EB%A0%88%ED%8F%AC%EC%9D%B4%EB%A6%84]/static/css/main.e6c13ad2.css",
-    "main.js": "/https[githubPage%EB%8A%94%20https]://[github%20user_name].github.io/[%EB%A0%88%ED%8F%AC%EC%9D%B4%EB%A6%84]/static/js/main.a345f10b.js",
-    "index.html": "/https[githubPage%EB%8A%94%20https]://[github%20user_name].github.io/[%EB%A0%88%ED%8F%AC%EC%9D%B4%EB%A6%84]/index.html",
-    "main.e6c13ad2.css.map": "/https[githubPage%EB%8A%94%20https]://[github%20user_name].github.io/[%EB%A0%88%ED%8F%AC%EC%9D%B4%EB%A6%84]/static/css/main.e6c13ad2.css.map",
-    "main.a345f10b.js.map": "/https[githubPage%EB%8A%94%20https]://[github%20user_name].github.io/[%EB%A0%88%ED%8F%AC%EC%9D%B4%EB%A6%84]/static/js/main.a345f10b.js.map"
+    "main.css": "/MiniProject_MealNote/static/css/main.e6c13ad2.css",
+    "main.js": "/MiniProject_MealNote/static/js/main.a345f10b.js",
+    "index.html": "/MiniProject_MealNote/index.html",
+    "main.e6c13ad2.css.map": "/MiniProject_MealNote/static/css/main.e6c13ad2.css.map",
+    "main.a345f10b.js.map": "/MiniProject_MealNote/static/js/main.a345f10b.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
