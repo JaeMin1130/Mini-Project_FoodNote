@@ -45,6 +45,7 @@ export default function NutritionTable(props) {
 
   const onClickHandler = () => {
     if (noteLogs) {
+      props.setOpen_amount(false);
       const target = noteLogs.filter((item) => item.foodName.includes(foodData.no));
 
       target["0"].amount = amount;
@@ -54,7 +55,6 @@ export default function NutritionTable(props) {
       target["0"].serving_size = foodData.serving_size;
       target["0"].unit = foodData.unit;
       target["0"].brand = foodData.brand;
-      target["0"].userId = localStorage.getItem("userId");
 
       const idx = noteLogs.findIndex((item) => item.foodName === target[0].foodName);
       props.setNoteLogs((prevLogs) => {

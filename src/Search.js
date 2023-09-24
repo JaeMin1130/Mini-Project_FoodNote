@@ -26,7 +26,7 @@ const Search = (props) => {
 
   // food 테이블에서 음식 조회(6번)
   const findFood = (keyword) => {
-    if (keyword != "") {
+    if (keyword !== "") {
       call(`/main/search/${keyword}`, "GET", null).then((data) => {
         if (data) {
           setFoodData(data.reverse());
@@ -48,7 +48,7 @@ const Search = (props) => {
   const saveSearchWord = (e) => {
     const value = e.target.textContent;
     setKeyword("");
-    if (value != "") {
+    if (value !== "") {
       call(`/main/searchLog/save/${value}`, "GET", null);
 
       const foodNo = value.split(" ")[0].replace(".", "").replace("No", "");
@@ -58,7 +58,7 @@ const Search = (props) => {
         let logList = [];
         if (
           logs.map((item) => {
-            if (item.foodName == value) return true;
+            if (item.foodName === value) return true;
           })
         ) {
           logList = logs.filter((item) => item.foodName !== value);
@@ -94,7 +94,7 @@ const Search = (props) => {
     if (foodData.length >= 1) {
       setFoodList(() => {
         const uniqueFoodsSet = new Set();
-        if (foodData != undefined) {
+        if (foodData !== undefined) {
           foodData.forEach((item) => {
             const foodName = item.brand !== "전국(대표)" ? item.name + " (" + item.brand + ")" : item.name;
             const foodNo = `No${item.no}`;
@@ -103,7 +103,7 @@ const Search = (props) => {
         }
         return Array.from(uniqueFoodsSet);
       });
-      if (foodData.length == 1) {
+      if (foodData.length === 1) {
         setOpen(true);
       }
     }

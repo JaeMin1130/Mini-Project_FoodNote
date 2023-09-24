@@ -20,17 +20,23 @@ export default function Note(props) {
   const [imageUpload, setImageUpload] = useState([]);
   const [mealType, setMealType] = useState("");
   const userId = localStorage.getItem("userId");
-  const [open, setOpen] = useState(false);
+  const [open_mealTime, setOpen_mealTime] = useState(false);
+  const [open_amount, setOpen_amount] = useState(false);
 
   const submitHandler = async () => {
     for (const noteData of noteLogs) {
       noteData.mealType = mealType;
       noteData.date = props.date;
+      noteData.userId = userId;
       if (noteData.mealType == "") {
-        setOpen(true);
+        setOpen_mealTime(true);
+        break;
+      } else if (noteData.unit === undefined) {
+        setOpen_amount(true);
         break;
       } else {
-        setOpen(false);
+        setOpen_mealTime(false);
+        setOpen_amount(false);
         const formData = new FormData();
 
         const json = JSON.stringify(noteData);
@@ -61,10 +67,11 @@ export default function Note(props) {
   return (
     <Box sx={{ width: "100%", maxWidth: "26vw" }}>
       <ImageLoader imageUpload={imageUpload} setImageUpload={setImageUpload} />
-      <AlertError open={open} setOpen={setOpen} text={"식사 시간을 선택해주세요."} />
+      <AlertError open={open_mealTime} setOpen={setOpen_mealTime} text={"식사 시간을 선택해주세요."} />
+      <AlertError open={open_amount} setOpen={setOpen_amount} text={"+ 버튼을 눌러 드신 양을 입력해주세요."} />
       <Divider sx={{ my: 2 }} />
       <Calendar inNote={true} today={props.today} setDate={props.setDate} />
-      <NoteButton setMealType={setMealType} />
+      <NoteButton setMealType={setMealType} setOpen_mealTime={setOpen_mealTime} />
       <Divider sx={{ my: 2 }} />
       <Box>
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-around", mb: 2 }}>
@@ -95,6 +102,7 @@ export default function Note(props) {
           noteLogs={noteLogs}
           setNoteLogs={setNoteLogs}
           inNote={true}
+          setOpen_amount={setOpen_amount}
         />
       )}
     </Box>
