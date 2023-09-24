@@ -84,7 +84,7 @@ export default function Main() {
         </Grid>
       ) : (
         <Grid item xs={5}>
-          <img src="/unrecorded.gif" alt="unrecorded" height="100%" width="100%" />
+          <img src="./unrecorded.gif" alt="unrecorded" height="100%" width="100%" />
         </Grid>
       )}
     </Grid>
