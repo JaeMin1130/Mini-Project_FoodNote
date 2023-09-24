@@ -23,8 +23,8 @@ jobs:
       - name: Build Project
         run: CI='' npm run build
 
-      - name: Deploy Project
+      - name: Publish Project
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.PODO_WEB_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
