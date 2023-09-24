@@ -68,7 +68,7 @@ export default function Note(props) {
     <Box sx={{ width: "100%", maxWidth: "26vw" }}>
       <ImageLoader imageUpload={imageUpload} setImageUpload={setImageUpload} />
       <AlertError open={open_mealTime} setOpen={setOpen_mealTime} text={"식사 시간을 선택해주세요."} />
-      <AlertError open={open_amount} setOpen={setOpen_amount} text={"+ 버튼을 눌러 드신 양을 입력해주세요."} />
+      <AlertError open={open_amount} setOpen={setOpen_amount} text={"+ 버튼을 눌러 먹은 양을 입력해주세요."} />
       <Divider sx={{ my: 2 }} />
       <Calendar inNote={true} today={props.today} setDate={props.setDate} />
       <NoteButton setMealType={setMealType} setOpen_mealTime={setOpen_mealTime} />
