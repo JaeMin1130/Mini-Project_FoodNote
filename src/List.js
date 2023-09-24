@@ -20,7 +20,6 @@ export default function List(props) {
         {data[0].imageData ? (
           <img
             src={`data:image/png;base64,${data[0].imageData}`}
-            alt="Image"
             style={{
               width: "40%",
               objectFit: "cover",

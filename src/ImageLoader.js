@@ -9,7 +9,6 @@ import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 export default function ImageLoader(props) {
-  const [uploadPreview, setUploadPreview] = useState([]);
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
   const imageUpload = props.imageUpload;
 
@@ -48,7 +47,6 @@ export default function ImageLoader(props) {
         const compressedFiles = await Promise.all(acceptedFiles.map((file) => handleImageCompress(file)));
         const validCompressedFiles = compressedFiles.filter((file) => file !== null);
         props.setImageUpload([...imageUpload, ...validCompressedFiles]);
-        setUploadPreview(validCompressedFiles.map((file) => URL.createObjectURL(file)));
       }
     },
     [imageUpload, handleImageCompress]
