@@ -51,7 +51,7 @@ export default function ImageLoader(props) {
     },
     [imageUpload, handleImageCompress]
   );
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop: handleDrop });
+  const { getRootProps, isDragActive } = useDropzone({ onDrop: handleDrop });
   return (
     <Box sx={{ display: "flex", alignContent: "center", justifyContent: "space-evenly", mt: 3 }}>
       <IconButton onClick={handlePreviousPhoto}>

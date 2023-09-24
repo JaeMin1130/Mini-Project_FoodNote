@@ -57,7 +57,9 @@ const Search = (props) => {
         let logList = [];
         if (
           logs.map((item) => {
-            if (item.foodName === value) return true;
+            if (item.foodName === value) {
+              return true;
+            }
           })
         ) {
           logList = logs.filter((item) => item.foodName !== value);
