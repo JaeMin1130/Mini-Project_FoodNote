@@ -57,7 +57,7 @@ export default function Calendar(props) {
     return new Promise((resolve, reject) => {
       if (props.categorizedNoteData) {
         const daysToHighlight = Object.keys(props.categorizedNoteData)
-          .filter((item) => item.substring(3, 5) == month)
+          .filter((item) => item.substring(3, 5) === month)
           .map((item) => Number(item.substring(6, 8)));
         resolve({ daysToHighlight });
 

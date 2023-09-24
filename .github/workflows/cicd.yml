@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Node.js 16.x
+      - name: Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
@@ -23,10 +23,7 @@ jobs:
       - name: Build Project
         run: npm run build
 
-      - name: copy index.html to 404.html
-        run: cp build/index.html build/404.html
-
-      - name: publish Project
+      - name: Deploy Project
         uses: peaceiris/actions-gh-pages@v3
         with:
           publish_dir: ./build

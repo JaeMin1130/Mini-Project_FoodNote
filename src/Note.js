@@ -28,7 +28,7 @@ export default function Note(props) {
       noteData.mealType = mealType;
       noteData.date = props.date;
       noteData.userId = userId;
-      if (noteData.mealType == "") {
+      if (noteData.mealType === "") {
         setOpen_mealTime(true);
         break;
       } else if (noteData.unit === undefined) {
@@ -92,7 +92,7 @@ export default function Note(props) {
         )}
       </Box>
       <Divider sx={{ my: 2 }} />
-      {foodData && foodData.length == 1 && (
+      {foodData && foodData.length === 1 && (
         <NutritionTable
           foodData={foodData["0"]}
           noteValue={noteValue}

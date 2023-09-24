@@ -4,7 +4,6 @@ import FoodList from "./FoodList";
 import NutritionTable from "./NutritionTable";
 import { call } from "./api/ApiService";
 const Search = (props) => {
-  const [selectedWord, setSelectedWord] = useState([]);
   const [foodData, setFoodData] = useState([]);
   const [foodList, setFoodList] = useState([]);
   const [keyword, setKeyword] = useState("");
