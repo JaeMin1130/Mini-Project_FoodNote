@@ -15,7 +15,7 @@ public class TestController {
         this.healthEndpoint = healthEndpoint;
     }
 
-    @GetMapping("/")
+    @GetMapping("/test")
     public ResponseEntity<Status> healthStatus() {
         Status status = healthEndpoint.health().getStatus();
         HttpStatus httpStatus = Status.UP.equals(status) ? HttpStatus.OK : HttpStatus.INTERNAL_SERVER_ERROR;
