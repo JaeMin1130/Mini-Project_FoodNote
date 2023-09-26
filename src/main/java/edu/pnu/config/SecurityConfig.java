@@ -40,9 +40,9 @@ public class SecurityConfig {
 		http.csrf(csrf -> csrf.disable()).httpBasic(httpbasic -> httpbasic.disable())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(auth -> {
-					auth.requestMatchers("/users/login", "/users/join").permitAll()
+					auth.requestMatchers("/users/login", "/users/join", "/test").permitAll()
 							.requestMatchers(HttpMethod.OPTIONS, "/main/**").permitAll()
-//                            .anyRequest().permitAll();
+							// .anyRequest().permitAll();
 							.anyRequest().authenticated();
 
 				}).addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
