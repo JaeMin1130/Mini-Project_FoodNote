@@ -1,4 +1,4 @@
-name: Mealnote publish
+name: Mealnote front publish
 on:
   push:
     branches: ["main"]
