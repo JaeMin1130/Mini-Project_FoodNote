@@ -1,7 +1,7 @@
 name: Mealnote front publish
 on:
   push:
-    branches: ["main"]
+    branches: ["front_deploy"]
 
 jobs:
   deploy:
