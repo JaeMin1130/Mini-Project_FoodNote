@@ -1,0 +1,77 @@
+name: Upload Docker Image to ECR & Pull Image to Beanstalk
+
+on:
+  push:
+    branches: ["back_deploy"] # back_deploy에 push될 때 actions 시작
+
+jobs:
+  deploy:
+    name: Deploy Back
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: "temurin"
+
+      - name: Grant execute permission for Maven wrapper
+        run: chmod +x ./mvnw
+        shell: bash
+
+      - name: Build with Maven
+        run: ./mvnw clean install -DskipTests=true
+        shell: bash
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: mealnote
+          IMAGE_TAG: latest
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+
+      - name: Get current time
+        uses: 1466587594/get-current-time@v2
+        id: current-time
+        with:
+          format: YYYY-MM-DDTHH-mm-ss # 다른 포맷으로 변경 가능(MomentJS format syntax)
+          utcOffset: "+09:00" # 한국 시간에 맞추기 위함
+
+      - name: Generate deployment package
+        run: |
+          mkdir -p deploy
+          cp -r .ebextensions deploy/.ebextensions
+          cp Dockerrun.aws.json deploy/Dockerrun.aws.json # Elastic Beanstalk에서 Docker 실행 시 체크하는 설정 파일
+          cd deploy && zip -r deploy.zip .
+
+        # Beanstalk Deploy 플러그인 사용
+      - name: Beanstalk Deploy
+        uses: einaregilsson/beanstalk-deploy@v21
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }} # github secrets로 등록한 값 사용
+          aws_secret_key: ${{ secrets.AWS_SECRET_KEY }} # github secrets로 등록한 값 사용
+          application_name: Mealnote # EB application 이름
+          environment_name: Mealnote-env # EB environment 이름
+          version_label: Github Action with Doker-${{steps.current-time.outputs.formattedTime}} # 배포 버전은 타임스탬프를 이용하여 구분
+          region: ap-northeast-2
+          deployment_package: deploy/deploy.zip
+          wait_for_environment_recovery: 200 # default wait time은 30초
