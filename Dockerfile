@@ -1,4 +1,4 @@
-FROM adoptopenjdk:17-jdk-hotspot
+FROM adoptopenjdk:11-jdk-hotspot
 
 ARG JAR_FILE=build/libs/*.jar
 
