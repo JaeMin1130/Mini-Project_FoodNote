@@ -1,8 +1,4 @@
-FROM adoptopenjdk:11-jdk-hotspot
-
-ARG SPRING_PROFILE=ebprod
-
-ENV SPRING_PROFILES_ACTIVE=${SPRING_PROFILE}
+FROM adoptopenjdk:17-jdk-hotspot
 
 COPY target/*.jar app.jar
 
