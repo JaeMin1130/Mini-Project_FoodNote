@@ -1,5 +1,5 @@
 let backendHost;
 
-backendHost = "http://15.164.78.46";
+backendHost = "https://mealnote.org";
 
 export const API_BASE_URL = `${backendHost}`;
