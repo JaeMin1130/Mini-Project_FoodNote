@@ -9,7 +9,7 @@
 ## 2. 팀원 
 |<img width="200" alt="image" src="https://avatars.githubusercontent.com/u/98063854?v=4">|<img width="200" alt="image" src="https://avatars.githubusercontent.com/u/129818813?v=4">|
 | :---------------------------------: | :-----------------------------------:|
-|                FrontEnd, CI/CD      |           Backend                       |        
+|                Front-End, CI/CD      |           Back-End                       |        
 |             김재민            |          김은진             |             
 | [GitHub](https://github.com/JaeMin1130)  | [GitHub](https://github.com/EUNJIN6131)  |
 
@@ -55,7 +55,16 @@
 ## 4. 서비스 아키텍처
 ![image](https://github.com/JaeMin1130/MiniProject_MealNote/assets/98063854/c3db61f9-04ef-46a9-88b3-9ccb9513d697)
 
-## 5. 주요 기능 
+## 5. 서비스 배포
+
+### 1) Front-End
+![image](https://github.com/JaeMin1130/MiniProject_MealNote/assets/98063854/5372bc11-1905-459e-9149-e8bf50ccf2f5)
+
+
+### 2) Back-End
+![image](https://github.com/JaeMin1130/MiniProject_MealNote/assets/98063854/446831b7-91ea-4e9f-bea3-a81ba1e8d2ce)
+
+## 6. 주요 기능 
 - [x] 회원가입/로그인
 - [x] 음식 영양 정보 검색 및 계산 기능
 - [x] 검색어 자동 완성 기능
@@ -63,10 +72,10 @@
 - [x] 사진을 포함한 식단 기록 기능
 - [x] 날짜별 기록 조회 기능
 - [x] 기록 삭제 기능
-- [ ] 기록 수정 기능
+- [x] 기록 수정 기능
 - [ ] 월별 통계치 조회 기능
 
-## 6. 화면 구성
+## 7. 화면 구성
 
 
 | 로그인 페이지  |  회원가입 페이지   |
@@ -85,7 +94,7 @@
 | :-------------------------------------------: | 
 |   <img width="900" height="600" src="https://github.com/JaeMin1130/MiniProject_MealNote/assets/129818813/d84a868b-6b03-4ac7-a85c-5e46c97e5ad5"> |
 
-## 7. REST API 명세 
+## 8. REST API 명세 
 | ID | Method | Params | URI | Return | Description |
 | --- | --- | --- | --- | --- | --- |
 | 1 | POST  | Member member | /users/join | boolean | 회원가입 |
@@ -101,5 +110,5 @@
 | 11 | DELETE | String keyword | /main/searchLog/delete/{foodName} | boolean | 최근 검색어 삭제 |
 
 
-## 8. 개발 일지 
+## 9. 개발 일지 
 <a href="https://shrub-snap-550.notion.site/CRUD-566be659b7bf4693a6515f408cf2f1d9?pvs=4">개발 일지 보러 가기  <img width="23" src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Notion-logo.svg"> </a>
