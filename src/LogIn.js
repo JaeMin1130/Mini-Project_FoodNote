@@ -34,15 +34,11 @@ export default function LogIn() {
     event.preventDefault();
     const data = new FormData(event.target);
 
-    console.log("Form Data:", data.entries());
-
     const formData = {
       userId: data.get("id"),
       password: data.get("password"),
     };
 
-    console.log("id:", formData.userId);
-    console.log("Password:", formData.password);
     const url = API_BASE_URL + "/users/login";
     console.log(url);
     try {

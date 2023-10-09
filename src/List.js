@@ -6,10 +6,6 @@ import FoodList from "./FoodList";
 export default function List(props) {
   const data = props.item;
 
-  useEffect(() => {
-    console.log("data", data);
-  }, [data]);
-
   if (!data || data.length === 0) {
     return null;
   }

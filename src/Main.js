@@ -22,8 +22,6 @@ export default function Main() {
   }, []);
 
   useEffect(() => {
-    console.log("noteData", noteData);
-
     const categorizedData = {};
 
     if (noteData) {
