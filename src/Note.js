@@ -29,6 +29,7 @@ export default function Note(props) {
       console.log("date", props.date);
       noteData.date = props.date;
       noteData.userId = userId;
+      console.log("noteData", noteData);
       if (noteData.mealType === "") {
         setOpen_mealTime(true);
         break;
