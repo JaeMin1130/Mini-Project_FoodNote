@@ -26,6 +26,7 @@ export default function Note(props) {
   const submitHandler = async () => {
     for (const noteData of noteLogs) {
       noteData.mealType = mealType;
+      console.log("date", props.date);
       noteData.date = props.date;
       noteData.userId = userId;
       if (noteData.mealType === "") {
