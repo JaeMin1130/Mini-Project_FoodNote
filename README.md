@@ -9,7 +9,7 @@
 ## 2. 팀원 
 |<img width="200" alt="image" src="https://avatars.githubusercontent.com/u/98063854?v=4">|<img width="200" alt="image" src="https://avatars.githubusercontent.com/u/129818813?v=4">|
 | :---------------------------------: | :-----------------------------------:|
-|                FrontEnd           |           Backend                       |        
+|                FrontEnd, CI/CD      |           Backend                       |        
 |             김재민            |          김은진             |             
 | [GitHub](https://github.com/JaeMin1130)  | [GitHub](https://github.com/EUNJIN6131)  |
 
@@ -19,10 +19,20 @@
   <img src="https://img.shields.io/badge/vscode 1.18.1-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white">
  <img src="https://img.shields.io/badge/eclipse 4.18.1-2C2255?style=for-the-badge&logo=eclipseide&logoColor=white"> 
 </div>
-<h3>Config</h3>
+<h3>CI/CD</h3>
 <div>
    <img src="https://img.shields.io/badge/npm 9.5.1-CB3837?style=for-the-badge&logo=npm&logoColor=white">
    <img src="https://img.shields.io/badge/maven 3.9.3-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white">
+   <img src="https://img.shields.io/badge/github pages-222222?style=for-the-badge&logo=githubpages&logoColor=white">
+   <img src="https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white">
+   <img src="https://img.shields.io/badge/github actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white">
+</div>
+<div>
+   <img src="https://img.shields.io/badge/aws EC2-FF9900?style=for-the-badge&logo=amazonec2&logoColor=white">
+   <img src="https://img.shields.io/badge/aws RDS-527FFF?style=for-the-badge&logo=amazonrds&logoColor=white">
+   <img src="https://img.shields.io/badge/aws S3-569A31?style=for-the-badge&logo=amazons3&logoColor=white">
+   <img src="https://img.shields.io/badge/aws ECR-FF9900?style=for-the-badge&logo=amazonecr&logoColor=white">
+   <img src="https://img.shields.io/badge/aws Route53-8C4FFF?style=for-the-badge&logo=amazonroute53&logoColor=white">
 </div>
   <h3>Development</h3>
 <div>
