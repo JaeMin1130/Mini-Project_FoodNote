@@ -39,7 +39,6 @@ export default function Note(props) {
         setOpen_mealTime(false);
         setOpen_amount(false);
         const formData = new FormData();
-        console.log("noteData", noteData);
         const json = JSON.stringify(noteData);
         const blob = new Blob([json], { type: "application/json" });
         formData.append("note", blob);
