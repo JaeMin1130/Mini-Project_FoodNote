@@ -10,7 +10,7 @@ import edu.pnu.domain.Member;
 import edu.pnu.persistance.MemberRepository;
 
 @Component
-public class NoteInitialize implements ApplicationRunner {
+public class MemberInitialize implements ApplicationRunner {
 
 	@Autowired
 	MemberRepository memRepo;
