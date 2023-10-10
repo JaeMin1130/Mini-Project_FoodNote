@@ -54,7 +54,7 @@ jobs:
         id: current-time
         with:
           format: YYYY-MM-DDTHH-mm-ss # 다른 포맷으로 변경 가능(MomentJS format syntax)
-          # utcOffset: "+09:00" # 한국 시간에 맞추기 위함
+          utcOffset: "+09:00" # 한국 시간에 맞추기 위함
 
       - name: Generate deployment package
         run: |

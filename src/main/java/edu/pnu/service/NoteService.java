@@ -1,8 +1,11 @@
 package edu.pnu.service;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,6 +57,11 @@ public class NoteService {
 			byte[] encodedImage = encodeImage(imageBytes);
 			note.setImageData(encodedImage);
 		}
+		// 한국 시간에 맞추기 위해 9시간 더해줌
+		LocalDateTime localDateTime = note.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+		localDateTime = localDateTime.plusHours(9);
+		Date newDate = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+		note.setDate(newDate);
 
 		System.out.println(note.toString());
 
