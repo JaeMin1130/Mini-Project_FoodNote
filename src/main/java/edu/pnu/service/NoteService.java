@@ -49,32 +49,15 @@ public class NoteService {
 	// 4.식단 추가
 	public Note insertNote(Note note, MultipartFile file) throws IOException {
 
-		Note n = new Note();
-
 		if (file != null && !file.isEmpty()) {
 			byte[] imageBytes = file.getBytes(); // 이미지 바이트 배열 가져오기
 			byte[] encodedImage = encodeImage(imageBytes);
-			n.setImageData(encodedImage);
+			note.setImageData(encodedImage);
 		}
 
-		n.setUserId(note.getUserId());
-		n.setFoodName(note.getFoodName());
-		n.setAmount(note.getAmount());
-		n.setServing_size(note.getServing_size());
-		n.setMealType(note.getMealType());
-		n.setDate(note.getDate());
-		n.setBrand(note.getBrand());
-		n.setCalories(note.getCalories());
-		n.setCarbohydrate(note.getCarbohydrate());
-		n.setProtein(note.getProtein());
-		n.setFat(note.getFat());
-		n.setSugars(note.getSugars());
-		n.setSodium(note.getSodium());
-		n.setCholesterol(note.getCholesterol());
-		n.setCaffeine(note.getCaffeine());
-		n.setUnit(note.getUnit());
+		System.out.println(note.toString());
 
-		return noteRepo.save(n);
+		return noteRepo.save(note);
 	}
 
 	// 5.음식 조회
