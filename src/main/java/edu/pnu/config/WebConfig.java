@@ -18,6 +18,6 @@ public class WebConfig implements WebMvcConfigurer {
 				// GET, POST, PUT, DELETE 메서드를 허용한다.
 				.allowedMethods("GET", "POST", "PUT", "DELETE")
 				// 모든 헤더와 인증에 관한 정보도 허용한다.
-				.allowCredentials(true).allowedHeaders("*").exposedHeaders(HttpHeaders.AUTHORIZATION);
+				.allowCredentials(true).exposedHeaders(HttpHeaders.AUTHORIZATION);
 	}
 }
