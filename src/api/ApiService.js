@@ -16,7 +16,9 @@ export function call(api, method, request) {
     headers: headers,
     url: API_BASE_URL + api,
     method: method,
+    credentials: "include",
   };
+
   if (request) {
     // POST method
     options.body = JSON.stringify(request);
