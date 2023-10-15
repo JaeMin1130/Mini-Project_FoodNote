@@ -50,11 +50,12 @@ jobs:
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
       - name: Get current time
-        uses: 1466587594/get-current-time@v2
         id: current-time
-        with:
-          format: YYYY-MM-DDTHH-mm-ss # 다른 포맷으로 변경 가능(MomentJS format syntax)
-          utcOffset: "+09:00" # 한국 시간에 맞추기 위함
+        run: |
+          current_time=$(date -u +"%Y-%m-%dT%H-%M-%S")
+          formatted_time=$(TZ="Asia/Seoul" date -d "$current_time 9 hours" -u +"%Y-%m-%dT%H-%M-%S")
+          echo "::set-output name=formattedTime::$formatted_time"
+        shell: bash
 
       - name: Generate deployment package
         run: |
