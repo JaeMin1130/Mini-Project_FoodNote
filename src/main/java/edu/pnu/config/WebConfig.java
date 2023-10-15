@@ -17,7 +17,9 @@ public class WebConfig implements WebMvcConfigurer {
 				.allowedOrigins("https://jaemin1130.github.io")
 				// GET, POST, PUT, DELETE 메서드를 허용한다.
 				.allowedMethods("GET", "POST", "PUT", "DELETE")
-				// 모든 헤더와 인증에 관한 정보도 허용한다.
-				.allowCredentials(true).exposedHeaders(HttpHeaders.AUTHORIZATION);
+				// 인증에 관한 정보를 허용한다.
+				.allowCredentials(true).exposedHeaders(HttpHeaders.AUTHORIZATION)
+				// 원하는 시간만큼 pre-flight 리퀘스트를 캐싱
+				.maxAge(3000);	
 	}
 }
