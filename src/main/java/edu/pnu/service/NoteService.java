@@ -129,7 +129,7 @@ public class NoteService {
 	@Transactional
 	public boolean deleteKeyword(String keyword) {
 		try {
-			searchRepo.deleteByKeyword(keyword);
+			searchRepo.deleteByFoodName(keyword);
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -151,7 +151,7 @@ public class NoteService {
 	// 7. 검색기록 저장
 	private void saveSearchLog(String userId, String keyword) {
 
-		SearchLog log = searchRepo.findByUserIdAndKeyword(userId, keyword);
+		SearchLog log = searchRepo.findByUserIdAndFoodName(userId, keyword);
 
 		if (log != null) {
 			searchRepo.deleteById(log.getId());
