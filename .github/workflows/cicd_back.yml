@@ -53,7 +53,7 @@ jobs:
         id: current-time
         run: |
           current_time=$(date -u +"%Y-%m-%dT%H-%M-%S")
-          formatted_time=$(TZ="Asia/Seoul" date -d "$current_time 9 hours" -u +"%Y-%m-%dT%H-%M-%S")
+          formatted_time=$(date -u -d "$current_time 9 hours" +"%Y-%m-%dT%H-%M-%S")
           echo "::set-output name=formattedTime::$formatted_time"
         shell: bash
 
