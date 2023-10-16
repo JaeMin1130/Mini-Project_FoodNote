@@ -16,6 +16,6 @@ public interface SearchLogRepository extends JpaRepository<SearchLog, Long> {
 	@Modifying
 	void deleteByFoodName(String foodname);
 
-	List<SearchLog> findAllbyUserId(String userId);
+	List<SearchLog> findAllByUserId(String userId);
 
 }

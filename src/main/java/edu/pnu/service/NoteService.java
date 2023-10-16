@@ -157,7 +157,7 @@ public class NoteService {
 			searchRepo.deleteById(log.getId());
 		}
 
-		List<SearchLog> list = searchRepo.findAllbyUserId(userId);
+		List<SearchLog> list = searchRepo.findAllByUserId(userId);
 		if (list.size() == 15) {
 			SearchLog firstLog = list.get(0);
 			searchRepo.deleteById(firstLog.getId());
