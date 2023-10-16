@@ -50,12 +50,11 @@ jobs:
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
       - name: Get current time
+        uses: 1466587594/get-current-time@v2
         id: current-time
-        run: |
-          current_time=$(date -u +"%Y-%m-%dT%H-%M-%S")
-          formatted_time=$(python -c "from datetime import datetime, timedelta; utc_time = datetime.strptime('$current_time', '%Y-%m-%dT%H-%M-%S'); korean_time = utc_time + timedelta(hours=9); print(korean_time.strftime('%Y-%m-%dT%H-%M-%S'))")
-          echo "::set-output name=formattedTime::$formatted_time"
-        shell: bash
+        with:
+          format: YYYY-MM-DDTHH-mm-ss # 다른 포맷으로 변경 가능(MomentJS format syntax)
+          utcOffset: "+09:00" # 한국 시간에 맞추기 위함
 
       - name: Generate deployment package
         run: |
