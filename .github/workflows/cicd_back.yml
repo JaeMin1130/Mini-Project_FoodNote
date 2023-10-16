@@ -62,7 +62,8 @@ jobs:
           cp Dockerrun.aws.json deploy/Dockerrun.aws.json
           cp .ebextensions/00-set-timezone.config deploy/.ebextensions/00-set-timezone.config
           cd deploy && zip -r deploy.zip .
-        # Beanstalk Deploy 플러그인 사용
+
+      # Beanstalk Deploy 플러그인 사용
       - name: Beanstalk Deploy
         uses: einaregilsson/beanstalk-deploy@v21
         with:

@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import edu.pnu.domain.SearchLog;
 
-public interface SearchLogRepository extends JpaRepository<SearchLog, String> {
+public interface SearchLogRepository extends JpaRepository<SearchLog, Long> {
 
 	List<SearchLog> findByUserId(String userId);
 

@@ -154,13 +154,13 @@ public class NoteService {
 		SearchLog log = searchRepo.findByUserIdAndKeyword(userId, keyword);
 
 		if (log != null) {
-			searchRepo.deleteById(String.valueOf(log.getId()));
+			searchRepo.deleteById(log.getId());
 		}
 
 		List<SearchLog> list = searchRepo.findAllbyUserId(userId);
 		if (list.size() == 15) {
 			SearchLog firstLog = list.get(0);
-			searchRepo.deleteById(String.valueOf(firstLog.getId()));
+			searchRepo.deleteById(firstLog.getId());
 		}
 		log = new SearchLog();
 		log.setUserId(userId);
