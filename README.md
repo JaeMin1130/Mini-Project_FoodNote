@@ -4,7 +4,6 @@
 - 개요: 매일의 식단을 기록하여 관리하는 웹 서비스 개발
 - 활용 데이터 : [식품의약품안전처 식품영양성분DB(음식)](https://various.foodsafetykorea.go.kr/nutrient/)
 - 기간: 2023. 07.24 ~ 08.17
-- [Go to see our service](https://jaemin1130.github.io/MiniProject_MealNote/)
 
 ## 2. 팀원 
 |<img width="200" alt="image" src="https://avatars.githubusercontent.com/u/98063854?v=4">|<img width="200" alt="image" src="https://avatars.githubusercontent.com/u/129818813?v=4">|
@@ -89,7 +88,3 @@
 | 9 | DELETE | Long id | /main/delete | boolean | 식단 삭제 |
 | 10 | GET | String userId | /main/searchLog/{userId} | List<SearchLog> | 최근 검색어 조회 |
 | 11 | DELETE | String keyword | /main/searchLog/delete/{foodName} | boolean | 최근 검색어 삭제 |
-
-
-## 8. 개발 일지 
-<a href="https://shrub-snap-550.notion.site/CRUD-566be659b7bf4693a6515f408cf2f1d9?pvs=4">개발 일지 보러 가기  <img width="23" src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Notion-logo.svg"> </a>
